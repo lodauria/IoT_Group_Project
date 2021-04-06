@@ -2,7 +2,7 @@
 
 ## Contributors
 
-- [Luca Giovannesi](https://it.linkedin.com/in/)
+- [Luca Giovannesi](https://www.linkedin.com/in/luca-giovannesi-48680519b)
 - [Lorenzo D'Auria](https://it.linkedin.com/in/)
 - [Idir Khouas](https://it.linkedin.com/in/)
 
