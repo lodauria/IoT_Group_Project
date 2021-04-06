@@ -10,26 +10,20 @@ The evaluation of the response time from an end-user point of view.
 
 
 the performance of the product will be evaluated with  mesuring  the power consomption and comparing it to a traditional lighthouses
-and also by the blue effect of this iot system  in the long term
+and also by the blue effect of this iot system  in the long term.
 
 during the devloppement of the project the performance will be evaluated by mesuring the energy consomption and the size and accuracy of the data from :
-GPS which have to send precise position in a short time and also have to send the strict minimum amount of data.
-FOG sensor : this sensor has to be precise on the sky visibility to  a precise computation with it's data 
-              and has to deal with the special wheather condition.
-              
-photocell :this sensor has to tell if it's day or night on the location of the lighthouse 
 
+  GPS: which have to send precise position in a short time and also have to send the strict minimum amount of data.
+  FOG sensor : this sensor has to be precise on the sky visibility to  a precise computation with it's data and has to deal with the special wheather condition.
 
-during the devloppement of the project the performance of actuators will be evaluated from :
-light: has to have a good range and less consuming   
-servo motor: the time response,and the precsion of the rotation angle
+  photocell :this sensor has to tell if it's day or night on the location of the lighthouse. 
 
+  light: has to have a good range and less energy consuming.   
+  servo motor: has to fastly respond to the input variation and to be pretty precise on the rotation angle. 
 
-after the first version we will test if the boat are satisfied with the product and if the beam is correctly set and fit the distance and the wheather conditions 
+after the first version we will test if the beam is correctly set and fit the distance and the wheather conditions. 
 
+the network technology should be wild range technology fast transfer of data and possibility of treating the data in cloud or at the nucleo board.
 
-the network technology should be wild range technology fast transfer of data and possibility of treating the data in cloud or at the nucleo board
-
-
-
-the time response for a user point of view should be fast and following the position of the boat  and a clean guidence for the boat captain
+the time response of the beam from a user point of view should be fast and follow the position of the boat  and a clean guidence for the boat captain.
