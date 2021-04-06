@@ -2,7 +2,7 @@
 
 Lighthouse hardware high level diagram
 
-![Lighthouse hardware diagram](resources/images/lighthouse hardware component.png)
+![Lighthouse hardware diagram](resources/images/lighthouse_hardware_component.png)
 
 - **Lighthouse**
   - **Dimmer** to set the light level.
@@ -16,7 +16,7 @@ Lighthouse hardware high level diagram
 
 Boat hardware high level diagram
 
-![Boat hardware diagram](resources/images/boat hardware component.png)
+![Boat hardware diagram](resources/images/boat_hardware_component.png)
 
 - **Boats**
   - **GPS** to get the position to share it with the lighthouse.
@@ -27,7 +27,7 @@ Boat hardware high level diagram
 
 ### Software components
 
-![Lighthouse hardware diagram](resources/images/software architecture.png)
+![Lighthouse hardware diagram](resources/images/software_architecture.png)
 
 - **Boats** Sends GPS position and visibility data over MQTT-SN to a cloud broker
 
@@ -41,7 +41,7 @@ Boat hardware high level diagram
 
 ### Network infrastructure
 
-![Network infrastructure](resources/images/network infrastructure.png)
+![Network infrastructure](resources/images/network_infrastructure.png)
 
 - **Lighthouse** is connected to Internet via wired connection and provide a LoRa connection for the boats that send their position with this modulation.
 - **Boats** are free to use their connection or the LoRa connection provided by the lighthouse, for example if a ship has a satellite or 4G connection it can use that.
