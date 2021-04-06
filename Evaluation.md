@@ -11,10 +11,9 @@ The evaluation of the response time from an end-user point of view.
 
 ## Evaluation of the performance during the devlopement of the project 
 
-the performance of the product will be evaluated with  mesuring  the power consomption and comparing it to a traditional lighthouses
-and also by the blue effect of this iot system  in the long term.
+the performance of the product will be evaluated with  mesuring  the power consomption and comparing it to a traditional lighthouses,size and accuracy of the data "less foot-print" and also by the blue effect of this iot system  in the long term.
 
-during the devloppement of the project the performance will be evaluated by mesuring the energy consomption and the size and accuracy of the data from :
+during the devloppement of the project the performance will be evaluating the effecency of:
 
   GPS: which have to send precise position in a short time and also have to send the strict minimum amount of data.
   FOG sensor : this sensor has to be precise on the sky visibility to  a precise computation with it's data and has to deal with the special wheather condition.
