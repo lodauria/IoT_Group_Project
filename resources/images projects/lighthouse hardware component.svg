@@ -15,7 +15,7 @@
    id="svg8"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
    sodipodi:docname="lighthouse hardware component.svg"
-   inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/lighthouse hardware component.png"
+   inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/lighthouse_hardware_component.png"
    inkscape:export-xdpi="108"
    inkscape:export-ydpi="108">
   <defs
@@ -189,7 +189,7 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="749.09856"
