@@ -15,7 +15,7 @@ the performance of the product will be evaluated with  mesuring  the power conso
 
 during the devloppement of the project the performance will be evaluating the effecency of:
 
-  ### GPS: which have to send precise position in a short time and also have to send the strict minimum amount of data.
+  ##### GPS: ##### which have to send precise position in a short time and also have to send the strict minimum amount of data.
   ### FOG sensor : this sensor has to be precise on the sky visibility to  a precise computation with it's data and has to deal with the special wheather condition.
 
   ### photocell :this sensor has to tell if it's day or night on the location of the lighthouse. 
