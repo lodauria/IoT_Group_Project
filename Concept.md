@@ -10,7 +10,7 @@ To make things more clear here we describe three personas who can benefit from t
 
 ### Captain of a cargo ship
 
-John is the captain of a cargo ship that is going to reach the harbor in a few minutes. John has more than 20 year of experience and on his boat has a lot of sophisticate technologies that help him driving the boat near the coast, but, as all expert captains know, he knows that is batter to use also the lighthouse on the coast as landmark. While getting closer to the harbor he sees more and more often the powerful light of the lighthouse pointing at him, so he uses it as an additional landmark to safely reach the harbor.
+John is the captain of a cargo ship that is going to reach the harbor in a few minutes. John has more than 20 year of experience and on his boat has a lot of sophisticate technologies that help him driving the boat near the coast, but, as all expert captains know, he knows that is better to use also the lighthouse on the coast as landmark. While getting closer to the harbor he sees more and more often the powerful light of the lighthouse pointing at him, so he uses it as an additional landmark to safely reach the harbor.
 
 ### Amateur sailor
 
