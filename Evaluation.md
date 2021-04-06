@@ -9,19 +9,19 @@ The evaluation of the performance of the embedded devices in terms of power cons
 The evaluation of the response time from an end-user point of view.
 
 
-the performance of the product will be evaluated with the mesurement of the power consomption and comparing it to a traditional lighthouses
-and also the affect on the bluegrove initiative in the long term 
+the performance of the product will be evaluated with  mesuring  the power consomption and comparing it to a traditional lighthouses
+and also by the blue effect of this iot system  in the long term
 
-during the devloppement of the project the performance will be evaluated by mesuring the size of the data and accuracy of data from :
-GPS: the performence will be mesured depending in the accuracy and regularity of the data and also the size of the data also the power consomption 
-FOG sensor : it's performence will be mesured depending on the precision of this sensor on detecting the fog and also the time response ad the size of the data reeived
-              and by the possibilty of in dealing with the special wheather condition
+during the devloppement of the project the performance will be evaluated by mesuring the energy consomption and the size and accuracy of the data from :
+GPS which have to send precise position in a short time and also have to send the strict minimum amount of data.
+FOG sensor : this sensor has to be precise on the sky visibility to  a precise computation with it's data 
+              and has to deal with the special wheather condition.
               
-photocell :size and periodicity of data 
+photocell :this sensor has to tell if it's day or night on the location of the lighthouse 
 
 
 during the devloppement of the project the performance of actuators will be evaluated from :
-light: by mesuring the power used and by caculation the time response and ther precision of the calculation  
+light: has to have a good range and less consuming   
 servo motor: the time response,and the precsion of the rotation angle
 
 
