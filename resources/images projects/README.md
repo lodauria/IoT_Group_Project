@@ -1,0 +1,1 @@
+This files are the inkscape projects for the images.
