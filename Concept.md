@@ -1,6 +1,6 @@
 # Concept
 
-The concept behind this project is to create a smarter alternative to classical lighthouses on the coasts. With an orientable light beam is possible to warn the boats when they are getting near the coast with the minimum possible impact on the environment.
+The concept behind this project is to create a smarter alternative to classical lighthouses on the coasts. With an orientable light beam it is possible to warn the boats when they are getting near the coast with the minimum possible impact on the environment.
 
 From the seaman point of view the interaction with the smart lighthouse is almost the same as with a classic one: when getting closer to the coast he sees a light on earth that can be used as landmark. Instead of seeing the light rotating toward him periodically he will see it pointing at him more often based on his needs.
 
