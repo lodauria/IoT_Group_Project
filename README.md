@@ -18,6 +18,6 @@ Traditional lighthouse are always on to signal the boats where the coast is, thi
 
 ## Video resources
 
-- [Product presentation](https://youtu.be/)
+- [Product presentation](https://youtu.be/xBoODjK8p_Q)
 - [Technical details](https://youtu.be/)
 - [Performance evaluation](https://youtu.be/)
