@@ -9,6 +9,7 @@ Lighthouse hardware high level diagram
   - **2 Servo motors** to orient the beam.
   - **Visibility sensor** to measure the visibility of the air.
   - **Power consumption meter** helpful for evaluation.
+  - **Radar** to warn a near boat without GPS
   - **STM32 Board**
   - **LoRa receiver** to receive data from the boats when they are near.
   - **Internet interface** to connect the lighthouse to the Internet connection provided by an ISP.
@@ -34,6 +35,8 @@ Boat hardware high level diagram
 - **Lighthouse** sends visibility data via an MQTT broker and receive the position of the boats to light, not in GPS coordinates but form the lighthouse point of view (Pan, Tilt degrees and light intensity).
 
   It also send power consumption to the cloud via MQTT that is used for monitoring.
+
+  If there are some boats without a GPS they will be detected with a RADAR but with a lower precision rather than the GPS system. There radar has also a limited range.
 
 - **Cloud** Receives the GPS position and visibility data from the boats. It process data and send to the lighthouse a list of all positions to light, each of them with a computed intensity, the list is ordered in such a way to have a smooth movement of the light and that all boats are lighted in the minimum amount of time.
 
