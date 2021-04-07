@@ -18,7 +18,7 @@ Scott is a fishing addicted who likes to sail far from the coast at night, drop 
 
 ### Resident near the coast
 
-Jeff is resident in a city with a beautiful gulf, his house has a lovely view on all the gulf with a big balcony where he likes to spend the summer evenings with his family. During the day Jeff can see a lighthouse on the other side of the gulf, but at night he can barely see its light. He know that the boats in the middle of the gulf are safe because from them the lighthouse is well visible, while he can enjoy the sea view.
+Jeff is resident in a city with a beautiful gulf, his house has a lovely view on all the gulf with a big balcony where he likes to spend the summer evenings with his family. Even if during the day Jeff can see from his house the lighthouse on the other side of the gulf, at night his beautiful view is not ruined by a light that periodically points to his house, because the beam produced by the smart lighthouse never points toward his house.
 
 ## Storyboard
 
