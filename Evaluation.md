@@ -1,6 +1,6 @@
 # *Evaluation of the project*
-Because of the hundreds of vessels who have get into the coast along history the lighthouses were created in the first of the 1960 and evaluated from there to the today lighthouse
-Despite the advent of GPS and modern navigation technology on ships, warning lights along the coast are still regarded as an important backup , in cases of navigation technology fail the light beam could save the boat live 
+Because of the hundreds of vessels who have get into the coast along history the lighthouses were created in the first of the 1960 and evaluated from there to  today lighthouses.
+Despite the advent of GPS and modern navigation technology on ships, warning lights along the coast are still regarded as an important backup , in cases of navigation technology fail the light beam could save the boat 
 
 for the maintenance of lighthouse ,lighthouse keeper are still emplyed to clean check the beam and the electric or oil station.
 the idea of this project is to introduce some automation and smart monitoring of the energy used for the 18600 lighhouses all around the world. 
