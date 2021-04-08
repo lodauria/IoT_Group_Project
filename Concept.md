@@ -16,6 +16,16 @@ John is the captain of a cargo ship that is going to reach the harbor in a few m
 
 Scott is a fishing addicted who likes to sail far from the coast at night, drop the anchor and spend one or two hours trying to catch the most delicious fishes of the gulf. He likes to stay on his boat relaxing in the peace of the sea at night. His boat his equipped with a GPS and wireless connectivity and so it can automatically communicate with the smart lighthouse. Using these informations the light of the lighthouse will be used only with the other moving boats, leaving Scott and his fishes in the tranquility of the night until he's ready to go back to the coast.
 
+### the Environement 
+
+As a traditional lighthouse consume to 1500 watt/h  and work on full power all the night if we consider an 8 hours of working it will be 12000watt on energy which can reduced to 1500 watt for all the night time with this monitoring, because the lighthouse if off :
+1-when there is no boat in the horizon. 
+2-when the boats are static and waiting to enter the port.
+the light will be adapted to the distance of the boat.
+
+### lighthouse keeper:
+Because the less work time of the lighthouse the maintenance and the battry charging will be less often saving by that time to the lighthouse keeper.
+
 ### Resident near the coast
 
 Jeff is resident in a city with a beautiful gulf, his house has a lovely view on all the gulf with a big balcony where he likes to spend the summer evenings with his family. Even if during the day Jeff can see from his house the lighthouse on the other side of the gulf, at night his beautiful view is not ruined by a light that periodically points to his house, because the beam produced by the smart lighthouse never points toward his house.
