@@ -19,6 +19,7 @@ Scott is a fishing addicted who likes to sail far from the coast at night, drop 
 ### the Environement 
 
 As a traditional lighthouse consume to 1500 watt/h  and work on full power all the night if we consider an 8 hours of working it will be 12000watt on energy which can reduced to 1500 watt for all the night time with this monitoring, because the lighthouse if off :
+
 1-when there is no boat in the horizon. 
 2-when the boats are static and waiting to enter the port.
 the light will be adapted to the distance of the boat.
