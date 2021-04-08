@@ -4,7 +4,7 @@
 
 - [Luca Giovannesi](https://www.linkedin.com/in/luca-giovannesi-48680519b)
 - [Lorenzo D'Auria](https://it.linkedin.com/in/)
-- [Idir Khouas](https://it.linkedin.com/in/)
+- [Idir Khouas](https://www.linkedin.com/in/idir-khouas-7b9269199)
 
 ## Brief description
 
