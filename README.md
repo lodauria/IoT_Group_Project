@@ -1,4 +1,4 @@
-# Smart beam lighthouse
+# Smart signage for marinas
 
 ## Contributors
 
@@ -8,18 +8,16 @@
 
 ## Brief description
 
-Traditional lighthouse are always on to signal the boats where the coast is, this is a big waste of energy and creates light pollution near the coast. Our new concept of lighthouse wants to eliminate these drawbacks without loss of the normal lighthouse functionality. The new smart lighthouse that we propose uses a low consumption light beam that is automatically pointed to the boats near the coast with the lowest intensity needed. In this way boats safety is preserved as well as the environment.
-
-![Animation example](resources/images/example_animation.gif)
+During summer touristic marinas are full of amateur sailors that reserved a docking spot for spending the night. Since in many cases these people don't know well the place, reaching the correct docking spot in the marina can be stressful and dangerous given the big traffic. The IoT system that we propose uses an automatic boat identification method and some LCD screens to generate easily readable specific signage for each boat entering the marina.
 
 ## More details
 
 - [Concept](./Concept.md)
-- [Technology](./Technology.md)
-- [Evaluation](./Evaluation.md)
+- [Technology] (missing for now)
+- [Evaluation] (missing for now)
 
 ## Video resources
 
-- [Product presentation](https://youtu.be/xBoODjK8p_Q)
-- [Technical details](https://youtu.be/w8znmP87peo)
-- [Performance evaluation](https://youtu.be/zOJKtFecgoM)
+- [Product presentation] (missing for now)
+- [Technical details] (missing for now)
+- [Performance evaluation] (missing for now)
