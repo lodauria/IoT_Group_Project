@@ -1,50 +1,95 @@
-### Hardware components
 
-Lighthouse hardware high level diagram
 
-![Lighthouse hardware diagram](resources/images/lighthouse_hardware_component.png)
+## Technology
 
-- **Lighthouse**
-  - **Dimmer** to set the light level.
-  - **2 Servo motors** to orient the beam.
-  - **Visibility sensor** to measure the visibility of the air.
-  - **Power consumption meter** helpful for evaluation.
-  - **Radar** to warn a near boat without GPS
-  - **STM32 Board**
-  - **LoRa receiver** to receive data from the boats when they are near.
-  - **Internet interface** to connect the lighthouse to the Internet connection provided by an ISP.
-  - **Light sensor** to detect if it's day or night.
+## ![Marina](resources/images/harbour.png)
 
-Boat hardware high level diagram
+The main macro components are:
 
-![Boat hardware diagram](resources/images/boat_hardware_component.png)
+- **Boat name and size estimator** at the marina entrance there is a set of sensors able to estimate the boat size and get the boat name.
+- **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot.
+- **Park sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
 
-- **Boats**
-  - **GPS** to get the position to share it with the lighthouse.
-  - **Visibility sensor** to measure the visibility of the air.
-  - **Light sensor** to detect if it's day or night, if it's day the boat doesn't send data
-  - **STM32 Board**
-  - **Internet interface** (LoRa/4G/Satellite)
+### Boat size estimator
 
-### Software components
+<img src="resources/images/boat_size_estimator.png" alt="Marina entrance" style="zoom:50%;" />
 
-![Lighthouse hardware diagram](resources/images/software_architecture.png)
+When a boat enters in the marina there are 2 sonar placed in fixed position, one for each side, to estimate the boat width.
+There are also 2 cameras used for detect the boat name and to estimate the boat length.
 
-- **Boats** Sends GPS position and visibility data over MQTT-SN to a cloud broker
+Knowing the field of view of the camera and the distance from the camera (measured by the sonar) we can compute the length of the boat by the taken picture.
 
-- **Lighthouse** sends visibility data via an MQTT broker and receive the position of the boats to light, not in GPS coordinates but form the lighthouse point of view (Pan, Tilt degrees and light intensity).
+<img src="resources/images/boat_size_estimator_error.png" alt="Marina entrance" style="zoom:50%;" />
 
-  It also send power consumption to the cloud via MQTT that is used for monitoring.
+If for example the field of view of the camera is 50° (**α**) and the distance from the camera is **10m** (d)
 
-  If there are some boats without a GPS they will be detected with a RADAR but with a lower precision rather than the GPS system. There radar has also a limited range.
+i = d/cos (fov/2) = 10/cos(25°) = 11.03 m
+h = 2*sqrt(i^2 - d^2) = 2*sqrt(121,66 - 100) = 43.32 m
 
-- **Cloud** Receives the GPS position and visibility data from the boats. It process data and send to the lighthouse a list of all positions to light, each of them with a computed intensity, the list is ordered in such a way to have a smooth movement of the light and that all boats are lighted in the minimum amount of time.
+h is the image width at distance d.
 
-- **Web interface** the system provide also a web interface for monitoring and eventually control the lighthouse manually.
+If the boat covers 60% of the image width, we can estimate the boat length in meters.
+boat length = 0.60 * 43.32 = 25.99 m
 
-### Network infrastructure
+But if the boat is not perfectly parallel to the camera, there is an error. the measured length is the distance between the bow of the boat and a back corner (distance r in the picture).
 
-![Network infrastructure](resources/images/network_infrastructure.png)
+For example with a boat with these dimensions:
 
-- **Lighthouse** is connected to Internet via wired connection and provide a LoRa connection for the boats that send their position with this modulation.
-- **Boats** are free to use their connection or the LoRa connection provided by the lighthouse, for example if a ship has a satellite or 4G connection it can use that.
+- Length 13.20 m
+- Width 4.00 m
+- Bow to back corner (r) = sqrt(13.20^2 + 4^2) = 13.35 m
+- Angle between r and bow bisector **β** = sin^-1 ((width/2)/r) = sin^-1 (2/13.35) =  8,61°
+- Length on image width (h) = r * cos(boat rotation+β)
+
+error = Length - h = 13.20 - r * cos(boat rotation+β)
+
+![boat size error](resources/images/boat_size_error.png)
+
+With the boat of this example we have this error function, so if the boat enter with an angle of 15 degree the error is only 1 meter, it's acceptable.
+
+### Dock device
+
+For each dock there is a LED (that blink when someone was finding his dock position) and a sonar to detects if the boat is present.
+A single stm32 board is used for multiple dock, and it use a LoRa interface to communicate with the marine server.
+
+<img src="resources/images/dock_device.png" alt="Dock device" style="zoom: 50%;" />
+
+### Signature screen
+
+A LED screen is driven by an STM32 board, that it's connected via LoRa to the marina server.
+
+### Entrance sensor
+
+<img src="resources/images/entrance_sensor.png" alt="Entrance sensor" style="zoom:50%;" />
+For each side there are:
+
+- **Sonar** to trigger the entrance software and detects the distance between the camera and the boat.
+- **Camera** 
+- **Raspberry PI** capable to read the boat's name and estimate the length of the boat.
+- **LoRa Interface** that sends computed data to the marina server.
+
+**Marina server** in which are local computation are executed.
+
+It's composed by:
+
+- **LoRa interface** that communicate with all the devices installed in the marina.
+- **STM32 Board** the local elaboration node.
+- **Internet interface** to connect the local system to the cloud.
+
+### Software components and Network infrastructure
+
+The major software components are:
+
+- In entrance device there is a **computer vision software** to estimate the boat size and name.
+- A **web interface** to used to see the current status of the marina and to book a dock.
+
+![Software component](resources/images/network_infrastructure.png)
+
+For the communication inside the marina LoRa is used.
+The marina server send updating data over MQTT to the cloud system.
+
+Software work flow examples:
+
+- A boat enter in the marina and the entrance device send name and size of the boat to the marina server.
+- The marina server check on the cloud system if there are a reserved dock for the entering boat, otherwise it'll assign a free dock suitable for the boat size.
+- The marina server send data to the monitors and dock device that start to show useful information at the sailor.
