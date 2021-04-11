@@ -31,7 +31,9 @@ h is the image width at distance d.
 If the boat covers 60% of the image width, we can estimate the boat length in meters.
 boat length = 0.60 * 43.32 = 25.99 m
 
-But if the boat is not perfectly parallel to the camera, there is an error. the measured length is the distance between the bow of the boat and a back corner (distance r in the picture).
+#### Estimation error if the boat is not parallel
+
+If the boat is not perfectly parallel to the camera, there is an error. the measured length is the distance between the bow of the boat and a back corner (distance r in the picture).
 
 For example with a boat with these dimensions:
 
