@@ -13,7 +13,7 @@ During summer touristic marinas are full of amateur sailors that reserved a dock
 ## More details
 
 - [Concept](./Concept.md)
-- [Technology] (missing for now)
+- [Technology](./Technology.md)
 - [Evaluation] (missing for now)
 
 ## Video resources
