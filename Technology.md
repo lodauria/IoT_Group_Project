@@ -8,6 +8,12 @@ The main macro components are:
 - **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot.
 - **Park sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
 
+### Oil spill sensor
+
+This device reading the reflection of the water can estimate if there is some floating oil, in this case the part of the marina in which the sensor is located will be closed and the marina's workers will intervenes.
+This sensor is connected to the nearest stm32 board of the dock device.
+https://ldi.ee/products/row-oil-detector
+
 ### Dock device
 
 For each dock there is a LED (that blink when someone was finding his dock position) and a sonar to detects if the boat is present.
