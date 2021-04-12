@@ -36,21 +36,6 @@
     </marker>
     <marker
        style="overflow:visible;"
-       id="marker1365"
-       refX="0.0"
-       refY="0.0"
-       orient="auto"
-       inkscape:stockid="Arrow1Lend"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         transform="scale(0.8) rotate(180) translate(12.5,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
-         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         id="path1363" />
-    </marker>
-    <marker
-       style="overflow:visible;"
        id="marker1255"
        refX="0.0"
        refY="0.0"
@@ -146,16 +131,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="389.09924"
-     inkscape:cy="219.10085"
+     inkscape:zoom="2.8"
+     inkscape:cx="301.60372"
+     inkscape:cy="303.96013"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="1000"
-     inkscape:window-x="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     inkscape:window-x="1280"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -1636,48 +1621,6 @@
          id="path1188-7"
          sodipodi:nodetypes="ccccc" />
     </g>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 65.192158,102.57913 c 0,0 -0.436843,-5.966182 -6.059633,-4.467955"
-       id="path1117"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.420097px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 67.825194,102.48238 c 0,0 -0.693606,-9.472936 -9.621306,-7.094096"
-       id="path1117-4"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.624531px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 70.838258,103.039 c 0,0 -1.031139,-14.082812 -14.303381,-10.546342"
-       id="path1117-4-8"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 78.142028,74.456953 c 0,0 0.283189,5.975442 5.942667,4.622385"
-       id="path1117-7"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.420097px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 75.507374,74.485923 c 0,0 0.449639,9.487641 9.435591,7.339298"
-       id="path1117-4-1"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.624531px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 72.50963,73.851961 c 0,0 0.668448,14.104676 14.027289,10.910871"
-       id="path1117-4-8-7"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.49922px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.137481"
@@ -1703,36 +1646,6 @@
        style="fill:none;stroke:#d50000;stroke-width:0.27;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.73725492;marker-end:url(#marker1255);stroke-miterlimit:4;stroke-dasharray:0.27,0.27;stroke-dashoffset:0"
        d="M 59.632283,102.21594 51.679429,65.752238"
        id="path1245"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:5.3076px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13269"
-       x="29.706184"
-       y="78.456451"
-       id="text1307"><tspan
-         sodipodi:role="line"
-         x="29.706184"
-         y="78.456451"
-         style="text-align:center;text-anchor:middle;stroke-width:0.13269"
-         id="tspan1313">Distance</tspan><tspan
-         sodipodi:role="line"
-         x="29.706184"
-         y="85.09095"
-         style="text-align:center;text-anchor:middle;stroke-width:0.13269"
-         id="tspan1317">sensor</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.26499999,0.52999997;marker-end:url(#marker1365);stroke-dashoffset:0"
-       d="M 72.509628,73.85196 43.834626,76.86582"
-       id="path1355"
-       inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
-       inkscape:export-xdpi="434.06134"
-       inkscape:export-ydpi="434.06134" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1431);stroke-miterlimit:4;stroke-dasharray:0.26458299,0.52916597;stroke-dashoffset:0"
-       d="M 56.534877,92.492657 42.754542,80.683808"
-       id="path1421"
        inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images/boat_size_estimator.png"
        inkscape:export-xdpi="434.06134"
        inkscape:export-ydpi="434.06134" />

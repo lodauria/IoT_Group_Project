@@ -13,7 +13,10 @@
    version="1.1"
    id="svg2609"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
-   sodipodi:docname="entrance_device.svg">
+   sodipodi:docname="entrance_device.svg"
+   inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images projects/entrance_device.png"
+   inkscape:export-xdpi="213.74129"
+   inkscape:export-ydpi="213.74129">
   <defs
      id="defs2603">
     <marker
@@ -30,21 +33,6 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
          id="path960-9" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="marker1471"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="Arrow1Lend"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1469" />
     </marker>
     <marker
        style="overflow:visible"
@@ -68,16 +56,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="558.99155"
-     inkscape:cy="560"
+     inkscape:zoom="0.7"
+     inkscape:cx="500.95875"
+     inkscape:cy="673.81024"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="1000"
-     inkscape:window-x="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     inkscape:window-x="1280"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -88,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -118,28 +106,6 @@
          y="220.64214"
          style="text-align:center;text-anchor:middle;stroke-width:0.224462"
          id="tspan839-5">Camera</tspan></text>
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.912492;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect833-1-2-0-0"
-       width="63.365925"
-       height="32.716492"
-       x="112.49492"
-       y="197.37943"
-       inkscape:export-xdpi="487.03329"
-       inkscape:export-ydpi="487.03329" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:11.1491px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.278729"
-       x="143.81042"
-       y="217.79613"
-       id="text837-7-2-6-9"
-       inkscape:export-xdpi="487.03329"
-       inkscape:export-ydpi="487.03329"><tspan
-         sodipodi:role="line"
-         x="143.81042"
-         y="217.79613"
-         style="text-align:center;text-anchor:middle;stroke-width:0.278729"
-         id="tspan839-7-1-5-3">Sonar</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.15934;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect943-8"
@@ -183,13 +149,6 @@
          y="147.35742"
          style="text-align:center;text-anchor:middle;stroke-width:0.224462"
          id="tspan2007">PI</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.683583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1471)"
-       d="M 144.90665,197.58748 79.979332,153.16497"
-       id="path2015"
-       sodipodi:nodetypes="cc"
-       inkscape:export-xdpi="487.03329"
-       inkscape:export-ydpi="487.03329" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:0.734834;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect833-0-1"
