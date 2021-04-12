@@ -43,7 +43,7 @@ It's composed by:
 The major software components are:
 
 - In entrance device there is a **computer vision software** to estimate the boat size and name.
-- A **web interface** to used to see the current status of the marina and to book a dock.
+- A **web interface**  used to see the current status of the marina and to book a dock.
 
 ![Software component](resources/images/network_infrastructure.png)
 
