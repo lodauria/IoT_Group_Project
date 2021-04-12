@@ -13,7 +13,8 @@ The main macro components are:
 This device reading the reflection of the water can estimate if there is some floating oil, in this case the part of the marina in which the sensor is located will be closed and the marina's workers will intervenes before that the spill reaches the sea.
 
 This sensor is connected to the nearest stm32 board of the dock device.
-https://ldi.ee/products/row-oil-detector
+
+More info: https://ldi.ee/products/row-oil-detector
 
 ### Dock device
 
