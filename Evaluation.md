@@ -7,10 +7,11 @@ The evaluation of the response time from an end-user point of view.
 
 ## Devices Performance 
 
--**Camera:** the performence of the camera will be evaluated by the  capablility of capturing clear images and  water-proof limits  and resistance to wheather conditions 
+  -**Camera:** the performence of the camera will be evaluated by the  capablility of capturing clear images and  water-proof limits  and resistance to wheather conditions 
 
--**oil spil sensor** : the performence of this Sensor sould be evaluated by detecting  precisely the ratio of floating oil in the marina
+  -**oil spil sensor** : the performence of this Sensor sould be evaluated by detecting  precisely the ratio of floating oil in the marina
 
--**boat detection** :should detect the presence of boat 
+  -**boat detection** :should detect the presence of boat 
 
--**screens** 
+  -**screens** 
+  -**Dock Led:** this led should indicate if the place is busy or free 
