@@ -18,5 +18,11 @@ The evaluation of the response time from an end-user point of view.
   -**Dock Led:** this led should indicate if the place is busy or free 
 
 
-##Network technology:
+## Network technology:
+
 The marina server should be provaided by data via Lora and the data will be published from the server to the cloud via MQTT protocol 
+
+
+## the response time from an end-user point of view: 
+
+this IoT system have to indicate and help the user to find a free spot as soon as he reachs the marina and the indication should be clear and easy to follow from the user.
