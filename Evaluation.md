@@ -14,4 +14,9 @@ The evaluation of the response time from an end-user point of view.
   -**boat detection** :should detect the presence of boat 
 
   -**screens** 
+  
   -**Dock Led:** this led should indicate if the place is busy or free 
+
+
+##Network technology:
+The marina server should be provaided by data via Lora and the data will be published from the server to the cloud via MQTT protocol 
