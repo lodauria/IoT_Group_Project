@@ -5,6 +5,7 @@ The evaluation of the performance of the embedded devices in terms of power cons
 The evaluation of the response time from an end-user point of view.
 
 
+##Devices Performance 
 
 -**Camera:** the camera should be capable of capturing clear images and be waterproof and resistante to wheather conditions 
 
