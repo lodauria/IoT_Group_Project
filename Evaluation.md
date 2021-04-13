@@ -6,7 +6,7 @@ The evaluation of the response time from an end-user point of view.
 
 
 
-Camera:the camera should be capable of capturing clear images and be waterproof and resistante to wheather conditions 
-oil spil sensor :sould detect precisely the ratio of oil in the port 
-boat detection:should detect the presence of boat 
-screens 
+**Camera:**the camera should be capable of capturing clear images and be waterproof and resistante to wheather conditions 
+**oil spil sensor** :sould detect precisely the ratio of oil in the port 
+**boat detection**:should detect the presence of boat 
+**screens **
