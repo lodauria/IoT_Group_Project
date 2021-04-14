@@ -1,11 +1,13 @@
-A separate mark-down document in the repository (called "Evaluation") providing details on how to performance of the product/service will be evaluated, (i) during the development of the project, (ii) when the first complete version of the system will be ready for use. The document needs to describe the evaluation methodology for both the overall system as well as each individual components and define specific key performance indicators that will be measured, tools that will be used.
-The document should clearly address the following apsects:
-The evaluation of the performance of the network technologies.
-The evaluation of the performance of the embedded devices in terms of power consumption and energy efficiency.
-The evaluation of the response time from an end-user point of view.
+##Evaluation:
+
+During the long days of summers the touriste flock to marinas of each cost in the world, and because of the less informations and the croud in the marinas the tourists have problems to find a free spot and reach it.
+
+our project will fix this probleme and to evaluate our solutionwe satrt by the dvices performance :
 
 
-## Devices Performance 
+
+
+### Devices Performance 
 
   -**Camera:** the performence of the camera will be evaluated by the  capablility of capturing clear images and  water-proof limits  and resistance to wheather conditions 
 
@@ -18,11 +20,11 @@ The evaluation of the response time from an end-user point of view.
   -**Dock Led:** this led should indicate if the place is busy or free 
 
 
-## Network technology:
+### Network technology:
 
 The marina server should be provaided by data via Lora and the data will be published from the server to the cloud via MQTT protocol 
 
 
-## the response time from an end-user point of view: 
+### the response time from an end-user point of view: 
 
 this IoT system have to indicate and help the user to find a free spot as soon as he reachs the marina and the indication should be clear and easy to follow from the user.
