@@ -2,7 +2,7 @@
 
 During the long days of summers the touriste flock to marinas of each cost in the world, and because of the less informations and the croud in the marinas the tourists have problems to find a free spot and reach it.
 
-our project will fix this probleme and to evaluate our solutionwe satrt by the dvices performance :
+our project will fix this probleme and to evaluate our solutio nwe satrt by the evaluation of the dvices performance :
 
 
 
