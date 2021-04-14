@@ -13,7 +13,7 @@ The evaluation of the response time from an end-user point of view.
 
   -**boat detection** :should detect the presence of boat 
 
-  -**screens** 
+  -**screens** : the evaluation of this scrren will be by the capability to guide a novice touriste to right spot
   
   -**Dock Led:** this led should indicate if the place is busy or free 
 
