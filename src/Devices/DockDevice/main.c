@@ -6,7 +6,6 @@
 int main(void)
 {
     printf("Hello from RIOT");
-
     logic_condition_init();
     scheduler_init();
     return 0;
