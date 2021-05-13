@@ -29,7 +29,8 @@ jobs:
       - name: Download RIOT 
         run: |
           cd ./src/Devices/
-          git clone https://github.com/RIOT-OS/RIOT/tree/2021.04-branch
+          git clone https://github.com/RIOT-OS/RIOT.git
+          git checkout 2021.04-branch
         
       - name: Building
         run: |
