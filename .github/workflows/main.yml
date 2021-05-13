@@ -30,6 +30,7 @@ jobs:
         run: |
           cd ./src/Devices/
           git clone https://github.com/RIOT-OS/RIOT.git
+          cd RIOT
           git checkout 2021.04-branch
         
       - name: Building
