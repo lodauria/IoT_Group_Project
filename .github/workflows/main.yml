@@ -25,13 +25,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
+      - name: Setup environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install gcc-arm-none-eabi
+          
       - name: Download RIOT 
         run: |
           cd ./src/Devices/
           git clone https://github.com/RIOT-OS/RIOT.git
+          cd RIOT
           git checkout 2021.04-branch
-        
+          
       - name: Building
         run: |
           cd ./src/Devices/DockDevice
