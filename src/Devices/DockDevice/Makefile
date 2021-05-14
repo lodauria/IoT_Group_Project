@@ -14,12 +14,10 @@ DEVELHELP ?= 1
 
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
-#Import devices and src folders
-USEMODULE += Common
-DIRS += $(CURDIR)/../Common
 
-USEMODULE += devices
-DIRS += $(CURDIR)/devices
+#Import devices and src folders
+# USEMODULE += devices
+# DIRS += $(CURDIR)/devices
 
 USEMODULE += xtimer
 USEMODULE += periph_gpio
