@@ -16,8 +16,8 @@ DEVELHELP ?= 1
 QUIET ?= 1
 
 #Import devices and src folders
-# USEMODULE += devices
-# DIRS += $(CURDIR)/devices
+USEMODULE += devices
+DIRS += $(CURDIR)/devices
 
 USEMODULE += xtimer
 USEMODULE += periph_gpio
