@@ -18,6 +18,11 @@ QUIET ?= 1
 USEMODULE += Common
 DIRS += $(CURDIR)/../Common
 
+USEMODULE += devices
+DIRS += $(CURDIR)/devices
+
 USEMODULE += xtimer
+USEMODULE += periph_gpio
+USEMODULE += srf04
 
 include $(RIOTBASE)/Makefile.include

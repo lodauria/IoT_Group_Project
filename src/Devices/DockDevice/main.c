@@ -1,12 +1,23 @@
 #include <stdio.h>
 
-#include "../Common/logic_condition.h"
-#include "../Common/my_scheduler.h"
+#include "xtimer.h"
+#include "devices/BoatPresenceEstimator.h"
 
-int main(void)
-{
+#define TRIGGER_PIN GPIO_PIN(PORT_B,3)  //D3
+#define ECHO_PIN GPIO_PIN(PORT_A,10)    //D2
+
+boatPresenceEstimator_t boatPresenceEstimator;
+
+int main(void) {
+    xtimer_init();
     printf("Hello from RIOT");
-    logic_condition_init();
-    scheduler_init();
+    boat_presence_estimator_init(&boatPresenceEstimator, TRIGGER_PIN, ECHO_PIN);
+
+    while (1) {
+        printf("Is boat present %d\n", boat_presence_estimator_get_present(&boatPresenceEstimator,3));
+        xtimer_sleep(1);
+    }
+
+
     return 0;
 }
