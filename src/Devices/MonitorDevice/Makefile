@@ -12,6 +12,14 @@ RIOTBASE ?= $(CURDIR)/../RIOT
 # development process:
 DEVELHELP ?= 1
 
+USEMODULE += devices
+DIRS += $(CURDIR)/devices
+
+USEMODULE += xtimer
+
+FEATURES_REQUIRED += periph_gpio periph_i2c
+USEPKG += u8g2
+
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
 
