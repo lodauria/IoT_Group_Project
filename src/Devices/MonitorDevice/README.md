@@ -1,7 +1,6 @@
 ## HARDWARE WIRING
 
-![Hardware monitor connection](../../../resources/images/Monitor connection.png)
-
+![Hardware monitor connection](./../../../resources/images/Monitor%20connection.png)
 The monitor chosen for the prototype is an OLED screen with a resolution of 128x64 driven by an SSD1306.
 It uses the I2C bus for communication with the main board, that is an STM nucleo-f401re.
 
