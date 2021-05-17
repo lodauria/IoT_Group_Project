@@ -1,1 +1,2 @@
-Put here all RIOT projects
+## RIOT applications
+this directory contains all RIOT applications
