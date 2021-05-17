@@ -43,7 +43,20 @@ def lambda_handler(event, context):
         'body': json.dumps("No free spots")}
         
     dock_num = response['Items'][0]['num']
+        
+    # Update reservation status
+    response = table_res.update_item(
+        Key={
+            'boat_id': boat_id
+        },
+        UpdateExpression="set status=:s",
+        ExpressionAttributeValues={
+            ':s': "IN"
+        },
+        ReturnValues="UPDATED_NEW"
+    )
     
+    # Update dockings table
     response = table_dock.update_item(
         Key={
             'num': dock_num
