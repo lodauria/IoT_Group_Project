@@ -5,6 +5,7 @@
 #include "stdint.h"
 
 #define MAX_QUEUE_ELEMENTS 16
+#define MAX_PLATE_TEXT 64
 
 typedef enum arrowDirection {
     LEFT,
@@ -14,13 +15,16 @@ typedef enum arrowDirection {
     TOP_RIGHT,
     BOTTOM,
     BOTTOM_LEFT,
-    BOTTOM_RIGHT
+    BOTTOM_RIGHT,
+    TURN_AROUND,
+    OFF
 } arrowDirection_e;
 
 typedef struct directionArrayElement_s {
     arrowDirection_e arrowDirection;
-    char *text;
+    char text[MAX_PLATE_TEXT];
     uint8_t currentStartPosition;
+    uint8_t enabled;
 } directionArrayElement_t;
 
 typedef struct ssd1306_s {

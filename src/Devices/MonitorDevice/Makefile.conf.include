@@ -1,0 +1,15 @@
+# In this file there are the all main config fot the application
+MQTT_TOPIC = "assignment"
+MQTT_PORT = 1885
+
+ETHOS_IP = "fe80::1"
+DEFAULT_NODE = 3
+
+INTERVAL_PER_PAGE_MS = 1000
+#Interval between signage for different boat
+
+CFLAGS += -DMQTT_TOPIC='$(MQTT_TOPIC)'
+CFLAGS += -DMQTT_PORT=$(MQTT_PORT)
+CFLAGS += -DETHOS_IP='$(ETHOS_IP)'
+CFLAGS += -DDEFAULT_NODE=$(DEFAULT_NODE)
+CFLAGS += -DINTERVAL_PER_PAGE_MS=$(INTERVAL_PER_PAGE_MS)
