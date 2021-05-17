@@ -13,12 +13,16 @@
 
 char em_stack[THREAD_STACKSIZE_MAIN];
 
-void emcuteManagerPublish(emcute_manager_t *emcuteManager, char *str) {
+void emcuteManagerPublish(emcute_manager_t *emcuteManager, char *topicName, char *str) {
     if (emcuteManager->connected) {
-        unsigned flags = EMCUTE_QOS_0;
-        int res = emcute_pub(&emcuteManager->emcute_topic, str, strlen(str), flags);
-        if (res != EMCUTE_OK) {
-            printf("Error while publishing %d\n", res);
+        for (uint8_t i = 0; i < MAX_TOPIC; i++) {
+            if (emcuteManager->topicPublisher[i].enabled && strcmp(emcuteManager->topicPublisher[i].emcute_topic.name, topicName) == 0) {
+                    unsigned flags = EMCUTE_QOS_0;
+                    int res = emcute_pub(&(emcuteManager->topicPublisher[i].emcute_topic), str, strlen(str), flags);
+                    if (res != EMCUTE_OK) {
+                        printf("Error while publishing %d\n", res);
+                    }
+            }
         }
     }
 }
@@ -37,24 +41,25 @@ int emcuteManagerIsConnected(emcute_manager_t *emcuteManager) {
     return emcuteManager->connected;
 }
 
-void emcuteManagerInit(emcute_manager_t *emcuteManager, int node_id) {
-    memset(&(emcuteManager->subscription), 0, sizeof(emcute_sub_t));
+int emcuteManagerSetConnection(emcute_manager_t *emcuteManager, const char *server_addr, int mqtt_port, int node_id) {
+
     memset(emcuteManager->node_name, 0, 64);
     sprintf(emcuteManager->node_name, "node%d", node_id);
     emcuteManager->connected = 0;
     emcuteManager->node_id = node_id;
+
+    for (uint8_t i = 0; i < MAX_TOPIC; i++) {
+        emcuteManager->topicSubscription[i].enabled = 0;
+        emcuteManager->topicPublisher[i].enabled = 0;
+        memset(&(emcuteManager->topicPublisher[i].emcute_topic), 0, sizeof(emcute_sub_t));
+
+    }
 
     thread_create(em_stack, sizeof(em_stack),
                   THREAD_PRIORITY_MAIN - 1,
                   THREAD_CREATE_STACKTEST,
                   emcute_thread,
                   ((void *) emcuteManager->node_name), "emcute thread");
-
-}
-
-int emcuteManagerSetConnection(emcute_manager_t *emcuteManager, const char *server_addr, const char *mqtt_topic,
-                               int mqtt_port,
-                               void(*on_message)(const emcute_topic_t *, void *, size_t)) {
 
     printf("Connecting to MQTT-SN broker %s port %d.\n",
            server_addr, mqtt_port);
@@ -81,24 +86,40 @@ int emcuteManagerSetConnection(emcute_manager_t *emcuteManager, const char *serv
 
     printf("Successfully connected to gateway at [%s]:%i\n",
            server_addr, (int) gw.port);
+    return 1;
+}
 
+void emcuteManagerSubscribeTopic(emcute_manager_t *emcuteManager, const char *mqtt_topic,
+                                 void(*on_message)(const emcute_topic_t *, void *, size_t)) {
     //setup subscription to topic
     unsigned flags = EMCUTE_QOS_0;
-    emcuteManager->subscription.cb = on_message;
-    memset(emcuteManager->topics, 0, TOPIC_MAXLEN);
-    emcuteManager->subscription.topic.name = mqtt_topic;
+    for (uint8_t i = 0; i < MAX_TOPIC; i++) {
+        if (!emcuteManager->topicSubscription[i].enabled) {
+            emcuteManager->topicSubscription[i].subscription.cb = on_message;
+            emcuteManager->topicSubscription[i].subscription.topic.name = mqtt_topic;
 
-    if (emcute_sub(&(emcuteManager->subscription), flags) != EMCUTE_OK) {
-        printf("error: unable to subscribe to %s\n", mqtt_topic);
-        return 0;
+            if (emcute_sub(&(emcuteManager->topicSubscription[i].subscription), flags) != EMCUTE_OK) {
+                printf("error: unable to subscribe to %s\n", mqtt_topic);
+                return;
+            }
+            else
+                printf("Now subscribed to %s\n", mqtt_topic);
+
+            emcuteManager->topicSubscription[i].enabled = 1;
+            break;
+        }
     }
-    else
-        printf("Now subscribed to %s\n", mqtt_topic);
+}
 
-    //Register topic to send
-    emcuteManager->emcute_topic.name = mqtt_topic;
-    emcute_reg(&(emcuteManager->emcute_topic));
-    emcuteManager->connected = 1;
 
-    return 1;
+void emcuteManagerRegisterPublishTopic(emcute_manager_t *emcuteManager, const char *mqtt_topic) {
+    for (uint8_t i = 0; i < MAX_TOPIC; i++) {
+        if (!emcuteManager->topicPublisher[i].enabled) {
+            emcuteManager->topicPublisher[i].emcute_topic.name = mqtt_topic;
+            emcute_reg(&(emcuteManager->topicPublisher[i].emcute_topic));
+            emcuteManager->topicPublisher[i].enabled = 1;
+            emcuteManager->connected = 1;
+            break;
+        }
+    }
 }

@@ -1,0 +1,18 @@
+# In this file there are the all main config fot the application
+MQTT_TOPIC_LED = "dock/led"
+MQTT_TOPIC_DETECT_BOAT = "dock/boat"
+MQTT_PORT = 1885
+
+ETHOS_IP = "fe80::1"
+DEFAULT_NODE = 13
+
+MQTT_PUBLISH_INTERVAL_S = 30
+#Interval between messages published in dock/boat
+
+CFLAGS += -DMQTT_TOPIC_LED='$(MQTT_TOPIC_LED)'
+CFLAGS += -DMQTT_TOPIC_DETECT_BOAT='$(MQTT_TOPIC_DETECT_BOAT)'
+
+CFLAGS += -DMQTT_PORT=$(MQTT_PORT)
+CFLAGS += -DETHOS_IP='$(ETHOS_IP)'
+CFLAGS += -DDEFAULT_NODE=$(DEFAULT_NODE)
+CFLAGS += -DMQTT_PUBLISH_INTERVAL_S=$(MQTT_PUBLISH_INTERVAL_S)

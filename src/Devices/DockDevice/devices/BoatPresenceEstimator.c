@@ -1,5 +1,6 @@
 #include "BoatPresenceEstimator.h"
-
+#include "stdint.h"
+#include "../../Common/conversion.h"
 
 int boat_presence_estimator_init(boatPresenceEstimator_t *boatPresenceEstimator, gpio_t triggerPin, gpio_t echoPin) {
     boatPresenceEstimator->srf04Params.trigger = triggerPin;
@@ -28,13 +29,14 @@ int boat_presence_estimator_get_present(boatPresenceEstimator_t *boatPresenceEst
     int boatIsNotPresent = 0;
 
     for (int i = 0; i < numberOfRead; i++) {
-        int distance_mm = srf04_get_distance(&(boatPresenceEstimator->srf04));
+        const int distance_mm = srf04_get_distance(&(boatPresenceEstimator->srf04));
         bool read_error = distance_mm < 0;
 
         if (distance_mm > DEFAULT_BOAT_DISTANCE_THRESHOLD_MM + DEFAULT_HYSTERESIS_MM / 2) { //Distance > 1000
             boatIsNotPresent++;
         }
-        else if (!read_error && distance_mm < DEFAULT_BOAT_DISTANCE_THRESHOLD_MM - DEFAULT_HYSTERESIS_MM / 2) { //Distance < 500
+        else if (!read_error &&
+                 distance_mm < DEFAULT_BOAT_DISTANCE_THRESHOLD_MM - DEFAULT_HYSTERESIS_MM / 2) { //Distance < 500
             boatIsPresent++;
         }
         xtimer_msleep(60);

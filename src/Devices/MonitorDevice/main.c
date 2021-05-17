@@ -139,8 +139,8 @@ int connect_mqtt(int argc, char **argv) {
     (void) argv;
     if (argc > 2) {
         const int nodeId = atoi(argv[2]);
-        emcuteManagerInit(&emcuteManager, nodeId);
-        emcuteManagerSetConnection(&emcuteManager, argv[1], MQTT_TOPIC, MQTT_PORT, on_received_message);
+        emcuteManagerSetConnection(&emcuteManager, argv[1], MQTT_PORT, nodeId);
+        emcuteManagerSubscribeTopic(&emcuteManager,MQTT_TOPIC,on_received_message);
     }
     else {
         printf("Usage: %s <broker_addr> <node_id>\n", argv[0]);
@@ -164,8 +164,8 @@ int main(void) {
 
     char line_buf[SHELL_DEFAULT_BUFSIZE];
 #ifdef USE_ETHOS
-    emcuteManagerInit(&emcuteManager, DEFAULT_NODE);
-    emcuteManagerSetConnection(&emcuteManager, ETHOS_IP, MQTT_TOPIC, MQTT_PORT, on_received_message);
+    emcuteManagerSetConnection(&emcuteManager, ETHOS_IP, MQTT_PORT, DEFAULT_NODE);
+    emcuteManagerSubscribeTopic(&emcuteManager,MQTT_TOPIC,on_received_message);
 #endif
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
     return 0;

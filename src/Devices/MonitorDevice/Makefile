@@ -14,6 +14,8 @@ USEMODULE += auto_init_gnrc_netif
 USEMODULE += gnrc_netif_single
 # Specify the mandatory networking modules for IPv6
 USEMODULE += gnrc_ipv6_default
+USEMODULE += emcute
+
 ifeq (1,$(ETHOS))
 CFLAGS += -DUSE_ETHOS
 
@@ -77,8 +79,6 @@ USEPKG += jsmn
 USEMODULE += shell
 USEMODULE += shell_commands
 USEMODULE += ps
-USEMODULE += emcute
-
 
 QUIET ?= 1
 
