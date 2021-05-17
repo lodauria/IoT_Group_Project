@@ -2,11 +2,9 @@
 #define IOTGROUPPROJECT_SSD1306_H
 
 #include "u8g2.h"
+#include "stdint.h"
 
-typedef struct ssd1306_s {
-    uint8_t i2cAddr;
-    u8g2_t u8g2;
-} ssd1306_t;
+#define MAX_QUEUE_ELEMENTS 16
 
 typedef enum arrowDirection {
     LEFT,
@@ -17,10 +15,22 @@ typedef enum arrowDirection {
     BOTTOM,
     BOTTOM_LEFT,
     BOTTOM_RIGHT
-}arrowDirection_e;
+} arrowDirection_e;
+
+typedef struct directionArrayElement_s {
+    arrowDirection_e arrowDirection;
+    char *text;
+    uint8_t currentStartPosition;
+} directionArrayElement_t;
+
+typedef struct ssd1306_s {
+    uint8_t i2cAddr;
+    u8g2_t u8g2;
+    directionArrayElement_t directionArray[MAX_QUEUE_ELEMENTS];
+} ssd1306_t;
 
 void ssd1306_init(ssd1306_t *ssd1306, uint8_t i2cAddr);
 
-void ssd1306_writeArrow(ssd1306_t *ssd1306, arrowDirection_e direction);
-
+void ssd1306_addIndication(ssd1306_t *ssd1306, arrowDirection_e direction, char *plate);
+void ssd1306_removeIndication(ssd1306_t *ssd1306, char *plate);
 #endif //IOTGROUPPROJECT_SSD1306_H
