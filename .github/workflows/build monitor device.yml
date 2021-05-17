@@ -39,6 +39,6 @@ jobs:
 
       - name: Building
         run: |
-          cd ./src/Devices/DockDevice
+          cd ./src/Devices/MonitorDevice
           make
 
