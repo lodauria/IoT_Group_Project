@@ -29,3 +29,15 @@ connect <ip_address_of_mqtts_broker> <node_id>
 For the tests with real hardware the nucleo board is connected to the internet connection of the pc using ETHOS.
 
 For the network tests with IoT-Lab the board will be replaced with a IoT-Lab m3 that has a 6LoWPAN connection.
+
+## MQTT TOPICS
+The monitors to show the signage are subscribed to the topic `assignment` and they accept messages with this format
+```
+{
+"dock_id": 13,
+"boat_id":"TS57845"
+}
+```
+`dock_id` The dock assigned to the boat
+
+`boat_id` The plate of the boat
