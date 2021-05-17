@@ -82,7 +82,8 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
     for (size_t i = 0; i < len; i++) {
         printf("%c", in[i]);
     }
-    puts("\n");*/
+    puts("\n");
+     */
 
 
     memset(&p, 0, sizeof(jsmn_parser));
@@ -149,9 +150,9 @@ int connect_mqtt(int argc, char **argv) {
 
 static const shell_command_t shell_commands[] = {
 #ifndef USE_ETHOS
-    {"connect", "Connect to the UDP server", connect_mqtt},
+        {"connect", "Connect to the UDP server", connect_mqtt},
 #endif
-        {NULL,      NULL,                        NULL}
+        {NULL, NULL, NULL}
 };
 
 int main(void) {

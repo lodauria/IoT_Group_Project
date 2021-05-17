@@ -580,7 +580,7 @@ static unsigned char turnaroud_bits[] = {
         0x00, 0x00, 0x00, 0xff, 0xff, 0x3f, 0x00, 0x00, 0x00, 0xff, 0x3f, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xfe, 0xff, 0x1f, 0x00, 0x00,
         0x00, 0xfc, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8,
-        0xff, 0x07, 0x00, 0x00, 0x00, 0xf0, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        0xff, 0x07, 0x00, 0x00, 0x00, 0xf0, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 
 char rcv_thread_stack[THREAD_STACKSIZE_MAIN];
@@ -647,7 +647,6 @@ void *ssd1306_writeArrowThread(void *arg) {
 
                     while (xtimer_now_usec() - start_time < MS2US(INTERVAL_PER_PAGE_MS)) {
                         //Cycle of text animation
-
                         u8g2_FirstPage(u8g2);
 
                         do {
@@ -720,8 +719,13 @@ void ssd1306_init(ssd1306_t *ssd1306, uint8_t i2cAddr) {
 
 void ssd1306_addIndication(ssd1306_t *ssd1306, arrowDirection_e direction, char *plate) {
     for (int i = 0; i < MAX_QUEUE_ELEMENTS; i++) {
+        if (ssd1306->directionArray[i].enabled && strcmp(ssd1306->directionArray[i].text, plate) == 0) //Check for dupliacte
+            return;
+    }
+
+    for (int i = 0; i < MAX_QUEUE_ELEMENTS; i++) {
         if (!ssd1306->directionArray[i].enabled) {
-            strcpy(ssd1306->directionArray[i].text,plate);
+            strcpy(ssd1306->directionArray[i].text, plate);
             ssd1306->directionArray[i].arrowDirection = direction;
             ssd1306->directionArray[i].enabled = 1;
             printf("Signage for %s added\n", plate);
@@ -734,8 +738,10 @@ void ssd1306_addIndication(ssd1306_t *ssd1306, arrowDirection_e direction, char 
 void ssd1306_removeIndication(ssd1306_t *ssd1306, char *plate) {
     for (int i = 0; i < MAX_QUEUE_ELEMENTS; i++) {
         if (strcmp(ssd1306->directionArray[i].text, plate) == 0) {
-            memset(ssd1306->directionArray[i].text,0,MAX_PLATE_TEXT);
+            memset(ssd1306->directionArray[i].text, 0, MAX_PLATE_TEXT);
             ssd1306->directionArray[i].enabled = 0;
+            ssd1306->directionArray[i].arrowDirection = 0;
+            ssd1306->directionArray[i].currentStartPosition = 0;
             printf("Signage for %s removed\n", plate);
         }
     }
