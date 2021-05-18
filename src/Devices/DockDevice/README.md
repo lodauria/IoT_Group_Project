@@ -15,8 +15,10 @@ this version by default has dock_id 13 and automatically setup TAP on your pc
 
 Without ETHOS=1 parameter will build a version with 6LoWPAN connection
 ```
-make
+make ETHOS_BAUDRATE=500000 DEFAULT_CHANNEL=17
 ```
+You have to use the same channel of the [border router](https://github.com/RIOT-OS/RIOT/tree/master/examples/gnrc_border_router)
+
 Once the application is launched, you have to connect to the MQTTS broker, entering
 this command in the serial interface (only in the 6LoWPAN version)
 
