@@ -13,9 +13,16 @@ Based on the feedback received after the first delivery we decided to start from
 
 ### Work done up to now
 
-We've developed the software for license plate recognition on a Raspberry Pi connected to an MQTT broker. We developed a DynamoDB storing the marina's boats information.
+We've developed:
+- Firmware for the screen controller
+- Firmware for boat detection device
+- Cloud software to control devices via MQTT
+- Cloud software to assign reservation
+- Software for license plate recognition
 
 ### Future work
+- Web interface
+- Security, all data stored in the database will be encrypted
 
 ## Evaluation update
 

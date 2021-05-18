@@ -595,6 +595,31 @@ static void initArray(ssd1306_t *ssd1306) {
     }
 }
 
+static char *getIndicationString(arrowDirection_e directionE) {
+    switch (directionE) {
+        case LEFT:
+            return "LEFT";
+        case RIGHT:
+            return "RIGHT";
+        case TOP:
+            return "TOP";
+        case BOTTOM:
+            return "BOTTOM";
+        case TOP_LEFT:
+            return "TOP LEFT";
+        case TOP_RIGHT:
+            return "TOP RIGHT";
+        case BOTTOM_LEFT:
+            return "BOTTOM LEFT";
+        case BOTTOM_RIGHT:
+            return "BOTTOM RIGHT";
+        case TURN_AROUND:
+            return "TURN AROUND";
+        default:
+            return "";
+    }
+}
+
 static size_t countArrayElements(ssd1306_t *ssd1306) {
     size_t size = 0;
     for (int i = 0; i < MAX_QUEUE_ELEMENTS; i++) {
@@ -719,7 +744,8 @@ void ssd1306_init(ssd1306_t *ssd1306, uint8_t i2cAddr) {
 
 void ssd1306_addIndication(ssd1306_t *ssd1306, arrowDirection_e direction, char *plate) {
     for (int i = 0; i < MAX_QUEUE_ELEMENTS; i++) {
-        if (ssd1306->directionArray[i].enabled && strcmp(ssd1306->directionArray[i].text, plate) == 0) //Check for dupliacte
+        if (ssd1306->directionArray[i].enabled &&
+            strcmp(ssd1306->directionArray[i].text, plate) == 0) //Check for dupliacte
             return;
     }
 
@@ -728,7 +754,7 @@ void ssd1306_addIndication(ssd1306_t *ssd1306, arrowDirection_e direction, char 
             strcpy(ssd1306->directionArray[i].text, plate);
             ssd1306->directionArray[i].arrowDirection = direction;
             ssd1306->directionArray[i].enabled = 1;
-            printf("Signage for %s added\n", plate);
+            printf("Signage %s for %s added\n", getIndicationString(direction), plate);
             return;
         }
     }
