@@ -49,7 +49,7 @@ def lambda_handler(event, context):
         Key={
             'boat_id': boat_id
         },
-        UpdateExpression="set status=:s",
+        UpdateExpression="set boat_status=:s",
         ExpressionAttributeValues={
             ':s': "IN"
         },
@@ -76,7 +76,7 @@ def lambda_handler(event, context):
     
     # Publish the message for the displays
     response = client.publish (
-        topic='assignment',
+        topic='dock/assign',
         qos=1,
-        payload=json.dumps({"boat_id":boat_id, "dock_id":str(dock_num)})
+        payload=json.dumps({"boat_id":boat_id, "dock_num":str(dock_num), "event":"0"})
     )

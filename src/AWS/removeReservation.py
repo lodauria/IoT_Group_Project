@@ -19,15 +19,16 @@ def lambda_handler(event, context):
      
     # Get boat id
     boat_id = response['Items'][0]['boat']
+    table_res = dynamodb.Table('reservations')
     
-    if action_type == "IN":
+    if action_type == "0":
         
         # Update reservation status
         response = table_res.update_item(
             Key={
                 'boat_id': boat_id
             },
-            UpdateExpression="set status=:s",
+            UpdateExpression="set boat_status=:s",
             ExpressionAttributeValues={
                 ':s': "STOP"
             },
@@ -41,12 +42,12 @@ def lambda_handler(event, context):
         
         # Publish the message for the displays
         response = client.publish (
-            topic='completed',
+            topic='dock/assign',
             qos=1,
-            payload=json.dumps({"boat": boat_id, "bock_num":dock_num})
+            payload=json.dumps({"boat_id": boat_id, "dock_num":dock_num, "event":"1"})
         )
     
-    if action_type == "OUT":
+    if action_type == "1":
         table_res = dynamodb.Table('reservations')
         response = table_res.delete_item(
             Key={'boat_id': boat_id}
