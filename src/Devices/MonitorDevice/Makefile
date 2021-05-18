@@ -84,4 +84,4 @@ QUIET ?= 1
 
 include	$(CURDIR)/Makefile.conf.include
 include $(RIOTBASE)/Makefile.include
-
+include $(RIOTMAKE)/default-radio-settings.inc.mk
