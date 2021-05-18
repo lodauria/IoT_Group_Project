@@ -23,6 +23,11 @@ this command in the serial interface (only in the 6LoWPAN version)
 ```
 connect <ip_address_of_mqtts_broker> <node_id>
 ```
+Building with the option `FAKE=1` the boat detection sensor output will be replaced with dummy random data.
+You can use these options together, ex.
+```
+make ETHOS=1 FAKE=1
+```
 
 ## NETWORK INTERFACE
 

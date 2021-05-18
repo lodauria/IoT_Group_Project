@@ -15,6 +15,10 @@ DEVELHELP ?= 1
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
 
+ifeq (1,$(FAKE))
+	CFLAGS += -DFAKE_SENSOR
+endif
+
 #Import devices and src folders
 USEMODULE += devices
 DIRS += $(CURDIR)/devices

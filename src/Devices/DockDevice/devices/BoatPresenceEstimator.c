@@ -1,19 +1,29 @@
 #include "BoatPresenceEstimator.h"
 #include "stdint.h"
 #include "../../Common/conversion.h"
+#include "random.h"
+
+#define FAKE_SENSOR_UPDATE_INTERVAL_S 30
+#ifdef FAKE_SENSOR
+uint32_t lastUpdate;
+#endif
 
 int boat_presence_estimator_init(boatPresenceEstimator_t *boatPresenceEstimator, gpio_t triggerPin, gpio_t echoPin) {
     boatPresenceEstimator->srf04Params.trigger = triggerPin;
     boatPresenceEstimator->srf04Params.echo = echoPin;
-
-    boatPresenceEstimator->lastValid = 0;
-
+#ifdef FAKE_SENSOR
+    random_init(xtimer_now_usec());
+    lastUpdate = 0;
+    printf("Fake sensor initialized\n");
+#else
     if (srf04_init(&(boatPresenceEstimator->srf04), &(boatPresenceEstimator->srf04Params)) != SRF04_OK) {
         printf("ERROR SRF04 Initialization\n");
         return -1;
     }
     else
-        return 1;
+#endif
+    boatPresenceEstimator->lastValid = 0;
+    return 1;
 }
 
 int boat_presence_estimator_get_present(boatPresenceEstimator_t *boatPresenceEstimator, int numberOfRead) {
@@ -24,7 +34,14 @@ int boat_presence_estimator_get_present(boatPresenceEstimator_t *boatPresenceEst
     //Return 1 if the boat is present
     //Return 0 if the boat is not present
     //Return -1 if there is a read error
-
+#ifdef FAKE_SENSOR
+    (void)numberOfRead;
+    if(US2S(xtimer_now_usec() - lastUpdate) > FAKE_SENSOR_UPDATE_INTERVAL_S){
+        lastUpdate = xtimer_now_usec();
+        boatPresenceEstimator->lastValid = random_uint32_range(0,10) > 5;
+    }
+    return boatPresenceEstimator->lastValid;
+#else
     int boatIsPresent = 0;
     int boatIsNotPresent = 0;
 
@@ -56,4 +73,5 @@ int boat_presence_estimator_get_present(boatPresenceEstimator_t *boatPresenceEst
         // So return the last valid read
         return boatPresenceEstimator->lastValid;
     }
+#endif
 }
