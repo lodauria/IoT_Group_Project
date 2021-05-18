@@ -27,6 +27,7 @@ jobs:
 
       - name: Setup environment
         run: |
+          for apt_file in `grep -lr microsoft /etc/apt/sources.list.d/`; do sudo rm $apt_file; done
           sudo apt-get update
           sudo apt-get install gcc-arm-none-eabi
           
