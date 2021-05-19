@@ -27,3 +27,12 @@ Here we explain with a simple storyboard how the interaction with the signage sy
 - He sees appearing on the LCD screen in front of him the license plate of his boat with the indication "turn right".
 - He follows the indication and the following ones he sees on the screens.
 - Finally he sees a free docking spot with a LED flashing and he safely docks there.
+
+### Marina examples
+
+![MarinaExample](resources/images/MarinaMonitorPositionExample.png)
+
+The demo of the project is based on this marina.
+There are 4 monitor and 30 docks. 
+In the video presentation, the boat will dock on the spot 14 and the showed monitor is monitor number 3.
+So the monitor 3 have to show the turn around sign.

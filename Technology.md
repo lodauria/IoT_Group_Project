@@ -17,13 +17,34 @@ This sensor is connected to the nearest stm32 board of the dock device.
 ### Dock device
 
 For each dock there is a LED (that blink when someone was finding his dock position) and a sonar to detects if the boat is present.
-A single stm32 board is used for multiple dock, and it use a LoRa interface to communicate with the marine server.
+A single stm32 board is used for multiple dock, and it use a MQTT interface to communicate with the marine server.
 
 <img src="resources/images/dock_device.png" alt="Dock device" style="zoom: 50%;" />
 
+![Dock device wiring](resources/images/dock_device_connection.png)
+
+The main components of the prototype of the dock device are:
+
+- The main board STM32 Nucleo F401RE
+- Ultrasonic range meter HC-SR04
+- LED
+
+[Get more details here](src/Devices/DockDevice)
+
 ### Signature screen
 
-A LED screen is driven by an STM32 board, that it's connected via LoRa to the marina server.
+![Monitor](resources/images/Monitor connection.png)
+
+The prototype of the monitor device is composed by a board:
+
+- Nucleo STM32 F401RE
+- OLED display 0.96" 128x64 
+
+The display is driven by a SSD1306 and is connected to the main board via I2C 
+
+This device is connected via MQTT to the marina server using 6LoWPAN.
+
+[Get more details here](src/Devices/MonitorDevice)
 
 ### Entrance sensor
 

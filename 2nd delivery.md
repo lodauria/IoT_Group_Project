@@ -21,9 +21,14 @@ We've developed:
 - Software for license plate recognition
 
 ### Future work
-- Web interface
-- Security, all data stored in the database will be encrypted
-
+- Improve web interface
+- Security, all data stored in the database will be encrypted to ensure that the marina clients cannot be tracked
+- The system have to work also with the boats without a license plate (<10 m).
+  We will work on one of these proposals: 
+    - QR Code ticket to scan at the entrance
+    - Contactless check-in using bluetooth low energy
+- The system have to response also if there isn't a reservation for entering boat
+- Oil spill detection [?]
 ## Evaluation update
 
 ### Work done up to now
