@@ -1,5 +1,5 @@
 # In this file there are the all main config fot the application
-MQTT_TOPIC = "assignment"
+MQTT_TOPIC = "dock/assign"
 MQTT_PORT = 1885
 
 ETHOS_IP = "fe80::1"

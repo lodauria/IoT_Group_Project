@@ -78,12 +78,10 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
     printf("### got publication for topic '%s' [%i] ###\n",
            topic->name, (int) topic->id);
 
-    /*
     for (size_t i = 0; i < len; i++) {
         printf("%c", in[i]);
     }
     puts("\n");
-     */
 
 
     memset(&p, 0, sizeof(jsmn_parser));
@@ -104,7 +102,9 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
 
     //Loop over all keys of the root objects
     char boat_id[64];
-    char dock_id[8];
+    char dock_num[8];
+    char event[8];
+
     for (int i = 1; i < r; i++) {
         if (jsoneq(in, &t[i], "boat_id") == 0) {
             sprintf(boat_id, "%.*s", t[i + 1].end - t[i + 1].start,
@@ -112,8 +112,14 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
             //printf("boat_id: %s\n", boat_id);
             i++;
         }
-        else if (jsoneq(in, &t[i], "dock_id") == 0) {
-            sprintf(dock_id, "%.*s", t[i + 1].end - t[i + 1].start,
+        else if (jsoneq(in, &t[i], "dock_num") == 0) {
+            sprintf(dock_num, "%.*s", t[i + 1].end - t[i + 1].start,
+                    in + t[i + 1].start);
+            //printf("dock_id: %s\n", dock_id);
+            i++;
+        }
+        else if (jsoneq(in, &t[i], "event") == 0) {
+            sprintf(event, "%.*s", t[i + 1].end - t[i + 1].start,
                     in + t[i + 1].start);
             //printf("dock_id: %s\n", dock_id);
             i++;
@@ -124,13 +130,17 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
         }
     }
 
-    if (strlen(boat_id) > 0 && strlen(dock_id) > 0) {
-        const int dock_in_integer = atoi(dock_id);
-        (void) dock_in_integer;
-        printf("Received boat id %s | dock id %d\n", boat_id, dock_in_integer);
-        arrowDirection_e arrow = getDirectionByDockId(dock_in_integer);
-        if (arrow != OFF)
-            ssd1306_addIndication(&display, arrow, boat_id);
+    if (strlen(boat_id) > 0 && strlen(dock_num) > 0 && strlen(event) > 0) {
+        const int dock_num_integer = atoi(dock_num);
+        const int event_integer = atoi(event);
+        if (event_integer) {
+            ssd1306_removeIndication(&display,boat_id);
+        }
+        else {
+            arrowDirection_e arrow = getDirectionByDockId(dock_num_integer);
+            if (arrow != OFF)
+                ssd1306_addIndication(&display, arrow, boat_id);
+        }
     }
 }
 
@@ -140,7 +150,7 @@ int connect_mqtt(int argc, char **argv) {
     if (argc > 2) {
         const int nodeId = atoi(argv[2]);
         emcuteManagerSetConnection(&emcuteManager, argv[1], MQTT_PORT, nodeId);
-        emcuteManagerSubscribeTopic(&emcuteManager,MQTT_TOPIC,on_received_message);
+        emcuteManagerSubscribeTopic(&emcuteManager, MQTT_TOPIC, on_received_message);
     }
     else {
         printf("Usage: %s <broker_addr> <node_id>\n", argv[0]);

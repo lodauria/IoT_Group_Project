@@ -32,13 +32,14 @@ For the tests with real hardware the nucleo board is connected to the internet c
 For the network tests with IoT-Lab the board will be replaced with a IoT-Lab m3 that has a 6LoWPAN connection.
 
 ## MQTT TOPICS
-The monitors to show the signage are subscribed to the topic `assignment` and they accept messages with this format
+The monitors to show the signage are subscribed to the topic `dock/assign` and they accept messages with this format
 ```
 {
-"dock_id": 13,
-"boat_id":"TS57845"
+"dock_num": 13,
+"boat_id":"TS57845",
+"event":"0"
 }
 ```
 `dock_id` The dock assigned to the boat
-
+`event = 0` means that a boat entering the marina
 `boat_id` The plate of the boat

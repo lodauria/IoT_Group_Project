@@ -42,21 +42,22 @@ The messages if a boat is detected or not are published in the topic `dock/boat`
 ```
 {
   "dock_id": 13,
-  "detected": 0
+  "event": 0
 }
 ```
 `dock_id` identify the sender.
 
-`detected` if it is 1 there is a boat in the dock, 0 otherwise
+`event` if it is 1 the boat leaves the dock, 0 otherwise
 
-To toggle the light, the device is subscribed to the topic `dock/led` and accepts messages with
-this format
+The devices to turn on the LED when a boat is entering the marina, are subscribed to the topic `dock/assign` and 
+they accept messages with this format
 ```
 {
-"dock_id": 13,
-"state":1
+"dock_num": 13,
+"boat_id":"TS57845",
+"event":"0"
 }
 ```
-`dock_id` identify the receiver.
-
-`state` if it is 0 the led will turn off, otherwise will be turn on
+`dock_id` The dock assigned to the boat
+`event = 0` means that a boat entering the marina
+`boat_id` The plate of the boat

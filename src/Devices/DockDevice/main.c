@@ -26,15 +26,24 @@ emcute_manager_t emcuteManager;
 jsmn_parser p;
 jsmntok_t t[MAX_JSON_TOKEN];
 char thread_stack[THREAD_STACKSIZE_MAIN];
+int isLedOn = 0;
 
 static void *boat_thread(void *arg) {
-    (void )arg;
+    (void) arg;
     char msg[MAX_MSG_SIZE];
-    while (1){
-        memset(msg,0,MAX_MSG_SIZE);
-        int boatIsDetected = boat_presence_estimator_get_present(&boatPresenceEstimator,5);
-        sprintf(msg,"{\"dock_id\":%d,\"detected\":%d}", emcuteManagerGetNodeId(&emcuteManager),boatIsDetected);
-        emcuteManagerPublish(&emcuteManager,MQTT_TOPIC_DETECT_BOAT,msg);
+    int lastIsDockFree = 0;
+    while (1) {
+        memset(msg, 0, MAX_MSG_SIZE);
+        const int isDockFree = !boat_presence_estimator_get_present(&boatPresenceEstimator, 5);
+        if (!isDockFree && isLedOn) {
+            gpio_clear(led);
+            isLedOn = 0;
+        }
+        if (isDockFree != lastIsDockFree) {
+            sprintf(msg, "{\"dock_num\":%d,\"event\":\"%d\"}", emcuteManagerGetNodeId(&emcuteManager), isDockFree);
+            emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
+            lastIsDockFree = isDockFree;
+        }
         xtimer_sleep(MQTT_PUBLISH_INTERVAL_S);
     }
     return NULL;   // should never be reached
@@ -60,12 +69,11 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
     printf("### got publication for topic '%s' [%i] ###\n",
            topic->name, (int) topic->id);
 
-    /*
     for (size_t i = 0; i < len; i++) {
         printf("%c", in[i]);
     }
     puts("\n");
-     */
+
 
     memset(&p, 0, sizeof(jsmn_parser));
     memset(&t, 0, sizeof(jsmntok_t) * MAX_JSON_TOKEN);
@@ -84,17 +92,27 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
     }
 
     //Loop over all keys of the root objects
-    char state[8];
-    char dock_id[8];
+    char boat_id[64];
+    char dock_num[8];
+    char event[8];
+
     for (int i = 1; i < r; i++) {
-        if (jsoneq(in, &t[i], "dock_id") == 0) {
-            sprintf(dock_id, "%.*s", t[i + 1].end - t[i + 1].start,
+        if (jsoneq(in, &t[i], "boat_id") == 0) {
+            sprintf(boat_id, "%.*s", t[i + 1].end - t[i + 1].start,
                     in + t[i + 1].start);
+            //printf("boat_id: %s\n", boat_id);
             i++;
         }
-        else if (jsoneq(in, &t[i], "state") == 0) {
-            sprintf(state, "%.*s", t[i + 1].end - t[i + 1].start,
+        else if (jsoneq(in, &t[i], "dock_num") == 0) {
+            sprintf(dock_num, "%.*s", t[i + 1].end - t[i + 1].start,
                     in + t[i + 1].start);
+            //printf("dock_id: %s\n", dock_id);
+            i++;
+        }
+        else if (jsoneq(in, &t[i], "event") == 0) {
+            sprintf(event, "%.*s", t[i + 1].end - t[i + 1].start,
+                    in + t[i + 1].start);
+            //printf("dock_id: %s\n", dock_id);
             i++;
         }
         else {
@@ -103,15 +121,11 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
         }
     }
 
-    if (strlen(dock_id) > 0 && strlen(state) > 0) {
-
-        const int state_integer = atoi(state);
-        const int dock_id_integer = atoi(dock_id);
-
+    if (strlen(dock_num) > 0 && strlen(event) > 0 && strcmp(event, "0") == 0) {
+        const int dock_id_integer = atoi(dock_num);
         if (dock_id_integer == emcuteManagerGetNodeId(&emcuteManager)) {
-            gpio_write(led, state_integer);
-            printf("setted %d\n", state_integer);
-
+            gpio_set(led);
+            printf("LED turned on\n");
         }
     }
 }
@@ -123,7 +137,7 @@ int connect_mqtt(int argc, char **argv) {
         const int nodeId = atoi(argv[2]);
         emcuteManagerSetConnection(&emcuteManager, argv[1], MQTT_PORT, nodeId);
         emcuteManagerSubscribeTopic(&emcuteManager, MQTT_TOPIC_LED, on_received_message);
-        emcuteManagerRegisterPublishTopic(&emcuteManager,MQTT_TOPIC_DETECT_BOAT);
+        emcuteManagerRegisterPublishTopic(&emcuteManager, MQTT_TOPIC_DETECT_BOAT);
     }
     else {
         printf("Usage: %s <broker_addr> <node_id>\n", argv[0]);
