@@ -766,7 +766,7 @@ void ssd1306_removeIndication(ssd1306_t *ssd1306, char *plate) {
         if (strcmp(ssd1306->directionArray[i].text, plate) == 0) {
             memset(ssd1306->directionArray[i].text, 0, MAX_PLATE_TEXT);
             ssd1306->directionArray[i].enabled = 0;
-            ssd1306->directionArray[i].arrowDirection = 0;
+            ssd1306->directionArray[i].arrowDirection = OFF;
             ssd1306->directionArray[i].currentStartPosition = 0;
             printf("Signage for %s removed\n", plate);
         }

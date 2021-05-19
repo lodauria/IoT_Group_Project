@@ -32,6 +32,7 @@ static void *boat_thread(void *arg) {
     (void) arg;
     char msg[MAX_MSG_SIZE];
     int lastIsDockFree = 0;
+    int firstRun = 1;
     while (1) {
         memset(msg, 0, MAX_MSG_SIZE);
         const int isDockFree = !boat_presence_estimator_get_present(&boatPresenceEstimator, 5);
@@ -39,12 +40,19 @@ static void *boat_thread(void *arg) {
             gpio_clear(led);
             isLedOn = 0;
         }
-        if (isDockFree != lastIsDockFree) {
-            sprintf(msg, "{\"dock_num\":%d,\"event\":\"%d\"}", emcuteManagerGetNodeId(&emcuteManager), isDockFree);
-            emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
+        if (firstRun) {
             lastIsDockFree = isDockFree;
+            firstRun = 0;
         }
-        xtimer_sleep(MQTT_PUBLISH_INTERVAL_S);
+        else {
+            if (isDockFree != lastIsDockFree) {
+                sprintf(msg, "{\"dock_num\":%d,\"event\":\"%d\"}", emcuteManagerGetNodeId(&emcuteManager), isDockFree);
+                emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
+                lastIsDockFree = isDockFree;
+                printf("Dock is free %d\n", isDockFree);
+                xtimer_sleep(MQTT_PUBLISH_INTERVAL_S);
+            }
+        }
     }
     return NULL;   // should never be reached
 }
@@ -125,6 +133,7 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
         const int dock_id_integer = atoi(dock_num);
         if (dock_id_integer == emcuteManagerGetNodeId(&emcuteManager)) {
             gpio_set(led);
+            isLedOn=1;
             printf("LED turned on\n");
         }
     }

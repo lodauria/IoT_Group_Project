@@ -4,7 +4,7 @@ MQTT_TOPIC_DETECT_BOAT = "dock/boat"
 MQTT_PORT = 1885
 
 ETHOS_IP = "fe80::1"
-DEFAULT_NODE = 13
+DEFAULT_NODE = 14
 
 MQTT_PUBLISH_INTERVAL_S = 5
 #Interval between messages published in dock/boat
