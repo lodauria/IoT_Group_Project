@@ -15,8 +15,8 @@
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
    sodipodi:docname="MarinaMonitorExample.svg"
    inkscape:export-filename="/home/luca/Desktop/Universita/IOT/IoTGroupProject/resources/images/MarinaMonitorPositionExample.png"
-   inkscape:export-xdpi="120"
-   inkscape:export-ydpi="120">
+   inkscape:export-xdpi="121"
+   inkscape:export-ydpi="121">
   <defs
      id="defs2">
     <marker
@@ -93,7 +93,7 @@
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1029"
-     inkscape:window-x="1920"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      width="250mm" />
@@ -105,7 +105,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
