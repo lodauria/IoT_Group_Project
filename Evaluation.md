@@ -26,6 +26,12 @@ When the device measurement is out of range the receiver components doesn't dete
 
 Another problem of this family of sensors is that they doesn't work fine with sound absorbing material, but for detect boats, that are made by metal or wood, we haven't this problem. 
 
+![Rangefinder tilted problem](https://hackster.imgix.net/uploads/attachments/553248/ultrasonic3_tpeypBFSav.gif)
+
+This devices doesn't produce good values when the surface is tilted, Luckily the most of the boat back are not tilted.
+
+
+
 #### Power consumption
 
 ![Dock device power consumption graph](resources/images/DockDeviceConsumption.png)
