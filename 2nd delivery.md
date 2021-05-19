@@ -33,11 +33,15 @@ We've developed:
 ## Evaluation update
 
 ### Work done up to now
--the plate recogntion is working for a simple boat without aditional design near the plate. 
+-the plate recogntion is working for a simple boat without aditional design near the plate.
+
 -We tested the power consumption and the delay in the license plate recognition.
+
 -the plate recognition is working slowly.
 
 ### Future work
 -making a more accurate plate recognition with taking in account cases where the boat is more designed and more writen word are near the plate. 
+
 -making a neural network algorithem to make the result of the plate recognition more precise.
+
 -make the response faster than the first one.
