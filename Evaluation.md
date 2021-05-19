@@ -10,6 +10,7 @@ To evaluate our solution we first consider the devices performances as follows:
 
 The performance of the camera will be evaluated by the capability of capturing clear images that allows to perform an accurate text recognition. We will consider the percentage of correct text detection on the number of given images.
 The camera is the slower part of the system, so it should detect the plate a fast as possible.
+the performance will be evaluated by the capability of the algorithm to differenciate between plate number and boat decoration or slogan.
 
 ## Oil spill sensor
 
@@ -25,12 +26,6 @@ The main issue for this kind of sensor is that we cannot detect the difference b
 When the device measurement is out of range the receiver components doesn't detects any ultrasonic sound and this phenomena could happen also if the receiver or the sender module is damaged.
 
 Another problem of this family of sensors is that they doesn't work fine with sound absorbing material, but for detect boats, that are made by metal or wood, we haven't this problem. 
-
-![Rangefinder tilted problem](https://hackster.imgix.net/uploads/attachments/553248/ultrasonic3_tpeypBFSav.gif)
-
-This devices doesn't produce good values when the surface is tilted, Luckily the most of the boat back are not tilted.
-
-
 
 #### Power consumption
 
