@@ -10,7 +10,8 @@ To evaluate our solution we first consider the devices performances as follows:
 
 The performance of the camera will be evaluated by the capability of capturing clear images that allows to perform an accurate text recognition. We will consider the percentage of correct text detection on the number of given images.
 The camera is the slower part of the system, so it should detect the plate a fast as possible.
-the performance will be evaluated by the capability of the algorithm to differenciate between plate number and boat decoration or slogan.
+
+the performance will also be evaluated by the capability of the algorithm to differenciate between plate number and boat decoration or slogan.
 
 ## Oil spill sensor
 
