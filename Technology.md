@@ -33,7 +33,7 @@ The main components of the prototype of the dock device are:
 
 ### Signature screen
 
-![Monitor](resources/images/Monitor connection.png)
+![Monitor](resources/images/Monitor%20connection.png)
 
 The prototype of the monitor device is composed by a board:
 
