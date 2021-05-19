@@ -40,8 +40,6 @@ We've developed:
 -the plate recognition is working slowly.
 
 ### Future work
--making a more accurate plate recognition with taking in account cases where the boat is more designed and more writen word are near the plate. 
-
--making a neural network algorithem to make the result of the plate recognition more precise.
-
--make the response faster than the first one.
+- making a more accurate plate recognition with taking in account cases where the boat is more designed and more writen word are near the plate. 
+- making a neural network algorithem to make the result of the plate recognition more precise.
+- make the response faster than the first one.
