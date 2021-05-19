@@ -33,14 +33,11 @@ We've developed:
 ## Evaluation update
 
 ### Work done up to now
-
-- We measure the power consumption of:
-  - The main board with radio module.
-  - The ultrasonic sensor.
-- We have tested how the network works with a number of nodes suitable for our proposal.
-- We have tested the reliability of the ultrasonic rangefinder.
+-the plate recogntion is working for a simple boat without aditional design near the plate. 
+-We tested the power consumption and the delay in the license plate recognition.
+-the plate recognition is working slowly.
 
 ### Future work
-
-- Camera device power consumption
-- Estimate the power consumption of the entire system (included brighter LED and real monitors)
+-making a more accurate plate recognition with taking in account cases where the boat is more designed and more writen word are near the plate. 
+-making a neural network algorithem to make the result of the plate recognition more precise.
+-make the response faster than the first one.
