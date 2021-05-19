@@ -1,2 +1,2 @@
 ## RIOT applications
-this directory contains all RIOT applications
+This directory contains all RIOT applications

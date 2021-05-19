@@ -33,6 +33,13 @@ We've developed:
 
 ### Work done up to now
 
-We tested the power consumption and the delay in the license plate recognition.
+- We measure the power consumption of:
+  - The main board with radio module.
+  - The ultrasonic sensor.
+- We have tested how the network works with a number of nodes suitable for our proposal.
+- We have tested the reliability of the ultrasonic rangefinder.
 
 ### Future work
+
+- Camera device power consumption
+- Estimate the power consumption of the entire system (included brighter LED and real monitors)

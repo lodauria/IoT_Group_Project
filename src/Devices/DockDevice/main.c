@@ -50,9 +50,10 @@ static void *boat_thread(void *arg) {
                 emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
                 lastIsDockFree = isDockFree;
                 printf("Dock is free %d\n", isDockFree);
-                xtimer_sleep(MQTT_PUBLISH_INTERVAL_S);
+                xtimer_sleep(MQTT_PUBLISH_INTERVAL_S-1);
             }
         }
+        xtimer_sleep(1);
     }
     return NULL;   // should never be reached
 }

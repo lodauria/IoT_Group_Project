@@ -19,7 +19,7 @@ During summer touristic marinas are full of amateur sailors that reserved a dock
 ## Video resources
 
 - [Product presentation](https://www.youtube.com/watch?v=dEvWLIq8EWU)
-- [Technical details] (missing for now)
+- [Technical details](https://youtu.be/lHtj5kDBaY8)
 - [Performance evaluation] (missing for now)
 
 ## First assignment
