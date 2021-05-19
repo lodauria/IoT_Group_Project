@@ -8,13 +8,11 @@ The main macro components are:
 - **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot.
 - **Park sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
 
-### Oil spill sensor
+### Oil spill sensor [Work in progress]
 
 This device reading the reflection of the water can estimate if there is some floating oil, in this case the part of the marina in which the sensor is located will be closed and the marina's workers will intervenes before that the spill reaches the sea.
 
 This sensor is connected to the nearest stm32 board of the dock device.
-
-More info: https://ldi.ee/products/row-oil-detector
 
 ### Dock device
 
@@ -34,15 +32,15 @@ For each side there are:
 
 - **Camera** 
 - **Raspberry PI** to read the name of the boat.
-- **LoRa Interface** that sends computed data to the marina server.
+- **Network Interface** that sends computed data to the marina server over MQTT on 6LoWPAN.
 
-Image processing is executed in the raspberry pi and the read name is sended.
+Image processing is executed in the raspberry pi and the read name is sent.
 
 **Marina server** in which are local computation are executed.
 
 It's composed by:
 
-- **LoRa interface** that communicate with all the devices installed in the marina.
+- **Network interface** that communicate with all the devices installed in the marina over 6LoWPAN.
 - **STM32 Board** the local elaboration node.
 - **Internet interface** to connect the local system to the cloud.
 
@@ -55,7 +53,7 @@ The major software components are:
 
 ![Software component](resources/images/network_infrastructure.png)
 
-For the communication inside the marina LoRa is used.
+For the communication inside the marina 6LoWPAN is used.
 The marina server send updating data over MQTT to the cloud system.
 
 Software work flow examples:

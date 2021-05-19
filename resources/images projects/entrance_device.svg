@@ -14,7 +14,7 @@
    id="svg2609"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
    sodipodi:docname="entrance_device.svg"
-   inkscape:export-filename="/home/luca/Desktop/Università/IOT/IoTGroupProject/resources/images projects/entrance_device.png"
+   inkscape:export-filename="/home/luca/Desktop/Universita/IOT/IoTGroupProject/resources/images/entrance_device.png"
    inkscape:export-xdpi="213.74129"
    inkscape:export-ydpi="213.74129">
   <defs
@@ -65,7 +65,7 @@
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1029"
-     inkscape:window-x="1280"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -170,7 +170,7 @@
          x="146.92688"
          y="136.8647"
          style="text-align:center;text-anchor:middle;stroke-width:0.224462"
-         id="tspan839-5-0">LoRa</tspan><tspan
+         id="tspan839-5-0">Network</tspan><tspan
          sodipodi:role="line"
          x="146.92688"
          y="148.08774"
