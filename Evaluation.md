@@ -48,7 +48,7 @@ If more boats enter in the marina, the screen have to show by cycling the signag
 
 #### Current consumption
 
-![Monitor device power consumption graph](/home/luca/Desktop/Universita/IOT/IoTGroupProject/resources/images/MonitorPowerConsumption.png)
+![Monitor device power consumption graph](resources/images/MonitorPowerConsumption.png)
 
 The MQTT messages are not received periodically but only when a boat enter in the marina, so the radio module is used occasionally.
 
