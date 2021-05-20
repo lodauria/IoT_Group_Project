@@ -31,7 +31,7 @@ The concept idea of the first delivery has received bad feedback, so we have sta
 
 Here we report the links to the videos required for the second delivery.
 
-- [Technology up to now and demo] ()
+- [Technology up to now and demo](https://youtu.be/3Wt1pBkmOxo)
 - [Evaluation up to now] ()
 - [Future plans] ()
 
