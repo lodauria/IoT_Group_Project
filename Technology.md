@@ -84,3 +84,17 @@ Software work flow examples:
 - A boat enter in the marina and the entrance device send name and size of the boat to the marina server.
 - The marina server check on the cloud system if there are a reserved dock for the entering boat, otherwise it'll assign a free dock suitable for the boat size.
 - The marina server send data to the monitors and dock device that start to show useful information at the sailor.
+
+### AWS infrastructure
+
+On AWS cloud we have developed the cloud system with the following architecture
+
+![AWS architecture](resources\images\architecture.png)
+
+We have 3 lambda function. The first one is `getReservation` and is called only from the web page to make a reservation that will be saved in a table of the marina DynamoDB. The second is called `assignDock` and is used to assign a docking spot when the camera detects an incoming boat. The assigned dock is stored in the DynamoDB in another table used only for the docking spot status and the reservation status is updated to take into account that the boat arrived. At the end this lambda function sends an MQTT message to the docking devices and the displays to generate the correct signage to reach the docking.
+
+When the boat reaches its docking spot a dock device message triggers the last lambda function called `removeReservation` which will communicate to all the docking devices that the docking procedure is completed.
+
+To conclude when a docking device detects that a docking spot is free again because a boat leaved, it sends a message that triggers again the `removeReservation` function that in this case will delete the reservation and restore the docking spot status to free.
+
+For more details about the messages exchanged by these components check the [dedicated folder](src/AWS).

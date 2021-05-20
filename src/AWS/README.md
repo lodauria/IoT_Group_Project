@@ -30,7 +30,7 @@ This will trigger the lambda function `removeReservation` that will change the r
 
 All the devices will react deleting the signage for the boat that docked.
 
-## Boat leaving in the marina
+## Boat leaving the marina
 
 When a dock device detect a boat leaving its docking, it sends a message to topic `dock/boat` in the form
 
