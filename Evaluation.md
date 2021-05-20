@@ -25,7 +25,11 @@ For this scope an ultrasonic sensor is used, for our propose the precision is no
 The main issue for this kind of sensor is that we cannot detect the difference between an out of range measure and a faulty sensor.
 When the device measurement is out of range the receiver components doesn't detects any ultrasonic sound and this phenomena could happen also if the receiver or the sender module is damaged.
 
-Another problem of this family of sensors is that they doesn't work fine with sound absorbing material, but for detect boats, that are made by metal or wood, we haven't this problem. 
+Another problem of this family of sensors is that they don't work fine with sound absorbing material, but for detect boats, that are made by metal or wood, we haven't this problem. 
+
+![Rangefinder tilted problem](resources/images/tiltedUltrasonic.gif)
+
+These devices don't produce good values when the surface is tilted, Luckily the most of the boat back are not tilted.
 
 #### Power consumption
 
