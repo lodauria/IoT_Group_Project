@@ -8,10 +8,7 @@ To evaluate our solution we first consider the devices performances as follows:
 
 ## Camera
 
-The performance of the camera will be evaluated by the capability of capturing clear images that allows to perform an accurate text recognition. We will consider the percentage of correct text detection on the number of given images.
-The camera is the slower part of the system, so it should detect the plate a fast as possible.
-
-the performance will also be evaluated by the capability of the algorithm to differenciate between plate number and boat decoration or slogan.
+The performance of the camera will be evaluated by the capability of capturing clear images that allows to perform an accurate text recognition. We will consider the percentage of correct text detection on the number of given images. The camera is the slower part of the system, so it should detect the plate a fast as possible. The performance will also be evaluated by the capability of the algorithm to differentiate between plate number and boat decoration or slogan.
 
 ## Oil spill sensor
 
@@ -77,7 +74,7 @@ So the future plans is to replace this connection with LoRa so leave also MQTT.
 
 ## Response time from an end-user point of view: 
 
-The response time, so the time between a plate detects and signage are shown on the monitors, is below 500 mS. It is not very important to have a real time system, but the system should produce a response in a reasonable time.
+The response time, so the time between a plate detects and signage are shown on the monitors, is below 500 ms. It is not very important to have a real time system, but the system should produce a response in a reasonable time.
 
 Usually the speed limit of the entrance of the marina is about 3 knots, the system In perfect condition has a response time < 500 ms, so the boat in this amount of time, with this speed limit, moves about 77 cm, so our system produces a response in time.
 

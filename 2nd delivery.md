@@ -3,11 +3,10 @@
 ## Comments received after the first delivery
 
 - The concept idea doesn't solve a real world problem and so it wouldn't be a valuable product.
-- The data collected by the sensors can be used in a more clever way.
 
 ## Changes done after the first delivery
 
-Based on the feedback received after the first delivery we decided to start from scratch on a new concept idea: a smart marina.
+Based on the feedback received after the first delivery we decided to start from scratch on a new concept idea: a smart signage system to be used inside the marinas.
 
 ## Technology update
 
