@@ -35,4 +35,4 @@ Here we report the links to the videos required for the second delivery.
 - [Evaluation up to now](https://youtu.be/7cdx_kfam0A)
 - [Future plans] ()
 
-The dedicated file can be found [here](./2nd delivery).
+The dedicated file can be found [here](./2nd%20delivery).
