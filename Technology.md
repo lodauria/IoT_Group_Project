@@ -89,7 +89,7 @@ Software work flow examples:
 
 On AWS cloud we have developed the cloud system with the following architecture
 
-![AWS architecture](resources\images\architecture.png)
+![AWS architecture](resources/images/architecture.png)
 
 We have 3 lambda function. The first one is `getReservation` and is called only from the web page to make a reservation that will be saved in a table of the marina DynamoDB. The second is called `assignDock` and is used to assign a docking spot when the camera detects an incoming boat. The assigned dock is stored in the DynamoDB in another table used only for the docking spot status and the reservation status is updated to take into account that the boat arrived. At the end this lambda function sends an MQTT message to the docking devices and the displays to generate the correct signage to reach the docking.
 
