@@ -26,7 +26,7 @@ We've developed:
   We will work on one of these proposals: 
     - QR Code ticket to scan at the entrance
     - Contactless check-in using bluetooth low energy
-- The system have to response also if there isn't a reservation for entering boat
+- The system has to response also if there isn't a reservation for entering boat
 - Change network connection to a more reliable one
 - MQTT client for camera devices.
 - Oil spill detection [?]
