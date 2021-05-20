@@ -28,6 +28,7 @@ We've developed:
     - Contactless check-in using bluetooth low energy
 - The system have to response also if there isn't a reservation for entering boat
 - Change network connection to a more reliable one
+- MQTT client for camera devices.
 - Oil spill detection [?]
 ## Evaluation update
 
