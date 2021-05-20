@@ -25,7 +25,7 @@ During summer touristic marinas are full of amateur sailors that reserved a dock
 ## First delivery
 [Smart beam lighthouse](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment)
 
-The concept idea of the first assignment has received bad feedback, so we have start from scratch the new project.
+The concept idea of the first delivery has received bad feedback, so we have start from scratch the new project.
 
 ## Second delivery
 

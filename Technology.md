@@ -1,5 +1,7 @@
 ## Technology
 
+*[previous version](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment/Technology.md)*
+
 ## ![Marina](resources/images/harbour.png)
 
 The main macro components are:
