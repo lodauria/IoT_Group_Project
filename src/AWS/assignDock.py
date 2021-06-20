@@ -1,5 +1,6 @@
 import json
 import boto3
+import re
 from datetime import datetime
 from boto3.dynamodb.conditions import Key, Attr
 
@@ -8,25 +9,24 @@ def lambda_handler(event, context):
     # Decode the JSON message (gives error and stop if wrong format)
     boat_id = event["boat_id"]
     
+    # Check boat license plate
+    if re.match("^[A-Z]{2}[0-9]{2,6}$", boat_id) is None:
+        return json.dumps({'ret_code': 1, 'info_mess': "Invalid boat id"})
+
     # Check for reservation
     dynamodb = boto3.resource('dynamodb', endpoint_url="http://dynamodb.us-east-1.amazonaws.com:80", region_name='us-east-1')
     table_res = dynamodb.Table('reservations')
     
     response = table_res.scan(
-        FilterExpression=Key('boat_id').eq(boat_id)
+        FilterExpression=Key('boat_id').eq(boat_id) & Attr('boat_status').eq("WAIT")
         )
     
     if len(response['Items']) == 0:
-        return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin' : '*',
-        },
-        'body': json.dumps("No reservations")}
+        return json.dumps({'ret_code': 2, 'info_mess': "No reservation found"})
     
     # Get boat dimension
     boat_dim = response['Items'][0]['dim']
-    
+
     # Assign docking spot
     table_dock = dynamodb.Table('docking_spots')
     
@@ -35,15 +35,11 @@ def lambda_handler(event, context):
         )
         
     if len(response['Items']) == 0:
-        return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin' : '*',
-        },
-        'body': json.dumps("No free spots")}
+        return json.dumps({'ret_code': 3, 'info_mess': "No free spot found"})
         
     dock_num = response['Items'][0]['num']
-        
+    # dock_num = 14
+
     # Update reservation status
     response = table_res.update_item(
         Key={
