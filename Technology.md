@@ -1,6 +1,8 @@
 ## Technology
 
-*[previous version](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment/Technology.md)*
+*[First delivery version](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment/Technology.md)*
+
+*[Second delivery version](https://github.com/kernel-machine/IoTGroupProject/tree/second_assignment/Technology.md)*
 
 ## ![Marina](resources/images/harbour.png)
 
@@ -9,12 +11,6 @@ The main macro components are:
 - **Boat name identifier** at the marina entrance there is camera used to identify the boat name to check if there is a dock reservation.
 - **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot.
 - **Park sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
-
-### Oil spill sensor [Work in progress]
-
-This device reading the reflection of the water can estimate if there is some floating oil, in this case the part of the marina in which the sensor is located will be closed and the marina's workers will intervenes before that the spill reaches the sea.
-
-This sensor is connected to the nearest stm32 board of the dock device.
 
 ### Dock device
 

@@ -1,6 +1,8 @@
 # Performance evaluation
 
-*[previous version](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment/Evaluation.md)*
+*[First delivery version](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment/Evaluation.md)*
+
+*[Second delivery version](https://github.com/kernel-machine/IoTGroupProject/tree/second_assignment/Evaluation.md)*
 
 Since our system is used to guide the boats inside a marina it has to be fast and reliable in indicating to each boat what to do.
 
@@ -11,10 +13,6 @@ To evaluate our solution we first consider the devices performances as follows:
 ## Camera
 
 The performance of the camera will be evaluated by the capability of capturing clear images that allows to perform an accurate text recognition. We will consider the percentage of correct text detection on the number of given images. The camera is the slower part of the system, so it should detect the plate a fast as possible. The performance will also be evaluated by the capability of the algorithm to differentiate between plate number and boat decoration or slogan.
-
-## Oil spill sensor
-
- The performance of this sensor should be evaluated by detecting precisely the ratio of floating oil in the marina.
 
 ## Boat detection devices
 
