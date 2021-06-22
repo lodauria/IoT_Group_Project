@@ -3,75 +3,32 @@
 #include "../../Common/conversion.h"
 #include "random.h"
 
-#define FAKE_SENSOR_UPDATE_INTERVAL_S 30
+#define FAKE_SENSOR_UPDATE_INTERVAL_S 60*3
 #ifdef FAKE_SENSOR
 uint32_t lastUpdate;
 #endif
 
-int boat_presence_estimator_init(boatPresenceEstimator_t *boatPresenceEstimator, gpio_t triggerPin, gpio_t echoPin) {
-    boatPresenceEstimator->srf04Params.trigger = triggerPin;
-    boatPresenceEstimator->srf04Params.echo = echoPin;
+int boat_presence_estimator_init(boatPresenceEstimator_t *boatPresenceEstimator, gpio_t triggerPin) {
 #ifdef FAKE_SENSOR
     random_init(xtimer_now_usec());
     lastUpdate = 0;
     printf("Fake sensor initialized\n");
 #else
-    if (srf04_init(&(boatPresenceEstimator->srf04), &(boatPresenceEstimator->srf04Params)) != SRF04_OK) {
-        printf("ERROR SRF04 Initialization\n");
-        return -1;
-    }
-    else
+    boatPresenceEstimator->pin = triggerPin;
+    gpio_init(triggerPin,GPIO_IN_PU);
 #endif
-    boatPresenceEstimator->lastValid = 0;
     return 1;
 }
 
-int boat_presence_estimator_get_present(boatPresenceEstimator_t *boatPresenceEstimator, int numberOfRead) {
-    // The boat present estimation is based on multiple read, to avoid outliers.
-    // The function return the most common value
-    // This function is blockable, use numberOfRead as small as possible
-
+int boat_presence_estimator_get_present(boatPresenceEstimator_t *boatPresenceEstimator) {
     //Return 1 if the boat is present
     //Return 0 if the boat is not present
-    //Return -1 if there is a read error
 #ifdef FAKE_SENSOR
-    (void)numberOfRead;
     if(US2S(xtimer_now_usec() - lastUpdate) > FAKE_SENSOR_UPDATE_INTERVAL_S){
-        lastUpdate = xtimer_now_usec();
-        boatPresenceEstimator->lastValid = random_uint32_range(0,10) > 5;
+        //Fake sensor is updated every 3 minutes
+        return random_uint32_range(0,10) > 5;
     }
-    return boatPresenceEstimator->lastValid;
 #else
-    int boatIsPresent = 0;
-    int boatIsNotPresent = 0;
-
-    for (int i = 0; i < numberOfRead; i++) {
-        const int distance_mm = srf04_get_distance(&(boatPresenceEstimator->srf04));
-        bool read_error = distance_mm < 0;
-
-        if (distance_mm > DEFAULT_BOAT_DISTANCE_THRESHOLD_MM + DEFAULT_HYSTERESIS_MM / 2) { //Distance > 1000
-            boatIsNotPresent++;
-        }
-        else if (!read_error &&
-                 distance_mm < DEFAULT_BOAT_DISTANCE_THRESHOLD_MM - DEFAULT_HYSTERESIS_MM / 2) { //Distance < 500
-            boatIsPresent++;
-        }
-        xtimer_msleep(60);
-    }
-
-    if (boatIsPresent > boatIsNotPresent) {
-        boatPresenceEstimator->lastValid = 1;
-        return boatPresenceEstimator->lastValid;
-    }
-    else if (boatIsPresent < boatIsNotPresent) {
-        boatPresenceEstimator->lastValid = 0;
-        return boatPresenceEstimator->lastValid;
-    }
-    else {
-        // if boatIsPresent == 0 and boatIsNotPresent == 0 the boat is on the deadzone, between 500 and 1000
-        // Or there are read error
-        // So return the last valid read
-        return boatPresenceEstimator->lastValid;
-    }
+    return gpio_read(boatPresenceEstimator->pin) > 0;
 #endif
 }

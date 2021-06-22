@@ -24,7 +24,7 @@ A single stm32 board is used for multiple dock, and it use a MQTT interface to c
 The main components of the prototype of the dock device are:
 
 - The main board STM32 Nucleo F401RE
-- Ultrasonic range meter HC-SR04
+- Switch
 - LED
 
 [Get more details here](src/Devices/DockDevice)

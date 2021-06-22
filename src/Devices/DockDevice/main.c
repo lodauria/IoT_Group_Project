@@ -11,7 +11,6 @@
 #include "net/emcute.h"
 
 #define TRIGGER_PIN GPIO_PIN(PORT_B,3)  //D3
-#define ECHO_PIN GPIO_PIN(PORT_A,10)    //D2
 #define LED_PIN GPIO_PIN(PORT_B,5)      //D4
 
 #define MAIN_QUEUE_SIZE     (8)
@@ -35,7 +34,8 @@ static void *boat_thread(void *arg) {
     int firstRun = 1;
     while (1) {
         memset(msg, 0, MAX_MSG_SIZE);
-        const int isDockFree = !boat_presence_estimator_get_present(&boatPresenceEstimator, 5);
+        const int isDockFree = boat_presence_estimator_get_present(&boatPresenceEstimator);
+        printf("Dock is free %d\n",isDockFree);
         if (!isDockFree && isLedOn) {
             gpio_clear(led);
             isLedOn = 0;
@@ -44,14 +44,12 @@ static void *boat_thread(void *arg) {
             lastIsDockFree = isDockFree;
             firstRun = 0;
         }
-        else {
-            if (isDockFree != lastIsDockFree) {
+        else if (isDockFree != lastIsDockFree) {
                 sprintf(msg, "{\"dock_num\":%d,\"event\":\"%d\"}", emcuteManagerGetNodeId(&emcuteManager), isDockFree);
                 emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
                 lastIsDockFree = isDockFree;
                 printf("Dock is free %d\n", isDockFree);
                 xtimer_sleep(MQTT_PUBLISH_INTERVAL_S-1);
-            }
         }
         xtimer_sleep(1);
     }
@@ -165,7 +163,7 @@ static const shell_command_t shell_commands[] = {
 
 int main(void) {
     xtimer_init();
-    boat_presence_estimator_init(&boatPresenceEstimator, TRIGGER_PIN, ECHO_PIN);
+    boat_presence_estimator_init(&boatPresenceEstimator, TRIGGER_PIN);
     gpio_init(led, GPIO_OUT);
 
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
