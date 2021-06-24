@@ -72,8 +72,7 @@ The major software components are:
 
 ![Software component](resources/images/network_infrastructure.png)
 
-For the communication inside the marina 6LoWPAN is used.
-The marina server send updating data over MQTT to the cloud system.
+For the communication inside the marina LoRaWAN is used.
 
 Software work flow examples:
 

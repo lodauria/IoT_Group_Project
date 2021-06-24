@@ -11,6 +11,7 @@
 
 typedef struct boatPresenceEstimator_s {
     gpio_t pin;
+    uint8_t lastRead;
 }boatPresenceEstimator_t;
 
 int boat_presence_estimator_init(boatPresenceEstimator_t *boatPresenceEstimator, gpio_t triggerPin);

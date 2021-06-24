@@ -1,10 +1,16 @@
 #include <stdio.h>
 #include "devices/ssd1306.h"
 #include "xtimer.h"
-#include "shell.h"
+#include "stdlib.h"
+#include "string.h"
 #include "msg.h"
-#include "../Common/emcute_manager.h"
+#include "../Common/network_manager.h"
+
+#ifdef USE_ETHOS
+#include "shell.h"
 #include "net/emcute.h"
+#endif
+
 #include "jsmn.h"
 #include "devices/ssd1306.h"
 
@@ -66,24 +72,8 @@ arrowDirection_e getDirectionByDockId(int dockId) {
 
 }
 
-void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
-
-    char *topic_name = MQTT_TOPIC;
+void process_message(void *data, size_t len) {
     char *in = (char *) data;
-
-
-    if (strcmp(topic->name, topic_name) != 0)
-        return;
-
-    printf("### got publication for topic '%s' [%i] ###\n",
-           topic->name, (int) topic->id);
-
-    for (size_t i = 0; i < len; i++) {
-        printf("%c", in[i]);
-    }
-    puts("\n");
-
-
     memset(&p, 0, sizeof(jsmn_parser));
     memset(&t, 0, sizeof(jsmntok_t) * MAX_JSON_TOKEN);
 
@@ -134,7 +124,7 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
         const int dock_num_integer = atoi(dock_num);
         const int event_integer = atoi(event);
         if (event_integer) {
-            ssd1306_removeIndication(&display,boat_id);
+            ssd1306_removeIndication(&display, boat_id);
         }
         else {
             arrowDirection_e arrow = getDirectionByDockId(dock_num_integer);
@@ -144,26 +134,27 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
     }
 }
 
-int connect_mqtt(int argc, char **argv) {
-    (void) argc;
-    (void) argv;
-    if (argc > 2) {
-        const int nodeId = atoi(argv[2]);
-        emcuteManagerSetConnection(&emcuteManager, argv[1], MQTT_PORT, nodeId);
-        emcuteManagerSubscribeTopic(&emcuteManager, MQTT_TOPIC, on_received_message);
+#ifdef USE_ETHOS
+void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
+
+    char *topic_name = MQTT_TOPIC;
+    char *in = (char *) data;
+
+
+    if (strcmp(topic->name, topic_name) != 0)
+        return;
+
+    printf("### got publication for topic '%s' [%i] ###\n",
+           topic->name, (int) topic->id);
+
+    for (size_t i = 0; i < len; i++) {
+        printf("%c", in[i]);
     }
-    else {
-        printf("Usage: %s <broker_addr> <node_id>\n", argv[0]);
-    }
-    return 0;
+    puts("\n");
+    process_message(data,len);
 }
 
-static const shell_command_t shell_commands[] = {
-#ifndef USE_ETHOS
-        {"connect", "Connect to the UDP server", connect_mqtt},
 #endif
-        {NULL, NULL, NULL}
-};
 
 int main(void) {
     ssd1306_init(&display, 0x3C);
@@ -172,11 +163,14 @@ int main(void) {
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     puts("RIOT network stack example application");
 
-    char line_buf[SHELL_DEFAULT_BUFSIZE];
 #ifdef USE_ETHOS
     emcuteManagerSetConnection(&emcuteManager, ETHOS_IP, MQTT_PORT, DEFAULT_NODE);
     emcuteManagerSubscribeTopic(&emcuteManager,MQTT_TOPIC,on_received_message);
+#else
+    loraSetConnection(&emcuteManager, NODE_ID, process_message);
 #endif
-    shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
+    while (1) {
+        xtimer_sleep(1);
+    }
     return 0;
 }
