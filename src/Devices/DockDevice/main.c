@@ -2,7 +2,7 @@
 
 #include "xtimer.h"
 #include "periph/gpio.h"
-#include "devices/BoatPresenceEstimator.h"
+#include "devices/dock.h"
 #include "jsmn.h"
 #include "shell.h"
 #include "msg.h"
@@ -15,20 +15,25 @@
 #include "net/emcute.h"
 #endif
 
-#define TRIGGER_PIN GPIO_PIN(PORT_B,3)  //D3
-#define LED_PIN GPIO_PIN(PORT_B,5)      //D4
-
 #define MAIN_QUEUE_SIZE     (8)
 #define MAX_JSON_TOKEN      128
 #define MAX_MSG_SIZE        128
-
-boatPresenceEstimator_t boatPresenceEstimator;
-gpio_t led = LED_PIN;
 
 #ifdef USE_ETHOS
 static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 #endif
 emcute_manager_t emcuteManager;
+
+//DOCK DEVICE DEFINITION
+static const dockSetting_t settings[] = {
+        //{DockId, SwitchPin, LedPin}
+        {1, GPIO_PIN(PORT_B, 3), GPIO_PIN(PORT_B, 5)},  //D3 - D4
+        {2, GPIO_PIN(PORT_B, 4), GPIO_PIN(PORT_B, 10)}, //D5 - D6
+        {3, GPIO_PIN(PORT_A, 8), GPIO_PIN(PORT_A, 9)}   //D7 - D8
+};
+
+#define DOCKS_COUNT (int)(sizeof(settings) / sizeof(dockSetting_t))
+dock_t docks[DOCKS_COUNT];
 
 jsmn_parser p;
 jsmntok_t t[MAX_JSON_TOKEN];
@@ -38,30 +43,36 @@ int isLedOn = 0;
 static void *boat_thread(void *arg) {
     (void) arg;
     char msg[MAX_MSG_SIZE];
-    int lastIsDockFree = 0;
-    int firstRun = 1;
     while (1) {
-        memset(msg, 0, MAX_MSG_SIZE);
-        const int isDockFree = boat_presence_estimator_get_present(&boatPresenceEstimator);
-        printf("Dock is free %d\n", isDockFree);
-        if (!isDockFree && isLedOn) {
-            gpio_clear(led);
-            isLedOn = 0;
-        }
-        if (firstRun) {
-            lastIsDockFree = isDockFree;
-            firstRun = 0;
-        }
-        else if (isDockFree != lastIsDockFree ) {
-            sprintf(msg, "{\"dock_num\":%d,\"event\":\"%d\"}", emcuteManagerGetNodeId(&emcuteManager), isDockFree);
-#ifdef USE_ETHOS
-            emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
-#else
-            loraSendMessage(&emcuteManager, msg);
-#endif
-            lastIsDockFree = isDockFree;
-            printf("Dock is free %d\n", isDockFree);
-            xtimer_sleep(MQTT_PUBLISH_INTERVAL_S - 1);
+        for (int i = 0; i < DOCKS_COUNT; i++) {
+            dock_t *currentDock = docks + i;
+
+            memset(msg, 0, MAX_MSG_SIZE);
+
+            const int isDockFree = dock_get_present(currentDock);
+            const uint16_t dockId = dock_get_id(currentDock);
+
+            if (!isDockFree && dock_get_led_state(currentDock)) {
+                dock_toggle_led(currentDock, 0);
+            }
+            if (dock_is_first_read(currentDock)) {
+                dock_set_last_read(currentDock, isDockFree);
+            }
+            else if (isDockFree != dock_get_last_read(currentDock)) {
+                //Message is sent only when state changes, NOT at once read, so i need to save the previous reads
+                sprintf(msg, "{\"dock_num\":%d,\"event\":\"%d\"}", dockId, isDockFree);
+                #ifdef USE_ETHOS
+                emcuteManagerPublish(&emcuteManager, MQTT_TOPIC_DETECT_BOAT, msg);
+                #else
+                loraSendMessage(&emcuteManager, msg);
+                #endif
+                dock_set_last_read(currentDock, isDockFree);
+                printf("Dock %u is free %d\n", dockId, isDockFree);
+                #ifdef USE_ETHOS
+                xtimer_sleep(MQTT_PUBLISH_INTERVAL_S - 1);
+                #endif
+
+            }
         }
         xtimer_sleep(1);
     }
@@ -76,8 +87,8 @@ static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
     return -1;
 }
 
-void process_message(void * data, size_t len){
-    char * in = (char*)data;
+void process_message(void *data, size_t len) {
+    char *in = (char *) data;
 
     memset(&p, 0, sizeof(jsmn_parser));
     memset(&t, 0, sizeof(jsmntok_t) * MAX_JSON_TOKEN);
@@ -127,10 +138,11 @@ void process_message(void * data, size_t len){
 
     if (strlen(dock_num) > 0 && strlen(event) > 0 && strcmp(event, "0") == 0) {
         const int dock_id_integer = atoi(dock_num);
-        if (dock_id_integer == emcuteManagerGetNodeId(&emcuteManager)) {
-            gpio_set(led);
-            isLedOn=1;
-            printf("LED turned on\n");
+        for (int i = 0; i < DOCKS_COUNT; i++) {
+            if (dock_get_id(docks + i) == dock_id_integer) {
+                dock_toggle_led(docks + i, 1);
+                printf("Dock %d LED turned on\n", dock_get_id(docks + i));
+            }
         }
     }
 }
@@ -180,12 +192,13 @@ static const shell_command_t shell_commands[] = {
 
 int main(void) {
     xtimer_init();
-    boat_presence_estimator_init(&boatPresenceEstimator, TRIGGER_PIN);
-    gpio_init(led, GPIO_OUT);
+    for (int i = 0; i < DOCKS_COUNT; i++) {
+        dock_init(docks + i, (dockSetting_t *) settings + i);
+    }
 #ifdef USE_ETHOS
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     char line_buf[SHELL_DEFAULT_BUFSIZE];
-    emcuteManagerSetConnection(&emcuteManager, ETHOS_IP, MQTT_PORT, DEFAULT_NODE);
+    emcuteManagerSetConnection(&emcuteManager, ETHOS_IP, MQTT_PORT, 0);
     emcuteManagerSubscribeTopic(&emcuteManager,MQTT_TOPIC_LED,on_received_message);
     emcuteManagerRegisterPublishTopic(&emcuteManager,MQTT_TOPIC_DETECT_BOAT);
 #else
