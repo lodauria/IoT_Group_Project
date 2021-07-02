@@ -22,7 +22,6 @@ const routes = [
 const router = new VueRouter({
     base:'IoTGroupProject',
     routes,
-    mode: 'history'
 })
 
 Vue.use(VueRouter)
