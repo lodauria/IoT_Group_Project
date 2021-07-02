@@ -65,9 +65,9 @@ export default {
       },
       sizeCategories: [
         {text: 'Select One', value: null},
-        {text: 'Until 5 meters', value: 1},
-        {text: 'Form 5 to 10 meters', value: 2},
-        {text: 'Greater than 10 meters', value: 3}],
+        {text: 'Until 7.99 meters', value: 1},
+        {text: 'From 8 to 12.99 meters', value: 2},
+        {text: 'From 13 to 17 meters', value: 3}],
     }
   },
   methods: {
