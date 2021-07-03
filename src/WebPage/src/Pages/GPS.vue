@@ -16,8 +16,8 @@
         </b-form-input>
       </b-form-group>
       <div class="my-2">
-        <b-button type="submit" variant="success" :disabled="watchId==null">Enable</b-button>
-        <b-button class="mx-3" variant="danger" v-on:click="disableGPS" :disabled="watchId!=null">Disable</b-button>
+        <b-button type="submit" variant="success" :disabled="watchId!=null">Enable</b-button>
+        <b-button class="mx-3" variant="danger" v-on:click="disableGPS" :disabled="watchId==null">Disable</b-button>
       </div>
     </b-form>
     <div class="text-center" v-if="watchId!=null">
