@@ -17,14 +17,20 @@
         </b-form-input>
       </b-form-group>
       <div class="my-2">
-        <b-button type="submit" variant="success">Enable</b-button>
-        <b-button class="mx-3" variant="danger" v-on:click="disableGPS">Disable</b-button>
+        <b-button type="submit" variant="success" :disabled="watchId==null">Enable</b-button>
+        <b-button class="mx-3" variant="danger" v-on:click="disableGPS" :disabled="watchId!=null">Disable</b-button>
       </div>
     </b-form>
+    <div class="text-center" v-if="watchId!=null">
+      <h3 class="text-success">Sending device position...</h3>
+      <p>Keep this page opened until the dock operation</p>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "GPS",
   data() {
@@ -57,11 +63,26 @@ export default {
       return false;
     },
     disableGPS() {
-      if (this.watchId)
+      if (this.watchId) {
         navigator.geolocation.clearWatch(this.watchId);
+        this.watchId = null
+      }
     },
     sendGPSUpdate(lat, long) {
       console.log("POS", lat, long)
+      const data = {}
+      const headers = {
+        headers: {
+          "boat-id": this.form.plate,
+          "latitude": lat,
+          "longitude": long
+        }
+      }
+      axios.post("https://kayib6g5eg.execute-api.us-east-1.amazonaws.com/default/GPSHandle", data, headers).then(d => {
+        console.log(d.data)
+      }).catch(e => {
+        console.log(e)
+      })
     }
   }
 }
