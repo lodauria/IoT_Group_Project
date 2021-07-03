@@ -25,7 +25,7 @@ def lambda_handler(event, context):
             'body': json.dumps({'ret_code': 1, 'info_mess': "Missing custom headers"})
         }
     
-    if sqrt((lat - lat_des)**2 + (lon - lon_des)**2) < trig:
+    if sqrt((float(lat) - lat_des)**2 + (float(lon) - lon_des)**2) < trig:
         
         # Send boat detection message
     
