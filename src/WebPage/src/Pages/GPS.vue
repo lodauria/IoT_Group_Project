@@ -22,7 +22,11 @@
     </b-form>
     <div class="text-center" v-if="sendingUpdate">
       <h3 class="text-success">Sending device position...</h3>
-      <p>Keep this page opened until the dock operation</p>
+    </div>
+    <div class="text-center" v-if="boatDetected">
+      <h3 class="text-success">Boat detected</h3>
+      <p>Follow the smart signage instructions</p>
+      <p>You can close the web page</p>
     </div>
   </div>
 </template>
@@ -38,7 +42,8 @@ export default {
         plate: '',
       },
       watchId: null,
-      sendingUpdate: false
+      sendingUpdate: false,
+      boatDetected: false
     }
   },
   mounted() {
@@ -90,13 +95,14 @@ export default {
         }
       }
       axios.post("https://kayib6g5eg.execute-api.us-east-1.amazonaws.com/default/GPSHandle", data, headers).then(d => {
-        if (d.data.ret_code != 0) { //If error
-          alert(d.data.info_mess)   //Show info_mess to the user
-          this.disableGPS();        //And disable GPS
-        } else {
-          this.sendingUpdate = true
+        if(d.data.ret_code==0){
+          this.boatDetected = true
+          this.disableGPS();
         }
-        console.log(d.data)
+        else {
+          this.sendingUpdate = true
+          this.boatDetected = false
+        }
       }).catch(e => {
         console.log(e)
       })
