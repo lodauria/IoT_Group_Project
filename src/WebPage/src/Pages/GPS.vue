@@ -85,8 +85,8 @@ export default {
       const headers = {
         headers: {
           "boat-id": this.form.plate,
-          "latitude": lat,
-          "longitude": long
+          "latitude": Number(lat),
+          "longitude": Number(long)
         }
       }
       axios.post("https://kayib6g5eg.execute-api.us-east-1.amazonaws.com/default/GPSHandle", data, headers).then(d => {
