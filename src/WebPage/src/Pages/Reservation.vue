@@ -72,7 +72,8 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit(event) {
+      event.preventDefault()
       const data = {
         "boat-id": this.form.plate,
         "boat-dim": this.form.sizeCategory,
@@ -86,9 +87,10 @@ export default {
           "owner": this.form.ownerName
         }
       }*/
-
+      console.log("SENDING",data)
       axios.post("https://zki9fxvfvi.execute-api.us-east-1.amazonaws.com/default/getReservation", data)
           .then(d => {
+            console.log("RICEVUTO",d.data)
             if (d.data.ret_code == 0) {
               this.onReset();
               alert(d.data.info_mess)
@@ -96,7 +98,7 @@ export default {
               alert(d.data.info_mess)
           })
           .catch(e => {
-            console.log(e);
+            console.log("ERRORE",e);
           })
       return false;
     },
