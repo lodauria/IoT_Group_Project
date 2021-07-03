@@ -2,6 +2,7 @@
   <div>
     <h2>Reserve a docking spot</h2>
     <p>Insert here your information</p>
+    <p>data in data</p>
     <b-form action="#" @submit="onSubmit" @reset="onReset">
 
       <b-form-group
@@ -72,16 +73,21 @@ export default {
   },
   methods: {
     onSubmit() {
-      const data = {}
+      const data = {
+        "boat-id": this.form.plate,
+        "boat-dim": this.form.sizeCategory,
+        "owner": this.form.ownerName
+      }
+      /*
       const headers = {
         headers: {
           "boat-id": this.form.plate,
           "boat-dim": this.form.sizeCategory,
           "owner": this.form.ownerName
         }
-      }
+      }*/
 
-      axios.post("https://zki9fxvfvi.execute-api.us-east-1.amazonaws.com/default/getReservation", data, headers)
+      axios.post("https://zki9fxvfvi.execute-api.us-east-1.amazonaws.com/default/getReservation", data)
           .then(d => {
             if (d.data.ret_code == 0) {
               this.onReset();
