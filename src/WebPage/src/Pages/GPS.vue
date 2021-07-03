@@ -98,7 +98,7 @@ export default {
         if (d.data.ret_code == 0) {
           this.boatDetected = true
           this.disableGPS();
-        } else if (d.data.red_code == 10) {
+        } else if (d.data.ret_code == 10) {
           this.sendingUpdate = true
           this.boatDetected = false
         } else {
