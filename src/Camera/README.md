@@ -9,3 +9,12 @@ The libraries that has to be installed before running the code are:
 - [Pygame](https://pypi.org/project/pygame/)
 - [Regex](https://pypi.org/project/regex/)
 
+Run this command to install all required libraries
+`pip install -U -r requirements.txt`
+
+You should install also [Tesseract](https://github.com/tesseract-ocr/tesseract), an OCR software developed by Google.
+This procedure depends by your operating system.
+
+On Arch Linux run
+
+`sudo pacman -S tesseract tesseract-data-eng`

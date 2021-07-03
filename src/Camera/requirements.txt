@@ -1,0 +1,5 @@
+Pillow
+paho-mqtt
+pytesseract
+pygame
+regex
