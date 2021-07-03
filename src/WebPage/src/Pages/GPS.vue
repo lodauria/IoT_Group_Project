@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form action="#" @submit="onSubmit">
-
+      <h2 class="text-danger">Version that doesn't work, just for testing</h2>
       <b-form-group
           class="my-3"
           label-for="plate"
@@ -43,13 +43,17 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-
+    onSubmit(event) {
+      event.preventDefault();
+      const options = {
+        enableHighAccuracy: true,
+        maximumAge: 1000
+      }
       this.watchId = navigator.geolocation.watchPosition(pos => {
         this.sendGPSUpdate(pos.coords.latitude, pos.coords.longitude)
       }, err => {
         console.log(err.message)
-      })
+      }, options)
       return false;
     },
     disableGPS() {
@@ -57,7 +61,7 @@ export default {
         navigator.geolocation.clearWatch(this.watchId);
     },
     sendGPSUpdate(lat, long) {
-      console.log("POS",lat,long)
+      console.log("POS", lat, long)
     }
   }
 }
