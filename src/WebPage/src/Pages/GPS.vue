@@ -95,13 +95,15 @@ export default {
         }
       }
       axios.post("https://kayib6g5eg.execute-api.us-east-1.amazonaws.com/default/GPSHandle", data, headers).then(d => {
-        if(d.data.ret_code==0){
+        if (d.data.ret_code == 0) {
           this.boatDetected = true
           this.disableGPS();
-        }
-        else {
+        } else if (d.data.red_code == 10) {
           this.sendingUpdate = true
           this.boatDetected = false
+        } else {
+          alert("Error in position processing")
+          this.disableGPS()
         }
       }).catch(e => {
         console.log(e)
