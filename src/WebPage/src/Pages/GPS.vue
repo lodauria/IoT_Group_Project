@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-form action="#" @submit="onSubmit">
-      <h2 class="text-danger">Version that doesn't work, just for testing</h2>
       <b-form-group
           class="my-3"
           label-for="plate"
