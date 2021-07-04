@@ -123,21 +123,17 @@ void process_message(void *data, size_t len) {
     if (strlen(boat_id) > 0 && strlen(dock_num) > 0 && strlen(event) > 0) {
         const int dock_num_integer = atoi(dock_num);
         const int event_integer = atoi(event);
-        switch (event_integer) {
-            case 0:
-                arrowDirection_e arrow = getDirectionByDockId(dock_num_integer);
-                if (arrow != OFF)
-                    ssd1306_addIndication(&display, arrow, boat_id);
-                break;
-            case 1:
-                ssd1306_removeIndication(&display, boat_id);
-                break;
-            case 2:
-                if (DEFAULT_NODE == 1)//If it is the monitor at the entrance
-                    ssd1306_addIndication(&display, NO_RESERVATION, boat_id);
-                break;
-            default:
-                break;
+        if (event_integer == 0) {
+            arrowDirection_e arrow = getDirectionByDockId(dock_num_integer);
+            if (arrow != OFF)
+                ssd1306_addIndication(&display, arrow, boat_id);
+        }
+        else if (event_integer == 1) {
+            ssd1306_removeIndication(&display, boat_id);
+        }
+        else if (event_integer == 2 && DEFAULT_NODE == 1) {
+            //If it is the monitor at the entrance
+            ssd1306_addIndication(&display, NO_RESERVATION, boat_id);
         }
     }
 }
