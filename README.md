@@ -18,8 +18,8 @@ During summer touristic marinas are full of amateur sailors that reserved a dock
 
 ## Video resources
 
-- [Project final presentation]()
-- [Prototype demonstration]()
+- Project final presentation (missing)
+- Prototype demonstration (missing)
 
 ## Previous deliveries
 
@@ -33,7 +33,7 @@ Here we report the links to the videos required for the first dellivery, but rel
 
 - [Product presentation](https://www.youtube.com/watch?v=dEvWLIq8EWU)
 - [Technical details](https://youtu.be/lHtj5kDBaY8)
-- [Performance evaluation]()
+- Performance evaluation (missing)
 
 ### Second delivery
 
@@ -45,4 +45,4 @@ Here we report the links to the videos required for the second delivery:
 
 - [Technology and prototype demo](https://youtu.be/3Wt1pBkmOxo)
 - [Evaluation](https://youtu.be/7cdx_kfam0A)
-- [Future plans]()
+- Future plans (missing)
