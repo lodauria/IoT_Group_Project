@@ -615,6 +615,8 @@ static char *getIndicationString(arrowDirection_e directionE) {
             return "BOTTOM RIGHT";
         case TURN_AROUND:
             return "TURN AROUND";
+        case NO_RESERVATION:
+            return "NO_RESERVATION";
         default:
             return "";
     }
@@ -637,6 +639,17 @@ int getStartingLinePixel(int linesNumber) {
     }
     else
         return 20;
+}
+
+int getStartPixelColumn(int textLength, int currentStartPosition) {
+    int startPixelColumn =
+            textLength > MAX_CHAR_FOR_LINE ? 0 : (MAX_CHAR_FOR_LINE - textLength) *
+                                                 (CHAR_WIDTH / 2);
+
+    if (textLength > MAX_CHAR_FOR_LINE)
+        startPixelColumn -= currentStartPosition;//ssd1306->directionArray[i].currentStartPosition;
+
+    return startPixelColumn;
 }
 
 void *ssd1306_writeArrowThread(void *arg) {
@@ -706,6 +719,16 @@ void *ssd1306_writeArrowThread(void *arg) {
                                 case TURN_AROUND:
                                     u8g2_DrawXBMP(u8g2, 0, 0, draw_width, draw_height, turnaroud_bits);
                                     break;
+                                case NO_RESERVATION:
+                                    char *noReservationText = "NO RESERVATION";
+                                    int startPixelColumn = getStartPixelColumn(strlen(noReservationText),
+                                                                               ssd1306->directionArray[i].currentStartPosition);
+                                    u8g2_DrawStr(u8g2, startPixelColumn, 20, noReservationText);
+                                    char *bookOnTheWebsite = "BOOK ON THE WEBSITE";
+                                    startPixelColumn = getStartPixelColumn(strlen(bookOnTheWebsite),
+                                                                           ssd1306->directionArray[i].currentStartPosition);
+                                    u8g2_DrawStr(u8g2, startPixelColumn, 40, bookOnTheWebsite);
+                                    break;
                                 default:
                                     break;
                             }
@@ -713,11 +736,7 @@ void *ssd1306_writeArrowThread(void *arg) {
                             char *text = ssd1306->directionArray[i].text;
                             const int textLength = strlen(text);
                             int startPixelColumn =
-                                    textLength > MAX_CHAR_FOR_LINE ? 0 : (MAX_CHAR_FOR_LINE - textLength) *
-                                                                         (CHAR_WIDTH / 2);
-
-                            if (textLength > MAX_CHAR_FOR_LINE)
-                                startPixelColumn -= ssd1306->directionArray[i].currentStartPosition;
+                                    getStartPixelColumn(textLength, ssd1306->directionArray[i].currentStartPosition);
 
                             u8g2_DrawStr(u8g2, startPixelColumn, SCREEN_HEIGHT, text);
 
@@ -725,6 +744,15 @@ void *ssd1306_writeArrowThread(void *arg) {
 
                         ssd1306->directionArray[i].currentStartPosition += TEXT_SPEED;
                         xtimer_msleep(HZ2MS(SCREEN_REFRESH_RATE_HZ));
+                    }
+
+                    if (ssd1306->directionArray[i].arrowDirection == NO_RESERVATION
+                        && (US2S(xtimer_now_usec()) - ssd1306->directionArray[i].addedAtS) > NO_RESERVATION_TIMEOUT_S) {
+                        printf("Signage for %s removed\n", ssd1306->directionArray[i].text);
+                        memset(ssd1306->directionArray[i].text, 0, MAX_PLATE_TEXT);
+                        ssd1306->directionArray[i].enabled = 0;
+                        ssd1306->directionArray[i].arrowDirection = OFF;
+                        ssd1306->directionArray[i].currentStartPosition = 0;
                     }
                 }
             }
@@ -754,6 +782,7 @@ void ssd1306_addIndication(ssd1306_t *ssd1306, arrowDirection_e direction, char 
             strcpy(ssd1306->directionArray[i].text, plate);
             ssd1306->directionArray[i].arrowDirection = direction;
             ssd1306->directionArray[i].enabled = 1;
+            ssd1306->directionArray[i].addedAtS = US2S(xtimer_now_usec());
             printf("Signage %s for %s added\n", getIndicationString(direction), plate);
             return;
         }

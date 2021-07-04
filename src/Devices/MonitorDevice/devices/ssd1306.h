@@ -17,6 +17,7 @@ typedef enum arrowDirection {
     BOTTOM_LEFT,
     BOTTOM_RIGHT,
     TURN_AROUND,
+    NO_RESERVATION,
     OFF
 } arrowDirection_e;
 
@@ -25,6 +26,7 @@ typedef struct directionArrayElement_s {
     char text[MAX_PLATE_TEXT];
     uint8_t currentStartPosition;
     uint8_t enabled;
+    uint16_t addedAtS;
 } directionArrayElement_t;
 
 typedef struct ssd1306_s {

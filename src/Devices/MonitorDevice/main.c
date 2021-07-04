@@ -123,13 +123,21 @@ void process_message(void *data, size_t len) {
     if (strlen(boat_id) > 0 && strlen(dock_num) > 0 && strlen(event) > 0) {
         const int dock_num_integer = atoi(dock_num);
         const int event_integer = atoi(event);
-        if (event_integer) {
-            ssd1306_removeIndication(&display, boat_id);
-        }
-        else {
-            arrowDirection_e arrow = getDirectionByDockId(dock_num_integer);
-            if (arrow != OFF)
-                ssd1306_addIndication(&display, arrow, boat_id);
+        switch (event_integer) {
+            case 0:
+                arrowDirection_e arrow = getDirectionByDockId(dock_num_integer);
+                if (arrow != OFF)
+                    ssd1306_addIndication(&display, arrow, boat_id);
+                break;
+            case 1:
+                ssd1306_removeIndication(&display, boat_id);
+                break;
+            case 2:
+                if (DEFAULT_NODE == 1)//If it is the monitor at the entrance
+                    ssd1306_addIndication(&display, NO_RESERVATION, boat_id);
+                break;
+            default:
+                break;
         }
     }
 }
@@ -158,8 +166,8 @@ void on_received_message(const emcute_topic_t *topic, void *data, size_t len) {
 
 int main(void) {
     ssd1306_init(&display, 0x3C);
-    /* we need a message queue for the thread running the shell in order to
-   * receive potentially fast incoming networking packets */
+    // we need a message queue for the thread running the shell in order to
+    // receive potentially fast incoming networking packets
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     puts("RIOT network stack example application");
 
@@ -167,8 +175,9 @@ int main(void) {
     emcuteManagerSetConnection(&emcuteManager, ETHOS_IP, MQTT_PORT, DEFAULT_NODE);
     emcuteManagerSubscribeTopic(&emcuteManager,MQTT_TOPIC,on_received_message);
 #else
-    loraSetConnection(&emcuteManager, NODE_ID, process_message);
+    loraSetConnection(&emcuteManager, DEFAULT_NODE, process_message);
 #endif
+
     while (1) {
         xtimer_sleep(1);
     }
