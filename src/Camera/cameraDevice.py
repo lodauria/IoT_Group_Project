@@ -5,18 +5,23 @@ import pytesseract
 import re
 import time
 
+AWS_HOST = "a3paxdkh0ekdqh-ats.iot.us-east-1.amazonaws.com"  # AWS endpoint
+AWS_PORT = 8883
+AWS_CA_CERTS = "/etc/mosquitto/certs/root-CA.crt"
+AWS_CERT_FILE = "/etc/mosquitto/certs/smartmarina.cert.pem"
+AWS_KEY_FILE = "/etc/mosquitto/certs/smartmarina.private.key"
 
 def send_message(mess):
-
-    # Setup MQTT
-    client = mqtt.Client("camera_client")
-    client.connect("localhost", 1885)
-    client.publish("camera/boat", '{"boat_id": ' + mess + "}")
-    # ourClient.on_message = messageFunction  # Attach the messageFunction to subscription
-    # client.loop_start()  # Start the MQTT client
+    #if isConnected:
+    print(client.publish("camera/boat", '{"boat_id": "' + mess + '"}'))
 
 
-# Initialization
+# Setup MQTT
+client = mqtt.Client()
+client.tls_set(AWS_CA_CERTS, AWS_CERT_FILE, AWS_KEY_FILE)
+client.connect(AWS_HOST, AWS_PORT)
+
+# Initialization camera
 pygame.init()
 pygame.camera.init()
 cam = pygame.camera.Camera("/dev/video0")
@@ -35,7 +40,6 @@ while 1:
     img = img.filter(ImageFilter.MedianFilter())
     enhancer = ImageEnhance.Contrast(img)
     img = enhancer.enhance(4)
-
     # Extract text
     text = pytesseract.image_to_string(img)
 
