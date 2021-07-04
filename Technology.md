@@ -10,12 +10,12 @@ The main macro components are:
 
 - **Boat name identifier** at the marina entrance there is camera used to identify the boat name to check if there is a dock reservation.
 - **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot.
-- **Park sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
+- **Dock sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
 
 ### Dock device
 
 For each dock there is a LED (that blink when someone was finding his dock position) and a sonar to detects if the boat is present.
-A single stm32 board is used for multiple dock, and it use a MQTT interface to communicate with the marine server.
+A single stm32 board is used for multiple dock, and it use a LoRaWAN interface to communicate with the LoRaWAN gateway installed on the marina.
 
 <img src="resources/images/dock_device.png" alt="Dock device" style="zoom: 50%;" />
 
@@ -40,7 +40,7 @@ The prototype of the monitor device is composed by a board:
 
 The display is driven by a SSD1306 and is connected to the main board via I2C 
 
-This device is connected via MQTT to the marina server using 6LoWPAN.
+This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 
 [Get more details here](src/Devices/MonitorDevice)
 
@@ -51,17 +51,23 @@ For each side there are:
 
 - **Camera** 
 - **Raspberry PI** to read the name of the boat.
-- **Network Interface** that sends computed data to the marina server over MQTT on 6LoWPAN.
+- **Network Interface** that sends computed data to the marina server over MQTT on a LAN connection.
 
-Image processing is executed in the raspberry pi and the read name is sent.
+Image processing is executed in the Raspberry Pi and the read name is sent.
 
-**Marina server** in which are local computation are executed.
+### Boat detection with GPS
 
-It's composed by:
+If the camera device cannot detect the plate of a boat, there is a backup system that uses the GPS to detect when a boat is at the entrance of the marina.
+If the boat is not detected with the cameras, the sailor has to open this [web page](https://kernel-machine.github.io/IoTGroupProject/#/gps), enter the boat plate, and keeping opened the web page the boat position is sent periodically to the cloud.
 
-- **Network interface** that communicate with all the devices installed in the marina over 6LoWPAN.
-- **STM32 Board** the local elaboration node.
-- **Internet interface** to connect the local system to the cloud.
+When the marina system detects that the boat is enough nearly to enter in the marina, the sailor can close the web page and the signs are shown on the monitors.
+
+### Addition components
+
+In the marina there are 2 addition components:
+
+- **LoRaWAN gateway**, used to connect all LoRa device to the cloud.
+- A **router** with internet connection, used to provide an internet connection at the camera devices and the LoRa gateway.
 
 ### Software components and Network infrastructure
 
@@ -93,3 +99,9 @@ When the boat reaches its docking spot a dock device message triggers the last l
 To conclude when a docking device detects that a docking spot is free again because a boat leaved, it sends a message that triggers again the `removeReservation` function that in this case will delete the reservation and restore the docking spot status to free.
 
 For more details about the messages exchanged by these components check the [dedicated folder](src/AWS).
+
+### Prototype convention
+
+To test the real hardware isn't used LoRaWAN, but the board is connected to internet with ETHOS.
+
+While for the network tests [The Things Network](https://www.thethingsnetwork.org/) is used, the boards are replaced with the [ST B-L072Z-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/) and the values read by the sensors are replaced with dummy data.
