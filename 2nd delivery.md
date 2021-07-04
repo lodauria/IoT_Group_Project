@@ -38,7 +38,7 @@ We've developed:
   - The ultrasonic sensor
 - We have tested how the network works with a number of nodes suitable for our proposal
 - We have tested the reliability of the ultrasonic rangefinder
-- The plate recogntion is working for a simple boat without aditional design near the plate
+- The plate recogntion is working only for simple boats without aditional text near the plate
 - We tested the power consumption and the delay in the license plate recognition
 - The plate recognition is working slowly
 
