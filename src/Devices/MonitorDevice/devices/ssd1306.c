@@ -719,7 +719,7 @@ void *ssd1306_writeArrowThread(void *arg) {
                                 case TURN_AROUND:
                                     u8g2_DrawXBMP(u8g2, 0, 0, draw_width, draw_height, turnaroud_bits);
                                     break;
-                                case NO_RESERVATION:
+                                case NO_RESERVATION: {
                                     char *noReservationText = "NO RESERVATION";
                                     int startPixelColumn = getStartPixelColumn(strlen(noReservationText),
                                                                                ssd1306->directionArray[i].currentStartPosition);
@@ -728,6 +728,7 @@ void *ssd1306_writeArrowThread(void *arg) {
                                     startPixelColumn = getStartPixelColumn(strlen(bookOnTheWebsite),
                                                                            ssd1306->directionArray[i].currentStartPosition);
                                     u8g2_DrawStr(u8g2, startPixelColumn, 40, bookOnTheWebsite);
+                                }
                                     break;
                                 default:
                                     break;
