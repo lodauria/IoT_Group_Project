@@ -30,7 +30,6 @@ The user interface for using this service can be found [here](https://kernel-mac
 The project status after the first delivery can be found [here](https://github.com/kernel-machine/IoTGroupProject/tree/first_assignment), while the required videos are linked below:
 
 - [Product presentation](https://youtu.be/xBoODjK8p_Q)
-
 - [Technical details](https://youtu.be/w8znmP87peo)
 - [Performance evaluation](https://youtu.be/zOJKtFecgoM)
 
