@@ -6,7 +6,7 @@ from boto3.dynamodb.conditions import Key, Attr
 def lambda_handler(event, context):
     
     # Decode the JSON message (gives error and stop if wrong format)
-    dock_num = event["dock_num"]
+    dock_num = int(event["dock_num"])
     action_type = event["event"]
     
     # Check attributes values

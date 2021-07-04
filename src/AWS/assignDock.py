@@ -22,6 +22,16 @@ def lambda_handler(event, context):
         )
     
     if len(response['Items']) == 0:
+        
+        # Create an MQTT client
+        client = boto3.client('iot-data', region_name='us-east-1')
+        
+        # Publish the message for the displays
+        response = client.publish (
+            topic='dock/assign',
+            qos=1,
+            payload=json.dumps({"boat_id":boat_id, "dock_num":"0", "event":"2"})
+        )
         return json.dumps({'ret_code': 2, 'info_mess': "No reservation found"})
     
     # Get boat dimension
@@ -35,6 +45,16 @@ def lambda_handler(event, context):
         )
         
     if len(response['Items']) == 0:
+        
+        # Create an MQTT client
+        client = boto3.client('iot-data', region_name='us-east-1')
+        
+        # Publish the message for the displays
+        response = client.publish (
+            topic='dock/assign',
+            qos=1,
+            payload=json.dumps({"boat_id":boat_id, "dock_num":"0", "event":"3"})
+        )
         return json.dumps({'ret_code': 3, 'info_mess': "No free spot found"})
         
     dock_num = response['Items'][0]['num']
