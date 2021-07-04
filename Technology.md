@@ -67,7 +67,7 @@ When the marina system detects that the boat is enough nearly to enter in the ma
 In the marina there are 2 addition components:
 
 - **LoRaWAN gateway**, used to connect all LoRa device to the cloud.
-- A **router** with internet connection, used to provide an internet connection at the camera devices and the LoRa gateway.
+- A **Marina server** to forward messages from LoRaWAN gateway and the MQTT broker of IoT Core and vice versa 
 
 ### Software components and Network infrastructure
 
