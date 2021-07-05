@@ -1,24 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="210mm"
    height="297mm"
    viewBox="0 0 210 297"
    version="1.1"
    id="svg2609"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
    sodipodi:docname="entrance_device.svg"
    inkscape:export-filename="/home/luca/Desktop/Universita/IOT/IoTGroupProject/resources/images/entrance_device.png"
    inkscape:export-xdpi="213.74129"
-   inkscape:export-ydpi="213.74129">
+   inkscape:export-ydpi="213.74129"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs2603">
+    <marker
+       style="overflow:visible"
+       id="DotM"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="DotM"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4) translate(7.4, 1)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
+         id="path5656" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="InfiniteLineEnd"
+       inkscape:stockid="InfiniteLineEnd"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <g
+         style="fill:context-stroke"
+         id="g5833">
+        <circle
+           cx="3"
+           cy="0"
+           r="0.8"
+           id="circle5827" />
+        <circle
+           cx="6.5"
+           cy="0"
+           r="0.8"
+           id="circle5829" />
+        <circle
+           cx="10"
+           cy="0"
+           r="0.8"
+           id="circle5831" />
+      </g>
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="TriangleInS"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="TriangleInS"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.2)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         id="path5731" />
+    </marker>
     <marker
        style="overflow:visible"
        id="Arrow1Lend-3"
@@ -56,9 +112,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="500.95875"
-     inkscape:cy="673.81024"
+     inkscape:zoom="1.4"
+     inkscape:cx="452.14286"
+     inkscape:cy="627.14286"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -67,7 +123,8 @@
      inkscape:window-height="1029"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata2606">
     <rdf:RDF>
@@ -76,7 +133,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -149,15 +205,6 @@
          y="147.35742"
          style="text-align:center;text-anchor:middle;stroke-width:0.224462"
          id="tspan2007">PI</tspan></text>
-    <rect
-       style="fill:none;stroke:#000000;stroke-width:0.734834;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect833-0-1"
-       width="51.028851"
-       height="26.346733"
-       x="121.61411"
-       y="126.09381"
-       inkscape:export-xdpi="487.03329"
-       inkscape:export-ydpi="487.03329" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:8.97843px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.224462"
@@ -170,14 +217,14 @@
          x="146.92688"
          y="136.8647"
          style="text-align:center;text-anchor:middle;stroke-width:0.224462"
-         id="tspan839-5-0">Network</tspan><tspan
+         id="tspan2123">LAN</tspan><tspan
          sodipodi:role="line"
          x="146.92688"
          y="148.08774"
          style="text-align:center;text-anchor:middle;stroke-width:0.224462"
-         id="tspan2123">Interface</tspan></text>
+         id="tspan3398">connection</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.602882px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart)"
+       style="fill:none;stroke:#000000;stroke-width:0.60288204;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#DotM);stroke-miterlimit:4;stroke-dasharray:1.80864611,1.80864611;stroke-dashoffset:0"
        d="M 120.69853,138.11235 H 85.775103"
        id="path2125"
        inkscape:export-xdpi="487.03329"
