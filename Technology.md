@@ -14,7 +14,7 @@ The main macro components are:
 
 ### Dock device
 
-For each dock there is a LED (that blink when someone has to find his docking spot) and a special cleat equipped with a button to detects if the boat is docked. More details about the cleat can be found [here](resources/cleat 3D model/).
+For each dock there is a LED (that blink when someone has to find his docking spot) and a special cleat equipped with a button to detects if the boat is docked. More details about the cleat can be found [here](resources/cleat%203D%20model/).
 A single stm32 board can be used for multiple docks, it uses a LoRaWAN interface to communicate with the LoRaWAN gateway installed on the marina.
 
 <img src="resources/images/dock_device.png" alt="Dock device" style="zoom: 50%;" />
