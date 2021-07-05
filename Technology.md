@@ -74,7 +74,7 @@ It is possible to use multiple camera and the system will process the output of 
 
 If the camera device cannot detect the plate of a boat, there is a backup system that uses the GPS to detect when a boat is at the entrance of the marina. If the boat cannot be detected with the cameras, the sailor can open this [web page](https://kernel-machine.github.io/IoTGroupProject/#/gps), enter the boat plate, and, by keeping opened the web page, the boat position will be sent periodically to the cloud. When the marina system detects that the boat is near enough to the marina entrance, the sailor can close the web page and the signage will be shown on the monitors.
 
-### Addition components
+### Additional components
 
 In the marina there are 2 addition components:
 
