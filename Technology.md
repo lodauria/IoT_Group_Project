@@ -4,11 +4,25 @@
 
 *[Second delivery version](https://github.com/kernel-machine/IoTGroupProject/tree/second_assignment/Technology.md)*
 
-## ![Marina](resources/images/harbour.png)
+## Marina examples
+
+In this project we will consider the following example of marina.
+
+![MarinaExample](resources/images/MarinaMonitorPositionExample.png)
+
+In this marina there 30 docking spots available placed in 5 different piers. Each pier can accommodate different type of boats:
+
+- The docking spots from 1 to 10 has to be used by small boats (category 1)
+- The docking spots from 11 to 15 and from 26 to 30 can accommodate also medium sized boats (category 2)
+- The docking spots from 16 to 25 are the only one which can host also big boats (category 3)
+
+The IoT system developed for this marina uses 30 docking devices, 4 LCD monitors and a camera.
+
+### Main marina components
 
 The main macro components are:
 
-- **Boat name identifier** at the marina entrance there is camera used to identify the boat name to check if there is a dock reservation
+- **Camera** at the marina entrance used to identify the boat name to check if there is a dock reservation
 - **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot
 - **Dock sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock
 
@@ -44,7 +58,7 @@ This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 
 [Get more details here](src/Devices/MonitorDevice)
 
-### Entrance sensor
+### Camera devices
 
 <img src="resources/images/entrance_device.png" alt="Entrance sensor" style="zoom:50%;" />
 
@@ -54,7 +68,9 @@ For each side there are:
 - **Raspberry PI** to read the name of the boat
 - **Network Interface** that sends computed data to the marina server over MQTT on a LAN connection
 
-Image processing is executed in the Raspberry Pi and the read name is sent.
+Image processing is executed in the Raspberry Pi and the read plate is sent.
+
+It is possible to use multiple camera and the system will process the output of the first camera that detects a plate.
 
 ### Boat detection with GPS
 
@@ -71,12 +87,14 @@ In the marina there are 2 addition components:
 
 The major software components are:
 
-- In entrance device there is a **computer vision software** to identify the boat entering
-- A **web interface**  used to see the current status of the marina and to book a dock
+- The **plate recognition software** in the cameras at the marina entrance
+- A **web interface** used get a reservation and to use the enter detection system via GPS
+- **Firmwares** of monitor and dock devices
+- **Cloud software** that manages the reservation and assigns the dock. [more details](./src/AWS)
 
 ![Software component](resources/images/network_infrastructure.png)
 
-For the communication inside the marina LoRaWAN is used.
+For the communication inside the marina LoRaWAN is used, while the cameras are connected directly to the AWS MQTT broker.
 
 Software work flow examples:
 
