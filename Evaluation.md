@@ -12,22 +12,23 @@ To evaluate our solution we first consider the devices performances as follows:
 
 ## Camera
 
-The performance of the camera will be evaluated by the capability of capturing clear images that allows to perform an accurate text recognition. We will consider the percentage of correct text detection on the number of given images. The camera is the slower part of the system, so it should detect the plate a fast as possible. The performance will also be evaluated by the capability of the algorithm to differentiate between plate number and boat decoration or slogan.
+The performance of the camera is evaluated by the capability of capturing clear images to be used by the text recognition algorithm. We will consider the percentage of correct text detection on a set of sample images collected in a real marina. The number of images considered is 20, some samples are reported below.
 
-## Boat detection devices
+![](resources/camera_samples/img_1.jpg)
+
+![](resources/camera_samples/img_2.jpg)
+
+The percentage of license plates correctly detected is --%, which is --.
+
+The plate recognition is the slower part of the system, so it has to work as fast as possible. The typical delay measured from when the picture is taken to when the message is received by IoT Core broker is -- seconds, which is an acceptable result.
+
+## Dock devices
 
 #### Precision
 
-For this scope an ultrasonic sensor is used, for our propose the precision is not much important, we have to detect only if a boat is present or not.
+It's important to detect with a good accuracy if a boat is present or not, so that the service works well. The goal is to avoid false negative and false positive when a rope is tied on the cleat.
 
-The main issue for this kind of sensor is that we cannot detect the difference between an out of range measure and a faulty sensor.
-When the device measurement is out of range the receiver components doesn't detects any ultrasonic sound and this phenomena could happen also if the receiver or the sender module is damaged.
-
-Another problem of this family of sensors is that they don't work fine with sound absorbing material, but for detect boats, that are made by metal or wood, we haven't this problem. 
-
-![Rangefinder tilted problem](resources/images/tiltedUltrasonic.gif)
-
-These devices don't produce good values when the surface is tilted, Luckily the most of the boat back are not tilted.
+We have tested 10 times the tie off procedure obtaining only 2 false negative and 0 false positive, which is acceptable considering that the cleat model created is a very simple prototype.
 
 #### Power consumption
 
@@ -61,7 +62,7 @@ The board has a current consumption of 43 mA without evident peaks.
 
 The marina server should be able to acquire the sensors data via wireless connection. The server data will be exchanged with the cloud using MQTT protocol over a secure internet connection.
 
-### 6LoWPAN/RPL
+### LoRaWAN
 
 The initial idea was to use 6LoWPAN on [IEEE 802.15.4](https://en.wikipedia.org/wiki/IEEE_802.15.4) based network, to connect the devices between them, the devices are narrow, so the short range of this connection hasn't a problem and this protocol allow us to use ip6 packets, so also MQTT, but using it on the IoT-LAB experiments we got stability and connection problems.
 
