@@ -24,7 +24,7 @@ The main macro components are:
 
 - **Camera** at the marina entrance used to identify the boat name to check if there is a dock reservation
 - **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot
-- **Dock sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock
+- **Dock device**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock
 
 ### Dock device
 
