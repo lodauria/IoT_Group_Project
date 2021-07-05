@@ -20,7 +20,7 @@ The performance of the camera is evaluated by the capability of capturing clear 
 
 The percentage of license plates correctly detected is --%, which is --.
 
-The plate recognition is the slower part of the system, so it has to work as fast as possible. The typical delay measured from when the picture is taken to when the message is received by IoT Core broker is -- seconds, which is an acceptable result.
+The plate recognition is the slower part of the system, so it has to work as fast as possible. The typical delay measured from when the picture is taken to when the message is received by IoT Core broker is of 1.5 s, which is an acceptable result.
 
 ## Dock devices
 
