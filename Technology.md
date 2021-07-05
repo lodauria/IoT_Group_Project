@@ -8,14 +8,14 @@
 
 The main macro components are:
 
-- **Boat name identifier** at the marina entrance there is camera used to identify the boat name to check if there is a dock reservation.
-- **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot.
-- **Dock sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock.
+- **Boat name identifier** at the marina entrance there is camera used to identify the boat name to check if there is a dock reservation
+- **Screens**, inside the marina there are some screens, useful to give indications at the sailor to find his dock spot
+- **Dock sensor**, for each dock there is a sensor to detect if a boat is presents and a LED that blink when a sailor is searching his dock
 
 ### Dock device
 
-For each dock there is a LED (that blink when someone was finding his dock position) and a sonar to detects if the boat is present.
-A single stm32 board is used for multiple dock, and it use a LoRaWAN interface to communicate with the LoRaWAN gateway installed on the marina.
+For each dock there is a LED (that blink when someone has to find his docking spot) and a special cleat equipped with a button to detects if the boat is docked. More details about the cleat can be found [here](resources/cleat 3D model/).
+A single stm32 board can be used for multiple docks, it uses a LoRaWAN interface to communicate with the LoRaWAN gateway installed on the marina.
 
 <img src="resources/images/dock_device.png" alt="Dock device" style="zoom: 50%;" />
 
@@ -24,12 +24,12 @@ A single stm32 board is used for multiple dock, and it use a LoRaWAN interface t
 The main components of the prototype of the dock device are:
 
 - The main board STM32 Nucleo F401RE
-- Switch
+- Cleat button
 - LED
 
 [Get more details here](src/Devices/DockDevice)
 
-### Signature screen
+### Signage screen
 
 ![Monitor](resources/images/Monitor%20connection.png)
 
@@ -38,7 +38,7 @@ The prototype of the monitor device is composed by a board:
 - Nucleo STM32 F401RE
 - OLED display 0.96" 128x64 
 
-The display is driven by a SSD1306 and is connected to the main board via I2C 
+The display is driven by a SSD1306 and is connected to the main board via I2C.
 
 This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 
@@ -47,34 +47,32 @@ This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 ### Entrance sensor
 
 <img src="resources/images/entrance_device.png" alt="Entrance sensor" style="zoom:50%;" />
+
 For each side there are:
 
 - **Camera** 
-- **Raspberry PI** to read the name of the boat.
-- **Network Interface** that sends computed data to the marina server over MQTT on a LAN connection.
+- **Raspberry PI** to read the name of the boat
+- **Network Interface** that sends computed data to the marina server over MQTT on a LAN connection
 
 Image processing is executed in the Raspberry Pi and the read name is sent.
 
 ### Boat detection with GPS
 
-If the camera device cannot detect the plate of a boat, there is a backup system that uses the GPS to detect when a boat is at the entrance of the marina.
-If the boat is not detected with the cameras, the sailor has to open this [web page](https://kernel-machine.github.io/IoTGroupProject/#/gps), enter the boat plate, and keeping opened the web page the boat position is sent periodically to the cloud.
-
-When the marina system detects that the boat is enough nearly to enter in the marina, the sailor can close the web page and the signs are shown on the monitors.
+If the camera device cannot detect the plate of a boat, there is a backup system that uses the GPS to detect when a boat is at the entrance of the marina. If the boat cannot be detected with the cameras, the sailor can open this [web page](https://kernel-machine.github.io/IoTGroupProject/#/gps), enter the boat plate, and, by keeping opened the web page, the boat position will be sent periodically to the cloud. When the marina system detects that the boat is near enough to the marina entrance, the sailor can close the web page and the signage will be shown on the monitors.
 
 ### Addition components
 
 In the marina there are 2 addition components:
 
-- **LoRaWAN gateway**, used to connect all LoRa device to the cloud.
-- A **Marina server** to forward messages from LoRaWAN gateway and the MQTT broker of IoT Core and vice versa 
+- **LoRaWAN gateway**, used to connect all the LoRa devices to the cloud.
+- A **Marina server** to forward messages from the LoRaWAN gateway to the MQTT broker of IoT Core and vice versa 
 
 ### Software components and Network infrastructure
 
 The major software components are:
 
-- In entrance device there is a **computer vision software** to estimate the boat size and name.
-- A **web interface**  used to see the current status of the marina and to book a dock.
+- In entrance device there is a **computer vision software** to identify the boat entering
+- A **web interface**  used to see the current status of the marina and to book a dock
 
 ![Software component](resources/images/network_infrastructure.png)
 
@@ -82,17 +80,19 @@ For the communication inside the marina LoRaWAN is used.
 
 Software work flow examples:
 
-- A boat enter in the marina and the entrance device send name and size of the boat to the marina server.
-- The marina server check on the cloud system if there are a reserved dock for the entering boat, otherwise it'll assign a free dock suitable for the boat size.
-- The marina server send data to the monitors and dock device that start to show useful information at the sailor.
+- A boat enter in the marina and the entrance device sends the boat license plate to the marina server
+- The marina server checks with the cloud system if there is a reservation for the boat entering and assigns a free docking spot suitable for the boat
+- The marina server sends data to the monitors and to the dock device that start to show useful information for the sailor
 
 ### AWS infrastructure
 
-On AWS cloud we have developed the cloud system with the following architecture
+On AWS cloud we have developed the cloud system with the following architecture:
 
 ![AWS architecture](resources/images/architecture.png)
 
-We have 3 lambda function. The first one is `getReservation` and is called only from the web page to make a reservation that will be saved in a table of the marina DynamoDB. The second is called `assignDock` and is used to assign a docking spot when the camera detects an incoming boat. The assigned dock is stored in the DynamoDB in another table used only for the docking spot status and the reservation status is updated to take into account that the boat arrived. At the end this lambda function sends an MQTT message to the docking devices and the displays to generate the correct signage to reach the docking.
+We have 4 lambda function. The first one is `getReservation` and is called only from the web page to make a reservation that will be saved in a table of the marina DynamoDB. The second is called `assignDock` and is used to assign a docking spot when the system detects an incoming boat. The assigned dock is stored in the DynamoDB in another table used only for the docking spots status and the reservation status is updated to take into account that the boat arrived. At the end this lambda function sends an MQTT message to the docking devices and the displays to generate the correct signage to reach the docking.
+
+With the `GPSHandle` function the boat identification made with the camera can be substituted with the GPS data coming from the web page opened on the sailor device.
 
 When the boat reaches its docking spot a dock device message triggers the last lambda function called `removeReservation` which will communicate to all the docking devices that the docking procedure is completed.
 
@@ -102,6 +102,6 @@ For more details about the messages exchanged by these components check the [ded
 
 ### Prototype convention
 
-To test the real hardware isn't used LoRaWAN, but the board is connected to internet with ETHOS.
+To test the real hardware we didn't use LoRaWAN, but the board is connected to internet with ETHOS.
 
-While for the network tests [The Things Network](https://www.thethingsnetwork.org/) is used, the boards are replaced with the [ST B-L072Z-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/) and the values read by the sensors are replaced with dummy data.
+While for the network tests [The Things Network](https://www.thethingsnetwork.org/) is used, the boards are replaced with the [ST B-L072Z-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/) and the values read by the sensors are replaced by simulated data.

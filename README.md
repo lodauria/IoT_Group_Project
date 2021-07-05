@@ -23,6 +23,10 @@ The user interface for using this service can be found [here](https://kernel-mac
 - Project final presentation (missing)
 - Prototype demonstration (missing)
 
+## Blog post
+
+A blog post about this project has been published on Medium at this [link] (missing).
+
 ## Previous deliveries
 
 ### First delivery
