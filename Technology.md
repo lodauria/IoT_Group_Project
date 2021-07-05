@@ -65,11 +65,9 @@ This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 For each side there are:
 
 - **Camera** 
-- **Raspberry PI** to read the name of the boat
-- **Network Interface** that sends computed data to the marina server over MQTT on a LAN connection
+- **Raspberry PI** to read the name of the boat and send read data over MQTT on a LAN connection
 
 Image processing is executed in the Raspberry Pi and the read plate is sent.
-
 It is possible to use multiple camera and the system will process the output of the first camera that detects a plate.
 
 ### Boat detection with GPS
