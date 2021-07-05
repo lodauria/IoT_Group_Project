@@ -55,4 +55,4 @@ Here we report the links to the videos required for the second delivery:
 
 - [Technology and prototype demo](https://youtu.be/3Wt1pBkmOxo)
 - [Evaluation](https://youtu.be/7cdx_kfam0A)
-- Future plans (missing)
+- [Future plans](https://youtu.be/AGUaO2chcDI)
