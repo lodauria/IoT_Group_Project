@@ -25,7 +25,7 @@ The user interface for using this service can be found [here](https://kernel-mac
 
 ## Blog post
 
-A blog post about this project has been published on Medium at this [link] (missing).
+A blog post about this project has been published on Medium at this [link](https://luca-giovannesi.medium.com/smart-signage-for-marinas-a6a3ed7dadee).
 
 ## Previous deliveries
 
