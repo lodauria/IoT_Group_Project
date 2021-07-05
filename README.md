@@ -43,7 +43,7 @@ Here we report the links to the videos required for the first dellivery, but rel
 
 - [Product presentation](https://www.youtube.com/watch?v=dEvWLIq8EWU)
 - [Technical details](https://youtu.be/lHtj5kDBaY8)
-- Performance evaluation (missing)
+- [Performance evaluation](https://youtu.be/gAtrrPOdk4Y)
 
 ### Second delivery
 
