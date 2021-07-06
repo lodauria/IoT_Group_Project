@@ -76,7 +76,7 @@ If the camera device cannot detect the plate of a boat, there is a backup system
 
 ### Additional components
 
-In the marina there are 2 addition components:
+In the marina there are 2 additional components:
 
 - **LoRaWAN gateway**, used to connect all the LoRa devices to the cloud.
 - A **Marina server** to forward messages from the LoRaWAN gateway to the MQTT broker of IoT Core and vice versa 
