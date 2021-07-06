@@ -1,24 +1,18 @@
-# web_pages
+## Web interface project
 
-## Project setup
-```
-yarn install
+In this folder there are the source code of the web interface. It was written using the framework [Vue.js](https://vuejs.org/).
+
+To run the development server to test you work before the commit, you can run:
+
+```bash
+npm run serve
 ```
 
-### Compiles and hot-reloads for development
-```
+or, if you prefer to use yarn:
+
+```bash
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+When there is a new commit is this directory, the web page is automatically build and deployed with the GitHub actions.
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
