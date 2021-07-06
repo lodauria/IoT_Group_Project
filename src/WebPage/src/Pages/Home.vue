@@ -7,7 +7,7 @@
       This web page is the simplest way to interact with the smart signage system used inside the marina.
     </p>
     <p>
-      Open the <router-link to="/reservation">page reservation</router-link> to make a reservation for a docking spot in the marina.
+      Open the page <router-link to="/reservation">Reservation</router-link> to make a reservation for a docking spot in the marina.
     </p>
     <p>
       If you already made a reservation and you want to use the GPS of your device to let us know when you are entering in the marina,  
