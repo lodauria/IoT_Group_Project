@@ -36,14 +36,35 @@ We have tested 10 times the tie off procedure obtaining only 2 false negative an
 
 #### Power consumption
 
-![Dock device power consumption graph](resources/images/DockDeviceConsumption.png)
+Since currently IoT LAB LoRa devices are not available due to service maintenance, we cannot evaluate directly the power consumption of the board, but we evaluate it reading the specifications of the chips.
 
-Usually the board has a current consumption of 32 mA.
-The radio module is used only when a boat arrives or leaves the dock, and the current raise to 38 mA.
+The used board is an ([ST B-L072Z-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/)) in which there are 2 main components that absorb the most of the current consumption:
 
-The ultrasonic range finder has a power consumption of 3.38 mA.
+- **CPU**, the [STM32L072CZ](https://www.st.com/en/microcontrollers-microprocessors/stm32l072cz.html), has an estimated current consumption of 2.97 mA
+- **Radio module**, the [SX1276](https://www.semtech.com/products/wireless-rf/lora-core/sx1276), that has an estimated current consumption of 11 mA during receiving, and at most 23 mA during transmitting.
 
-The current consumption of this device without the light is 35.4 mA / 41.3 mA for each device.
+Another components of the dock device that has a large power consumption is the **LED**, let's assume that we [this light](https://cablematic.com/it/prodotti/luce-a-led-per-semaforo-ip65-200mm-12-24v-verde-SM028/) that has:
+
+- Current consumption of 5.8 W
+- Input voltage from 12 to 24 V DC
+
+We assume that each dock is triggered **1 time at day** and a **boat takes 4 minutes** from the enter of the marina, until the anchors to the cleat, So in these 4 minutes the LED has a power consumption of 5.8W x (4/60) h = **0.24 Wh**
+
+The CPU has a current consumption of 2.97 mA, if the board is powered with 3.3V, the power is 0.0098 W, since it is turned on for 24 hours at day, every day, the current consumption is 0.0098 W x 24 h =  0.2352 Wh
+
+From the sum were excluded:
+
+- The power dissipated by the **voltage transformers**
+- The power consumption of the **relay** that toggle the light
+- Since **LoRa transmission** happens only for few milliseconds at the day, we can exclude it from the total count.
+- Li-Ion battery will be used, so we need a **BMS (Battery Management System)** to ensure that when the battery voltage drop below a fixed threshold the dock device is turned off, in such a way to avoid to damage the battery, the BMS has a little power consumption that is not taken into account.
+- The power dissipated by the components of the board.
+
+So for every day the power consumption of a dock device is about 0.4752 Wh.
+
+If we use a [4S2P LiIon pack of 18650s](https://it.aliexpress.com/i/4001228530702.html) with a total capacity of 6000 mAh and a voltage of 14.4V, the power that the pack can deliver is 86.4 Wh, and it can power a dock device for about 181 days, about 6 months.
+
+If the customer of these project prefer to power the dock devices with batteries it's possible.
 
 ## Signage screens
 
@@ -83,7 +104,7 @@ So the future plans is to replace this connection with LoRa so leave also MQTT.
 
 ## Response time from an end-user point of view: 
 
-The response time, so the time between the boat detection and the signage visualization on the monitors, is around 4 s. Usually the speed limit at the entrance of a marina is about 3 knots, so the boat in this amount of time can travel for at most 6 m. So in conclusion our system produces a response in time as soon as the camera is placed distant enough (more than 6 meters) from the nearest monitor.
+The response time, so the time between a plate detects and signage are shown on the monitors, is below 500 ms. It is not very important to have a real time system, but the system should produce a response in a reasonable time.
 
-When using the user's device GPS for detecting the boat entrance, the signage generation starts when the distance between the boat position and the marina entrance is below a certain threshold. This value can be set high enough to take into account the system delay in transmitting the messages. If we consider a delay similar to the previous case (4 s) and we also take into account a 5 m error in the GPS position, we obtain that a reasonable threshold distance is 11 m. So also in this case our system is able to generate the correct signage in time.
+Usually the speed limit of the entrance of the marina is about 3 knots, the system In perfect condition has a response time < 500 ms, so the boat in this amount of time, with this speed limit, moves about 77 cm, so our system produces a response in time.
 
