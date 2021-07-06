@@ -12,15 +12,19 @@ To evaluate our solution we first consider the devices performances as follows:
 
 ## Camera
 
-The performance of the camera is evaluated by the capability of capturing clear images to be used by the text recognition algorithm. We will consider the percentage of correct text detection on a set of sample images collected in a real marina. The number of images considered is 20, some samples are reported below.
+The performance of the camera is evaluated by the capability of capturing clear images to be used by the text recognition algorithm. We will consider the percentage of correct text detection on a set of sample images collected in a real marina. The number of images considered is 20.
 
-![](resources/camera_samples/img_1.jpg)
+The percentage of license plates correctly detected is 35%, which is not so satisfying. The main problem is dealing with pictures taken with an angle, because in this case the text recognition algorithm fails. On the other hand, when considering images taken perpendicularly with respect to the text, the algorithm performs well. So in a real implementation an important aspect to take into account is the camera angle with respect to the license plates.
 
-![](resources/camera_samples/img_2.jpg)
+In addition it's reasonable to think that with more sophisticated image transformations the performances could improve even more. In the final implementation the additional text present on the boats is no more a problem for the license plate recognition.
 
-The percentage of license plates correctly detected is --%, which is --.
+Below are reported two images among those tested. In the first one the algorithm succeeded in the plate recognition, while not in the second. For privacy reasons here the license plates have been partially obscured.
 
-The plate recognition is the slower part of the system, so it has to work as fast as possible. The typical delay measured from when the picture is taken to when the message is received by IoT Core broker is of 1.5 s, which is an acceptable result.
+![](resources/images/boat_img_1.jpg)
+
+![](resources/images/boat_img_2.jpg)
+
+The plate recognition is the slower part of the system, so it has to work as fast as possible. The typical delay measured from when the picture is taken to when the message is received by IoT Core broker is of 2 s, which is an acceptable result.
 
 ## Dock devices
 
