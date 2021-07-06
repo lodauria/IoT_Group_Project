@@ -30,11 +30,11 @@ The plate recognition is the slower part of the system, so it has to work as fas
 
 ### Power consumption
 
-A Raspberry PI 4 is used for this purpose, it has enough computational power to get a fast response, but the current consumption is between 600mA and 1500mA, it depends by the CPU usage, so power this device with a battery is not a good choose, so we think that power it with the power line is a better solution.
+The Raspberry PI 4 used for this purpose has enough computational power to get a fast response, but its current consumption is between 600 mA and 1500 mA because depends on the CPU usage. For this reason powering the camera device with a battery is not a good choice, so we think that using the power line is the most convenient solution.
 
 ### Network evaluation
 
-The raspberry has a gigabit port, it's used to connect it to the marina router via an ethernet cable, so the connection will be reliable and enough fast for our purpose.
+The Raspberry Pi 4 has a gigabit port which is used to connect it to the marina router via an Ethernet cable. In this way the connection is reliable and fast enough for our purpose. An alternative solution could be to use the incorporated WiFi module.
 
 ## Dock devices
 
@@ -46,36 +46,36 @@ We have tested 10 times the tie off procedure obtaining only 2 false negative an
 
 ### Power consumption
 
-Since currently IoT LAB LoRa devices are not available due to service maintenance, we cannot evaluate directly the power consumption of the board, but we evaluate it reading the specifications of the chips.
+Since the LoRa devices on IoT LAB are currently unavailable due to service maintenance, we cannot evaluate directly the power consumption of the board, but we can evaluate it by reading the specifications of the chips.
 
-The used board is an ([ST B-L072Z-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/)) in which there are 2 main components that absorb the most of the current consumption:
+The board used is an ([ST B-L072Z-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/)) in which there are 2 main components that absorb the most of the current consumption:
 
 - **CPU**, the [STM32L072CZ](https://www.st.com/en/microcontrollers-microprocessors/stm32l072cz.html), has an estimated current consumption of 2.97 mA
 - **Radio module**, the [SX1276](https://www.semtech.com/products/wireless-rf/lora-core/sx1276), that has an estimated current consumption of 11 mA during receiving, and at most 23 mA during transmitting.
 
-Another components of the dock device that has a large power consumption is the **LED**, let's assume that we [this light](https://cablematic.com/it/prodotti/luce-a-led-per-semaforo-ip65-200mm-12-24v-verde-SM028/) that has:
+Another component of the dock device that has a large power consumption is the **LED**, let's assume to use [this kind of light](https://cablematic.com/it/prodotti/luce-a-led-per-semaforo-ip65-200mm-12-24v-verde-SM028/) that has:
 
 - Current consumption of 5.8 W
 - Input voltage from 12 to 24 V DC
 
-We assume that each dock is triggered **1 time at day** and a **boat takes 4 minutes** from the enter of the marina, until the anchors to the cleat, So in these 4 minutes the LED has a power consumption of 5.8W x (4/60) h = **0.24 Wh**
+We assume that each docking device is triggered **once a day** and that a **boat takes 4 minutes** from the entrance in the marina to tie off to the cleat. So in these 4 minutes the LED has a power consumption of 5.8 W x (4/60) h = **0.24 Wh**
 
-The CPU has a current consumption of 2.97 mA, if the board is powered with 3.3V, the power is 0.0098 W, since it is turned on for 24 hours at day, every day, the current consumption is 0.0098 W x 24 h =  0.2352 Wh
+The CPU has a current consumption of 2.97 mA, the board is powered with 3.3V, so the power is 0.0098 W. Since it is turned on for 24 hours at day, every day, the current consumption is 0.0098 W x 24 h =  0.2352 Wh.
+
+So every day the power consumption of a dock device is about 0.4752 Wh.
 
 From the sum were excluded:
 
 - The power dissipated by the **voltage transformers**
 - The power consumption of the **relay** that toggle the light
-- Since **LoRa transmission** happens only for few milliseconds at the day, we can exclude it from the total count.
-- Li-Ion battery will be used, so we need a **BMS (Battery Management System)** to ensure that when the battery voltage drop below a fixed threshold the dock device is turned off, in such a way to avoid to damage the battery, the BMS has a little power consumption that is not taken into account.
+- Since **LoRa transmission** happens only for few milliseconds at the day, we have excluded it from the total count
+- Li-Ion battery will be used, so we need a **BMS (Battery Management System)** to ensure that when the battery voltage drop below a fixed threshold the dock device is turned off, in such a way to avoid to damage the battery, the BMS has a little power consumption that is not taken into account
 - The power dissipated by the components of the board.
 
-So for every day the power consumption of a dock device is about 0.4752 Wh.
+If we assume to use the [4S2P LiIon pack of 18650s](https://it.aliexpress.com/i/4001228530702.html) with a total capacity of 6000 mAh and a voltage of 14.4V, the power that the pack can deliver is 86.4 Wh, and it can power a dock device for about 181 days, i.e. about 6 months.
 
-If we use a [4S2P LiIon pack of 18650s](https://it.aliexpress.com/i/4001228530702.html) with a total capacity of 6000 mAh and a voltage of 14.4V, the power that the pack can deliver is 86.4 Wh, and it can power a dock device for about 181 days, about 6 months.
-
-If the customer of this project prefer to have less cable on the marina and power the dock devices with batteries, the power consumption of these devices allow this strategy. 
-Otherwise if he prefer to have less maintenance, so there isn't the need to recharge battery periodically, or to decrease the cost of the system don't buying the batteries, the system can be powered by the marina electric line.
+In conclusion, to have less cables to place inside the marina, with our solution we can power the dock devices with batteries during the whole the tourist season. 
+Otherwise, if we don't want to take into account the batteries maintenance and we want to decrease the fixed costs, the system can be powered by the marina electric line. This solution doesn't necessarily require a lot of cables placing if the marina docking spots are already reached by the power line.
 
 ## Signage screens
 
@@ -88,16 +88,13 @@ If more boats enter in the marina, the screen have to show by cycling the signag
 
 ### Current consumption
 
-The monitors that will be used for the final product is the ones that we can found on a normal road.
+The monitors that could be used in this system are the ones that we can found for example in highways.
 
 ![](http://www.vmstech.co.uk/images/top-ms4.jpg)
 
-The display chosen is the [MS4](http://www.vmstech.co.uk/ms4.htm) made by VSM.
-It is visible also in the sunny summer days, it requires a voltage of 230V and the power consumption can be up to 2700 W, it depends of how many pixels are turned on.
+If we consider this specific monitor [MS4](http://www.vmstech.co.uk/ms4.htm) made by VSM, which is visible also in the sunny summer days, it requires a voltage of 230V and the power consumption can be up to 2700 W, but it depends on how many pixels are turned on. The datasheet is available [here](http://www.vmstech.co.uk/downloads/MS4.pdf)
 
-The datasheet is available [here](http://www.vmstech.co.uk/downloads/MS4.pdf)
-
-So the monitor and the control board are powered by the current line of the marina.
+From this very general consideration we concluded that the monitor and the relative control boards should be powered by the power line of the marina. This solution is easier to be realized with respect to the dock devices also because the number of required monitors is smaller.
 
 ## Network technology:
 
@@ -105,9 +102,9 @@ The marina server should be able to acquire the sensors data via wireless connec
 
 ### LoRaWAN
 
-The initial idea was to use 6LoWPAN on [IEEE 802.15.4](https://en.wikipedia.org/wiki/IEEE_802.15.4) based network, to connect the devices between them, the devices are narrow, so the short range of this connection hasn't a problem and this protocol allow us to use ip6 packets, so also MQTT, but using it on the IoT-LAB experiments we got stability and connection problems.
+The initial idea was to use 6LoWPAN on [IEEE 802.15.4](https://en.wikipedia.org/wiki/IEEE_802.15.4) based network, to connect the devices between them, the devices are narrow, so the short range of this connection it's not a problem and this protocol allows us to use IPv6 packets, so also MQTT. After testing this solution on the IoT-LAB we got stability and connection problems so we abandoned this option.
 
-Now the project uses **LoRaWAN** for network connection between the dock devices, the monitors and the LoRaWAN gateway.
+In the final implementation we used **LoRaWAN** for network connection between the dock devices, the monitors and the LoRaWAN gateway.
 
 The exchanged messages have a size from 32 bytes to 48 bytes, in Europe the throughput of LoRaWAN is up to 5 kbps, so the transmission time is about 10 ms.
 With the long range characteristics of LoRa, the transmission is robust and covers all zones of a marina.
