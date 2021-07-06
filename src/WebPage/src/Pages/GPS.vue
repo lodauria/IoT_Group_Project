@@ -1,11 +1,12 @@
 <template>
   <div>
-    <p>If your boat is not detected by the cameras at the entrance of the marina, so the screens are not show information
-      for your boat,
-      Insert here your plate and click on the button enable.</p>
+	<h2>Enable the GPS tracking</h2>
+    <p> Activate here the GPS tracking of your boat if you don't want to use
+	the automatic license plate recognition service.
+	Indentify your boat by inserting here the license plate and then click on the button enable.</p>
     <p>
-      When you are nearly the marina entrance the monitors will
-      show the information to reach your dock.</p>
+      When you will be near the marina entrance the monitors will automatically 
+	  show you the information to reach your docking spot.</p>
     <b-form action="#" @submit="onSubmit">
       <b-form-group
           class="my-3"
