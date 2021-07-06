@@ -83,7 +83,7 @@ So the future plans is to replace this connection with LoRa so leave also MQTT.
 
 ## Response time from an end-user point of view: 
 
-The response time, so the time between a plate detects and signage are shown on the monitors, is below 500 ms. It is not very important to have a real time system, but the system should produce a response in a reasonable time.
+The response time, so the time between the boat detection and the signage visualization on the monitors, is around 4 s. Usually the speed limit at the entrance of a marina is about 3 knots, so the boat in this amount of time can travel for at most 6 m. So in conclusion our system produces a response in time as soon as the camera is placed distant enough (more than 6 meters) from the nearest monitor.
 
-Usually the speed limit of the entrance of the marina is about 3 knots, the system In perfect condition has a response time < 500 ms, so the boat in this amount of time, with this speed limit, moves about 77 cm, so our system produces a response in time.
+When using the user's device GPS for detecting the boat entrance, the signage generation starts when the distance between the boat position and the marina entrance is below a certain threshold. This value can be set high enough to take into account the system delay in transmitting the messages. If we consider a delay similar to the previous case (4 s) and we also take into account a 5 m error in the GPS position, we obtain that a reasonable threshold distance is 11 m. So also in this case our system is able to generate the correct signage in time.
 
