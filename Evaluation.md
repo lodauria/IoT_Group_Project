@@ -12,6 +12,8 @@ To evaluate our solution we first consider the devices performances as follows:
 
 ## Camera
 
+### Precision
+
 The performance of the camera is evaluated by the capability of capturing clear images to be used by the text recognition algorithm. We will consider the percentage of correct text detection on a set of sample images collected in a real marina. The number of images considered is 20.
 
 The percentage of license plates correctly detected is 35%, which is not so satisfying. The main problem is dealing with pictures taken with an angle, because in this case the text recognition algorithm fails. On the other hand, when considering images taken perpendicularly with respect to the text, the algorithm performs well. So in a real implementation an important aspect to take into account is the camera angle with respect to the license plates.
@@ -26,15 +28,23 @@ Below are reported two images among those tested. In the first one the algorithm
 
 The plate recognition is the slower part of the system, so it has to work as fast as possible. The typical delay measured from when the picture is taken to when the message is received by IoT Core broker is of 2 s, which is an acceptable result.
 
+### Power consumption
+
+A Raspberry PI 4 is used for this purpose, it has enough computational power to get a fast response, but the current consumption is between 600mA and 1500mA, it depends by the CPU usage, so power this device with a battery is not a good choose, so we think that power it with the power line is a better solution.
+
+### Network evaluation
+
+The raspberry has a gigabit port, it's used to connect it to the marina router via an ethernet cable, so the connection will be reliable and enough fast for our purpose.
+
 ## Dock devices
 
-#### Precision
+### Precision
 
 It's important to detect with a good accuracy if a boat is present or not, so that the service works well. The goal is to avoid false negative and false positive when a rope is tied on the cleat.
 
 We have tested 10 times the tie off procedure obtaining only 2 false negative and 0 false positive, which is acceptable considering that the cleat model created is a very simple prototype.
 
-#### Power consumption
+### Power consumption
 
 Since currently IoT LAB LoRa devices are not available due to service maintenance, we cannot evaluate directly the power consumption of the board, but we evaluate it reading the specifications of the chips.
 
@@ -64,24 +74,30 @@ So for every day the power consumption of a dock device is about 0.4752 Wh.
 
 If we use a [4S2P LiIon pack of 18650s](https://it.aliexpress.com/i/4001228530702.html) with a total capacity of 6000 mAh and a voltage of 14.4V, the power that the pack can deliver is 86.4 Wh, and it can power a dock device for about 181 days, about 6 months.
 
-If the customer of these project prefer to power the dock devices with batteries it's possible.
+If the customer of this project prefer to have less cable on the marina and power the dock devices with batteries, the power consumption of these devices allow this strategy. 
+Otherwise if he prefer to have less maintenance, so there isn't the need to recharge battery periodically, or to decrease the cost of the system don't buying the batteries, the system can be powered by the marina electric line.
 
 ## Signage screens
 
-#### Usability
+### Usability
 
 The evaluation of the screen considers the clarity and visibility of the indications to guide the tourist to the right spot.
 If more boats enter in the marina, the screen have to show by cycling the signage for all boats, alternating the signage for different boats. If there are many boats, the delay between the information shown increases.
 
 ![Screen GIF](resources/images/screen.gif)
 
-#### Current consumption
+### Current consumption
 
-![Monitor device power consumption graph](resources/images/MonitorPowerConsumption.png)
+The monitors that will be used for the final product is the ones that we can found on a normal road.
 
-The MQTT messages are not received periodically but only when a boat enter in the marina, so the radio module is used occasionally.
+![](http://www.vmstech.co.uk/images/top-ms4.jpg)
 
-The board has a current consumption of 43 mA without evident peaks.
+The display chosen is the [MS4](http://www.vmstech.co.uk/ms4.htm) made by VSM.
+It is visible also in the sunny summer days, it requires a voltage of 230V and the power consumption can be up to 2700 W, it depends of how many pixels are turned on.
+
+The datasheet is available [here](http://www.vmstech.co.uk/downloads/MS4.pdf)
+
+So the monitor and the control board are powered by the current line of the marina.
 
 ## Network technology:
 
@@ -99,12 +115,17 @@ For example, on an experiments with 11 node in which:
 - 9 nodes are dock devices
 
 Only 3 of the 9 nodes can connect to the border router, so only 33% of nodes. After various experiments we can't get a successfully connection on most of the devices.
-Maybe in the IoT-LAB there are a lot of connections and the network could be congested, while in a real scenario it could work fine.
-So the future plans is to replace this connection with LoRa so leave also MQTT.
 
-## Response time from an end-user point of view: 
+Now the project uses **LoRaWAN** for network connection between the dock devices, the monitors and the LoRaWAN gateway.
 
-The response time, so the time between a plate detects and signage are shown on the monitors, is below 500 ms. It is not very important to have a real time system, but the system should produce a response in a reasonable time.
+The exchanged messages have a size from 32 bytes to 48 bytes, in Europe the throughput of LoRaWAN is up to 5 kbps, so the transmission time is about 10 ms.
+With the long range characteristics of LoRa, the transmission is robust and covers all zones of a marina.
 
-Usually the speed limit of the entrance of the marina is about 3 knots, the system In perfect condition has a response time < 500 ms, so the boat in this amount of time, with this speed limit, moves about 77 cm, so our system produces a response in time.
+The messages payload is encrypted using AES-128, so it is also secure.
+
+### Response time from an end-user point of view: 
+
+The response time, so the time between the boat detection and the signage visualization on the monitors, is around 4 s. Usually the speed limit at the entrance of a marina is about 3 knots, so the boat in this amount of time can travel for at most 6 m. So in conclusion our system produces a response in time as soon as the camera is placed distant enough (more than 6 meters) from the nearest monitor.
+
+When using the user's device GPS for detecting the boat entrance, the signage generation starts when the distance between the boat position and the marina entrance is below a certain threshold. This value can be set high enough to take into account the system delay in transmitting the messages. If we consider a delay similar to the previous case (4 s) and we also take into account a 5 m error in the GPS position, we obtain that a reasonable threshold distance is 11 m. So also in this case our system is able to generate the correct signage in time.
 
