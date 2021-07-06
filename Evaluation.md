@@ -107,15 +107,6 @@ The marina server should be able to acquire the sensors data via wireless connec
 
 The initial idea was to use 6LoWPAN on [IEEE 802.15.4](https://en.wikipedia.org/wiki/IEEE_802.15.4) based network, to connect the devices between them, the devices are narrow, so the short range of this connection hasn't a problem and this protocol allow us to use ip6 packets, so also MQTT, but using it on the IoT-LAB experiments we got stability and connection problems.
 
-Until 4 nodes this protocol works fine, but with an higher number of nodes we cannot have a reliable connection, we will have about 40 nodes.
-
-For example, on an experiments with 11 node in which:
-
-- 2 nodes are border routers
-- 9 nodes are dock devices
-
-Only 3 of the 9 nodes can connect to the border router, so only 33% of nodes. After various experiments we can't get a successfully connection on most of the devices.
-
 Now the project uses **LoRaWAN** for network connection between the dock devices, the monitors and the LoRaWAN gateway.
 
 The exchanged messages have a size from 32 bytes to 48 bytes, in Europe the throughput of LoRaWAN is up to 5 kbps, so the transmission time is about 10 ms.
