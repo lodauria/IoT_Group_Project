@@ -1,4 +1,6 @@
 Pillow
+numpy
+opencv-python
 paho-mqtt
 pytesseract
 pygame
