@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Reserve a docking spot</h2>
-    <p>Insert here your information</p>
+    <p>Insert here your information to get a reservation</p>
     <b-form action="#" @submit="onSubmit" @reset="onReset">
 
       <b-form-group

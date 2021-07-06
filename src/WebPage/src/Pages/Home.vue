@@ -4,11 +4,11 @@
       Smart signage for marinas
     </h2>
     <p>
-      During summer touristic marinas are full of amateur sailors that reserved a docking spot for spending the night.
-      Since in many cases these people don't know well the place, reaching the correct docking spot in the marina can
-      be stressful and dangerous given the big traffic. The IoT system that we propose uses an automatic boat
-      identification method and some LCD screens to generate easily readable specific signage for each boat entering the
-      marina.
+      Going to the <router-link to="/reservation">page reservation</router-link> you can get a reservation for a docking spot in the marina
+    </p>
+    <p>
+      If when you enter in the marina and you boat is not detected by the camera, you should open the page <router-link to="/gps">GPS</router-link>
+      , insert you data and the system will show up the signage for your booked dock.
     </p>
     <p>
       <GithubButton href="https://github.com/kernel-machine/IoTGroupProject" data-size="large">

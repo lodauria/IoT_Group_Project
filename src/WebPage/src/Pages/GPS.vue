@@ -1,5 +1,11 @@
 <template>
   <div>
+    <p>If your boat is not detected by the cameras at the entrance of the marina, so the screens are not show information
+      for your boat,
+      Insert here your plate and click on the button enable.</p>
+    <p>
+      When you are nearly the marina entrance the monitors will
+      show the information to reach your dock.</p>
     <b-form action="#" @submit="onSubmit">
       <b-form-group
           class="my-3"
