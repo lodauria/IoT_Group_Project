@@ -41,7 +41,7 @@ The main components of the prototype of the dock device are:
 - Cleat button
 - LED
 
-[Get more details here](src/Devices/DockDevice)
+[Get more details here](src/Devices/DockDevice).
 
 ### Signage screen
 
@@ -56,7 +56,7 @@ The display is driven by a SSD1306 and is connected to the main board via I2C.
 
 This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 
-[Get more details here](src/Devices/MonitorDevice)
+[Get more details here](src/Devices/MonitorDevice).
 
 ### Camera devices
 
@@ -65,10 +65,12 @@ This device is connected via LoRaWAN to the marina LoRaWAN gateway.
 For each side there are:
 
 - **Camera** 
-- **Raspberry PI** to read the name of the boat and send read data over MQTT on a LAN connection
+- **Raspberry PI 4** to read the name of the boat and send read data over MQTT on a LAN connection
 
-Image processing is executed in the Raspberry Pi and the read plate is sent.
+Image processing is executed in the Raspberry Pi 4 and the read plate is sent.
 It is possible to use multiple camera and the system will process the output of the first camera that detects a plate.
+
+[Get more details here](src/Camera).
 
 ### Boat detection with GPS
 
@@ -88,7 +90,7 @@ The major software components are:
 - The **plate recognition software** in the cameras at the marina entrance
 - A **web interface** used get a reservation and to use the enter detection system via GPS
 - **Firmwares** of monitor and dock devices
-- **Cloud software** that manages the reservation and assigns the dock. [more details](./src/AWS)
+- **Cloud software** that manages the reservation and assigns the dock. For more details visit the dedicated [folder](./src/AWS).
 
 ![Software component](resources/images/network_infrastructure.png)
 

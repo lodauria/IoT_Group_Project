@@ -4,7 +4,7 @@ More details about the dock devices are reported below.
 
 ## Hardware wiring
 
-![Hardware camera connection](../../resources/images/camera_device_connection.png)
+![Hardware camera connection](../../resources/images/rasp_image.jpg)
 
 In the prototype we used a Raspberry Pi 4 as main board to which we connected a USB webcam and an Ethernet cable for internet connection.
 
@@ -36,7 +36,7 @@ sudo pacman -S tesseract tesseract-data-eng
 
 ## Network interface
 
-
+The board is connected to the local broker in the marina server through an Ethernet cable.
 
 ## MQTT messages
 
