@@ -1,6 +1,8 @@
-## Web interface project
+# Web interface
 
-In this folder there are the source code of the web interface. It was written using the framework [Vue.js](https://vuejs.org/).
+In this folder is collected the source code of the web interface. It was written using the framework [Vue.js](https://vuejs.org/).
+
+## How to setup
 
 To run the development server to test you work before the commit, you can run:
 
@@ -8,7 +10,7 @@ To run the development server to test you work before the commit, you can run:
 npm run serve
 ```
 
-or, if you prefer to use yarn:
+Or, if you prefer, you can use yarn:
 
 ```bash
 yarn serve

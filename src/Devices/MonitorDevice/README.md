@@ -1,45 +1,36 @@
-## HARDWARE WIRING
+# Monitor device
+
+More details about the monitor devices are reported below.
+
+## Hardware wiring
 
 ![Hardware monitor connection](./../../../resources/images/Monitor%20connection.png)
-The monitor chosen for the prototype is an OLED screen with a resolution of 128x64 driven by an SSD1306.
-It uses the I2C bus for communication with the main board, that is an STM nucleo-f401re.
+The monitor chosen for the prototype is an OLED screen with a resolution of 128x64 driven by an SSD1306. It uses the I2C bus for communication with the main board (the STM32 Nucleo).
 
-## HOW TO BUILD
+## How to build
 
-To build a version compatible with ETHOS run this command
+To build a version compatible with ETHOS run this command:
 ```
 make ETHOS=1
 ```
-this version by default has monitor_id 3 and automatically setup TAP on your pc
+This version automatically setup the TAP interface on the PC and uses `monitor_id=3` by default.
 
-Without ETHOS=1 parameter will build a version with 6LoWPAN connection
-```
-make ETHOS_BAUDRATE=500000 DEFAULT_CHANNEL=17
-```
-You have to use the same channel of the [border router](https://github.com/RIOT-OS/RIOT/tree/master/examples/gnrc_border_router)
+Without the parameter `ETHOS=1` we build the version with LoRaWAN connection.
+## Network interface
 
-Once the application is launched, you have to connect to the MQTTS broker, entering
-this command in the serial interface (only in the 6LoWPAN version)
+For the tests with real hardware the STM32 Nucleo board is connected to internet through the PC using ETHOS.
 
-```
-connect <ip_address_of_mqtts_broker> <node_id>
-```
+For the network tests with IoT-Lab the board will be replaced with a [ST-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/) that has a LoRaWAN connection.
 
-## NETWORK INTERFACE
-
-For the tests with real hardware the nucleo board is connected to the internet connection of the pc using ETHOS.
-
-For the network tests with IoT-Lab the board will be replaced with a IoT-Lab m3 that has a 6LoWPAN connection.
-
-## MQTT TOPICS
-The monitors to show the signage are subscribed to the topic `dock/assign` and they accept messages with this format
+## MQTT messages
+To show the signage the devices are subscribed to the topic `dock/assign` and they accept messages with this format:
 ```
 {
-"dock_num": 13,
 "boat_id":"TS57845",
+"dock_num": "13",
 "event":"0"
 }
 ```
-`dock_id` The dock assigned to the boat
-`event = 0` means that a boat entering the marina
-`boat_id` The plate of the boat
+`boat_id` is the license plate of the boat,
+`dock_num` is the dock assigned to the boat,
+`event = "0"` means that the boat is entering in the marina.

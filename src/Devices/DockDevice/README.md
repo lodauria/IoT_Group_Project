@@ -1,14 +1,17 @@
-## HARDWARE WIRING
+# Dock device
+
+More details about the dock devices are reported below.
+
+## Hardware wiring
 
 ![Hardware monitor connection](../../../resources/images/dock_device_connection.png)
 
-In the prototype the light is replaced with a small led and to detect if a boat is present
-is used an ultrasonic range meter.
+In the prototype we used a small LED to simulate the light on the docking spot. The boat presence is detect using our [special cleat](../../../resources/cleat%203D%20model) equipped with a button. All the components are connected to the main board (the STM32 Nucleo).
 
-## HOW TO SETUP
+## How to setup
 
-A single board can be used for multiple docks. Each dock has a led and a switch.
-To define the number of dock connected to the board and the connection pins these lines of code inside [main.c](./main.c) should be changes.
+A single board can also be used for multiple docking spots. Each dock is equipped with a LED and a button inside the cleat.
+To define the number of docks connected to the board and the connection pins the following lines of code inside [main.c](./main.c) has to be changed.
 
 ```c
 static const dockSetting_t settings[] = {
@@ -19,49 +22,48 @@ static const dockSetting_t settings[] = {
 };
 ```
 
-## HOW TO BUILD
+## How to build
 
-To build a version compatible with ETHOS run this command
+To build a version compatible with ETHOS run this command:
 ```
 make ETHOS=1
 ```
-this version by default has dock_id 13 and automatically setup TAP on your pc
+This version automatically setup the TAP interface on the PC.
 
-Without ETHOS=1 parameter will build a version with LoRaWAN connection
+Without the parameter `ETHOS=1` we build the version with LoRaWAN connection.
 
-Building with the option `FAKE=1` the boat detection sensor output will be replaced with dummy random data.
-You can use these options together, ex.
+If we use the option `FAKE=1`, the boat detection sensor output will be replaced with dummy random data.
+You can also use these options together, e.g.:
+
 ```
 make ETHOS=1 FAKE=1
 ```
 
-## NETWORK INTERFACE
+## Network interface
 
-For the tests with real hardware the nucleo board is connected to the internet connection of the pc using ETHOS.
+For the tests with real hardware the STM32 Nucleo board is connected to internet through the PC using ETHOS.
 
 For the network tests with IoT-Lab the board will be replaced with a [ST-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/) that has a LoRaWAN connection.
 
-## MQTT TOPICS
-The messages if a boat is detected or not are published in the topic `dock/boat` with this format
+## MQTT messages
+The messages if a boat is detected or not are published on the topic `dock/boat` with this format:
 ```
 {
-  "dock_id": 13,
-  "event": 0
+    "dock_id": 13,
+    "event": "0"
 }
 ```
-`dock_id` identify the sender.
+`dock_id` identifies the sender,
+`event` has value 1 if the boat leaves the docking spot, 0 otherwise.
 
-`event` if it is 1 the boat leaves the dock, 0 otherwise
-
-The devices to turn on the LED when a boat is entering the marina, are subscribed to the topic `dock/assign` and 
-they accept messages with this format
+To turn on the LED when the boat has to reach the docking spot, the board subscribes to the topic `dock/assign` and accepts messages with this format:
 ```
 {
-"dock_num": 13,
-"boat_id":"TS57845",
-"event":"0"
+    "boat_id":"TS57845",
+    "dock_num": "13",
+    "event":"0"
 }
 ```
-`dock_id` The dock assigned to the boat
-`event = 0` means that a boat entering the marina
-`boat_id` The plate of the boat
+`boat_id` is the license plate of the boat,
+`dock_num` is the dock assigned to the boat,
+`event = "0"` means that the boat is entering in the marina.
