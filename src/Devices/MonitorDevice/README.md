@@ -22,8 +22,11 @@ For the tests with real hardware the STM32 Nucleo board is connected to internet
 
 For the network tests with IoT-Lab the board will be replaced with a [ST-LRWAN1](https://www.iot-lab.info/docs/boards/st-b-l072z-lrwan1/) that has a LoRaWAN connection.
 
-## MQTT messages
-To show the signage the devices are subscribed to the topic `dock/assign` and they accept messages with this format:
+## Network messages
+On the ETHOS version the received messages are MQTT messages, while in the LoRaWAN version, they are LoRaWAN messages, but they are received by The Things Network that receives messages from AWS IoT core through the TTN MQTT broker.
+
+To show the signage the devices are subscribed<sup>*1</sup> to the topic `dock/assign` and they accept messages with this format:
+
 ```
 {
 "boat_id":"TS57845",
@@ -34,3 +37,5 @@ To show the signage the devices are subscribed to the topic `dock/assign` and th
 `boat_id` is the license plate of the boat,
 `dock_num` is the dock assigned to the boat,
 `event = "0"` means that the boat is entering in the marina.
+
+<sup>*1</sup> In case of ETHOS the subscription is done at device level, while when we use LoRaWAN the subscription is done on The Things Network MQTT broker.
