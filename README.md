@@ -20,7 +20,7 @@ The web interface for using this service can be found [here](https://kernel-mach
 
 ## Video resources
 
-- Project final presentation (missing)
+- [Project final presentation](https://youtu.be/oTstH3U-rkw)
 - [Prototype demonstration](https://youtu.be/_4xa47vLS9I)
 
 ## Blog post
