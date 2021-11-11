@@ -3,7 +3,7 @@
 ## Contributors
 
 - [Luca Giovannesi](https://www.linkedin.com/in/luca-giovannesi-48680519b)
-- [Lorenzo D'Auria](mailto:dauria.1918917@studenti.uniroma1.it)
+- [Lorenzo D'Auria](https://www.linkedin.com/in/lorenzodauria/)
 - [Idir Khouas](https://www.linkedin.com/in/idir-khouas-7b9269199)
 
 ## Brief description
